@@ -55,11 +55,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       { source: '/', destination: '/stitch/home.html' },
-      { source: '/dashboard', destination: '/stitch/dashboard-professor.html' },
-      { source: '/dashboard/professor', destination: '/stitch/dashboard-professor.html' },
-      { source: '/dashboard/aluno', destination: '/stitch/dashboard-aluno.html' },
       { source: '/prestacao-de-contas', destination: '/stitch/prestacao-de-contas.html' },
-      { source: '/acesso-ao-portal-interno', destination: '/stitch/acesso-ao-portal-interno.html' },
       { source: '/acervo-digital-de-fosseis', destination: '/stitch/acervo-digital-de-fosseis.html' },
       { source: '/wiki-de-estudos-paleontologicos', destination: '/stitch/wiki-de-estudos-paleontologicos.html' },
     ];

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase-server';
 import { prisma } from '@/lib/prisma';
+import { getCurrentUserContext, hasAnyAllowedRole } from '@/lib/current-user';
 import { isDatabaseConfigured, isLocalDemoMode } from '@/lib/demo-mode';
 
 export async function PATCH(
@@ -15,18 +15,12 @@ export async function PATCH(
       return NextResponse.json({ id, ...body, updatedAt: new Date().toISOString() });
     }
 
-    const supabase = await createClient();
-    if (!supabase) {
-      return NextResponse.json({ error: 'Supabase is not configured' }, { status: 503 });
-    }
-
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
-
-    if (error || !user) {
+    const context = await getCurrentUserContext();
+    if (!context) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    if (!hasAnyAllowedRole(context.roleCodes, ['admin', 'gestor', 'professor', 'pesquisador'])) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const { holeId, project, area, status, method, targetDepth, currentDepth, rigId } = body;
@@ -35,7 +29,7 @@ export async function PATCH(
       where: { id },
     });
 
-    if (!existingHole || existingHole.createdById !== user.id) {
+    if (!existingHole || existingHole.createdById !== context.supabaseUser.id) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
@@ -70,25 +64,19 @@ export async function DELETE(
       return NextResponse.json({ success: true, id });
     }
 
-    const supabase = await createClient();
-    if (!supabase) {
-      return NextResponse.json({ error: 'Supabase is not configured' }, { status: 503 });
-    }
-
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
-
-    if (error || !user) {
+    const context = await getCurrentUserContext();
+    if (!context) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    if (!hasAnyAllowedRole(context.roleCodes, ['admin', 'gestor', 'professor', 'pesquisador'])) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const existingHole = await prisma.drillHole.findUnique({
       where: { id },
     });
 
-    if (!existingHole || existingHole.createdById !== user.id) {
+    if (!existingHole || existingHole.createdById !== context.supabaseUser.id) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase-server';
 import { prisma } from '@/lib/prisma';
+import { getCurrentUserContext, hasAnyAllowedRole } from '@/lib/current-user';
 import { demoStats, isDatabaseConfigured, isLocalDemoMode } from '@/lib/demo-mode';
 
 export async function GET() {
@@ -9,22 +9,16 @@ export async function GET() {
       return NextResponse.json(demoStats);
     }
 
-    const supabase = await createClient();
-    if (!supabase) {
-      return NextResponse.json(demoStats);
-    }
-
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
-
-    if (error || !user) {
+    const context = await getCurrentUserContext();
+    if (!context) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    if (!hasAnyAllowedRole(context.roleCodes, ['admin', 'gestor', 'professor', 'pesquisador', 'aluno'])) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const drillHoles = await prisma.drillHole.findMany({
-      where: { createdById: user.id },
+      where: { createdById: context.supabaseUser.id },
     });
 
     const rigs = await prisma.rig.findMany();
