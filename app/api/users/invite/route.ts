@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getCurrentUserContext, hasAnyAllowedRole } from '@/lib/current-user';
 import { createAdminClient, isSupabaseAdminConfigured } from '@/lib/supabase-admin';
 import { syncUser } from '@/lib/user-sync';
 import { getManageableRoles, replaceUserRoles, MANAGE_USERS_ROLES, USER_TYPES } from '@/lib/user-management';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const context = await getCurrentUserContext();
 
@@ -54,7 +54,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Supabase admin client unavailable' }, { status: 503 });
     }
 
-    const redirectTo = process.env.NEXT_PUBLIC_SITE_URL || 'http://127.0.0.1:3000/acesso-ao-portal-interno';
+    const redirectTo =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      `${request.nextUrl.origin}/acesso-ao-portal-interno`;
 
     const { data, error } = await adminClient.auth.admin.inviteUserByEmail(email, {
       redirectTo,
