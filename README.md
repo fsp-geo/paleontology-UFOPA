@@ -1,6 +1,6 @@
-# Magellan Operational Control
+# Paleontology UFOPA
 
-Aplicacao web em Next.js para acompanhamento operacional de sondagem, furos, sondas e indicadores de produtividade.
+Aplicacao web em Next.js para o portal institucional de paleontologia da UFOPA, com foco em acervo digital, portal interno, dashboards academicos, publicacoes e prestacao de contas.
 
 ## Rodar localmente
 
@@ -16,8 +16,8 @@ Pre-requisito: Node.js 20+ e npm.
 
 Quando `NEXT_PUBLIC_LOCAL_DEMO=true` ou quando as chaves do Supabase nao estiverem configuradas, o projeto abre em modo demonstracao:
 
-- bypass de login
-- dashboard acessivel localmente
+- bypass de autenticacao real
+- portal acessivel localmente
 - rotas de API respondendo com dados mockados
 
 ## Integracao real
