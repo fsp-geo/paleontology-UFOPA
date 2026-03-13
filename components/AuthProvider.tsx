@@ -13,17 +13,16 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({ user: null, loading: true });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const isDemoContext = isLocalDemoMode || !isSupabaseConfigured || !supabase;
+  const [user, setUser] = useState<User | null>(() => (isDemoContext ? (demoUser as unknown as User) : null));
+  const [loading, setLoading] = useState(!isDemoContext);
 
   useEffect(() => {
-    if (isLocalDemoMode || !isSupabaseConfigured || !supabase) {
-      setUser(demoUser as unknown as User);
-      setLoading(false);
+    if (isDemoContext) {
       return;
     }
 
-    const client = supabase;
+    const client = supabase!;
 
     const setData = async () => {
       const {
@@ -68,7 +67,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => {
       listener?.subscription.unsubscribe();
     };
-  }, []);
+  }, [isDemoContext]);
 
   return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
 };

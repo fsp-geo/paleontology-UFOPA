@@ -13,16 +13,13 @@ export default function AccessPortalPage() {
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [nextPath, setNextPath] = useState('/dashboard/professor');
-
-  useEffect(() => {
+  const [nextPath] = useState(() => {
     if (typeof window === 'undefined') {
-      return;
+      return '/dashboard/professor';
     }
 
-    const next = new URLSearchParams(window.location.search).get('next');
-    setNextPath(next || '/dashboard/professor');
-  }, []);
+    return new URLSearchParams(window.location.search).get('next') || '/dashboard/professor';
+  });
 
   useEffect(() => {
     if (loading || !user) {
