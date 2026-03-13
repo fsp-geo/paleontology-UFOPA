@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fff8f1",
+              "surface-container-low": "#fbf2e6",
+              "secondary-fixed-dim": "#bacca8",
+              "surface-tint": "#785830",
+              "surface-container": "#f5ede1",
+              "on-error-container": "#93000a",
+              "on-surface": "#1e1b14",
+              "on-secondary-fixed": "#111f08",
+              "on-primary-fixed": "#2a1700",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#d6e9c3",
+              "outline-variant": "#d2c4b7",
+              "on-tertiary-fixed-variant": "#743320",
+              "on-surface-variant": "#4f453b",
+              "primary-fixed-dim": "#e9bf8e",
+              "primary": "#785830",
+              "surface-variant": "#e9e1d5",
+              "on-primary-fixed-variant": "#5e411b",
+              "on-tertiary-fixed": "#3b0900",
+              "inverse-primary": "#e9bf8e",
+              "surface-dim": "#e1d9cd",
+              "surface-container-highest": "#e9e1d5",
+              "surface": "#fff8f1",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed": "#ffdbd1",
+              "on-secondary-fixed-variant": "#3c4b30",
+              "on-secondary": "#ffffff",
+              "on-background": "#1e1b14",
+              "on-primary-container": "#4e330e",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb5a0",
+              "inverse-surface": "#343028",
+              "primary-fixed": "#ffddb7",
+              "surface-container-high": "#efe7db",
+              "tertiary-container": "#e28b72",
+              "secondary": "#536346",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#59694b",
+              "background": "#fff8f1",
+              "outline": "#81756a",
+              "on-error": "#ffffff",
+              "secondary-container": "#d6e9c3",
+              "inverse-on-surface": "#f8f0e3",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#612514",
+              "tertiary": "#924a35",
+              "primary-container": "#c29b6d"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Manrope', sans-serif;
+        background-color: #fff8f1;
+        color: #1e1b14;
+      }
+      .font-serif { font-family: 'Newsreader', serif; }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="w-72 bg-surface-container flex flex-col sticky top-0 h-screen">
+<div class="p-8">
+<h1 class="font-serif text-2xl font-semibold text-primary">Strata Archive</h1>
+<p class="text-xs uppercase tracking-[0.15em] text-on-surface-variant mt-1 font-semibold">Paleontology Portal</p>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-medium">Fossil Archive</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-medium">Educational Wiki</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="science">science</span>
+<span class="font-medium">Research Tools</span>
+</a>
+</nav>
+<div class="mt-auto p-4 border-t border-outline-variant border-opacity-10">
+<div class="flex items-center gap-3 p-4 mb-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Researcher Profile Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRaWc4_3HvFYWBpGF_cr59KOOvy-X69H7K_4Qmgjow4vv3mov7hLgkyydZbYIyP2mwwNWW4aYhLHjjYDGoUJq1oeQ88K2NToNFRe2QHdz8F726ll3Z8tnllUdOfPID78aPgDDwTCMf_4cKVZOGpAyw-1ZvCbLRPImfrD-E3G8mVmd4yoKjkOKkpCDDwlzVuEfJ-qY3-_DAhfkPLiRbT30odEsuI4cOJdM4BYZSV5m6WAZ2Cg9dUcxb28vIE7YU9qJpQpJ79YZcInA"/>
+<div>
+<p class="text-sm font-semibold text-on-surface">Dr. Aris Thorne</p>
+<p class="text-[10px] uppercase tracking-wider text-on-surface-variant">Lead Researcher</p>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar -->
+<header class="h-16 flex items-center justify-between px-8 bg-surface-bright/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h2 class="font-serif text-lg font-medium text-on-surface">Internal Portal</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant pointer-events-none" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-highest rounded text-sm w-80 focus:ring-1 focus:ring-primary focus:outline-none border-none" placeholder="Search archetypes, eras, or species..." type="text"/>
+</div>
+<button class="text-on-surface-variant relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-tertiary rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-12 max-w-7xl mx-auto w-full">
+<!-- Hero Header -->
+<section class="mb-16 grid grid-cols-12 gap-8 items-end">
+<div class="col-span-12 lg:col-span-7">
+<span class="text-xs font-bold uppercase tracking-[0.2em] text-tertiary mb-4 block">Archive Resource</span>
+<h3 class="font-serif text-6xl text-on-surface mb-6 leading-tight">The Digital Stratigraphy of Paleontology</h3>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed max-w-2xl">
+                        An curated encyclopedia for the modern archivist. Explore the interconnected disciplines that define our understanding of prehistoric life, from the microscopic structures of bone to the evolutionary trees of empires long extinct.
+                    </p>
+</div>
+<div class="col-span-12 lg:col-span-5 flex justify-end">
+<div class="relative w-full aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High detail fossil ammonite in limestone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmV0K2zt3sT5S5_T3Gs9NnPuinDZ25PuWHHKUaFnjW7Pv0veZnC6_lLGPCCsGFmyg89xB7nxvGr0qM-N0XFsLcGIsxo8sW2qMraGpWzB25z1Ksi2dx_6PVUR--4XQB9gsiW5Jn9eFNHvB3Ngd3V1XL9nlQRoGxW8sk04yILAo-8NQhepZuIbi4CDsax1lJGlTFuyExpVIkmeClMpcBrxYsJtKmWb7cV_i3kbO_N6jHNUKbkg41-md9gFoTXWs8zXQezubIgM0JIF4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<p class="text-[10px] uppercase tracking-widest font-bold">Featured Specimen</p>
+<p class="font-serif text-xl italic">Ammonitida sp.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid of Disciplines -->
+<section class="grid grid-cols-12 gap-8 mb-24">
+<!-- Phylogeny -->
+<div class="col-span-12 md:col-span-8 bg-surface-container-low p-10 rounded-xl relative overflow-hidden group">
+<div class="relative z-10 flex flex-col h-full">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="account_tree">account_tree</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase tracking-wider">Evolutionary Lineage</span>
+</div>
+<h4 class="font-serif text-3xl mb-4">Phylogeny</h4>
+<p class="text-on-surface-variant leading-relaxed mb-8 max-w-lg">
+                            The study of the evolutionary history and relationships among or within groups of organisms. It visualizes the "Tree of Life," mapping how species branched from common ancestors over millions of years through genetic and morphological evidence.
+                        </p>
+<div class="mt-auto">
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-sm text-sm font-semibold tracking-wide hover:bg-surface-tint transition-colors">Explore Cladistics</button>
+</div>
+</div>
+<!-- Aesthetic decoration -->
+<div class="absolute -right-20 -bottom-20 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[300px]" data-icon="schema">schema</span>
+</div>
+</div>
+<!-- Taxonomy -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-high p-8 rounded-xl flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-3xl text-tertiary mb-6" data-icon="category">category</span>
+<h4 class="font-serif text-2xl mb-3">Taxonomy</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+                            The science of naming, defining, and classifying groups of biological organisms on the basis of shared characteristics.
+                        </p>
+</div>
+<ul class="space-y-3 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+<li class="flex justify-between border-b border-outline-variant border-opacity-20 pb-2"><span>Kingdom</span><span class="text-primary">Animalia</span></li>
+<li class="flex justify-between border-b border-outline-variant border-opacity-20 pb-2"><span>Phylum</span><span class="text-primary">Chordata</span></li>
+<li class="flex justify-between border-b border-outline-variant border-opacity-20 pb-2"><span>Class</span><span class="text-primary">Reptilia</span></li>
+</ul>
+</div>
+<!-- Morphology -->
+<div class="col-span-12 md:col-span-5 bg-surface-container p-8 rounded-xl">
+<div class="aspect-video w-full bg-surface-container-highest rounded-lg mb-6 overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 transition-all" data-alt="Microscopic structure of dinosaur bone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnVm-5KSkQokqkNjGrguruuZUBCSSKQvMKAIrz5Jc6_kr5Lb9TOx_d6sMs-guX_cdoxsAYl6n69StjWz9Vco2deWMPRJP2vtZNuC7YLuNCwLtX4pSd66yuGeVuiBFlJ9tmRhk8Hlc9pM7T2HA4Bot1Bf3dTgdK3P62RN3E4Nd6tPA3HmP15WzTRpP0Vh8tCp2QLtJjlx3r07mw3xNDM9Tqx0LS-FZSXbADa3fzul-duG7-renKS2Z8EYlxMmw7DazbBm8HOQFWztA"/>
+</div>
+<h4 class="font-serif text-2xl mb-3">Morphology</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        Examining the physical form and structure of organisms. In paleontology, this focuses on skeletal architecture, dental patterns, and functional adaptations to environment.
+                    </p>
+<div class="mt-6 flex gap-2">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded border border-outline-variant border-opacity-10 text-on-surface-variant">Osteology</span>
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded border border-outline-variant border-opacity-10 text-on-surface-variant">Histology</span>
+</div>
+</div>
+<!-- Ichnology -->
+<div class="col-span-12 md:col-span-7 bg-white p-10 rounded-xl flex flex-col md:flex-row gap-10 items-center border border-surface-container">
+<div class="flex-1">
+<h4 class="font-serif text-3xl mb-4">Ichnology</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+                            The branch of paleontology that deals with traces of organismal behavior, such as footprints, burrows, and trails. Unlike body fossils, ichnofossils provide direct evidence of prehistoric life's ethology.
+                        </p>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="footprint" style="font-variation-settings: 'FILL' 1;">footprint</span>
+<span class="text-sm font-semibold italic text-on-surface-variant">Behavioral Archaeology</span>
+</div>
+</div>
+<div class="w-full md:w-56 h-72 bg-surface-container-low rounded-lg p-4 flex flex-col justify-center items-center text-center">
+<div class="w-32 h-32 mb-4 bg-primary/5 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-primary/40" data-icon="pets">pets</span>
+</div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Trace Analysis</p>
+</div>
+</div>
+</section>
+<!-- Comparative Study Section -->
+<section class="mb-24">
+<div class="flex items-center justify-between mb-12">
+<h3 class="font-serif text-4xl">Chronological Strata</h3>
+<div class="h-px flex-1 bg-outline-variant bg-opacity-30 mx-8"></div>
+<a class="text-tertiary font-bold text-sm uppercase tracking-widest hover:underline" href="#">View Timeline</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-6 rounded hover:bg-surface-container transition-colors cursor-pointer border-l-4 border-primary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Era 01</p>
+<h5 class="font-serif text-xl mb-2">Paleozoic</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed">The era of "ancient life," beginning with the Cambrian explosion and ending with the Great Dying.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded hover:bg-surface-container transition-colors cursor-pointer border-l-4 border-tertiary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Era 02</p>
+<h5 class="font-serif text-xl mb-2">Mesozoic</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed">The Age of Reptiles and Conifers. Triassic, Jurassic, and Cretaceous periods define this strata.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded hover:bg-surface-container transition-colors cursor-pointer border-l-4 border-secondary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Era 03</p>
+<h5 class="font-serif text-xl mb-2">Cenozoic</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed">The Age of Mammals. Modern lineages emerge and the rise of Homo sapiens occurs in the final layers.</p>
+</div>
+</div>
+</section>
+<!-- Methodology Insights -->
+<section class="grid grid-cols-12 gap-8 items-center bg-surface-container-high p-12 rounded-xl">
+<div class="col-span-12 lg:col-span-5 space-y-8">
+<h3 class="font-serif text-4xl">Study Methodology</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="travel_explore">travel_explore</span>
+</div>
+<div>
+<p class="font-bold text-sm mb-1">Field Excavation</p>
+<p class="text-xs text-on-surface-variant">The primary source of data. Precision removal of matrix using micro-tools and dental picks.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="biotech">biotech</span>
+</div>
+<div>
+<p class="font-bold text-sm mb-1">Isotopic Analysis</p>
+<p class="text-xs text-on-surface-variant">Measuring carbon and oxygen isotopes within fossils to determine diet and prehistoric climate.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="view_in_ar">view_in_ar</span>
+</div>
+<div>
+<p class="font-bold text-sm mb-1">3D Photogrammetry</p>
+<p class="text-xs text-on-surface-variant">Creating digital twins of fragile specimens to allow for global research collaboration.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-7 h-[400px] rounded-lg overflow-hidden relative shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Archeologist carefully cleaning a bone in a lab" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz2XTn9rBQRGdwmR_af1iaLwQD_MPG71X0ac-MQ6hBvN4xOXn77zRBmMztNlyPPSUB2BdCEaeOXllfpkYF68j0bWpM1-0aywtDpTJrJUuPaWVTTmiqeNYT6hC6kpDbcH38GzLcXyTOyjfrsekwhK1QKbVLByn74WZ8soZR636nsdnw4hKzDrN0Gr3GJG8eFkRkghTIgzd0AD-nztPvu9cc-lCqVkl7eJIIb0iuqd2pSlMLhBSy0pQ8wUqhcMquJ9ihFj9yzhcxGrM"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+</div>
+</section>
+</div>
+<!-- Institutional Footer -->
+<footer class="mt-auto py-12 px-8 bg-surface-container flex flex-col md:flex-row justify-between items-center border-t border-outline-variant border-opacity-10">
+<div class="flex items-center gap-8 mb-6 md:mb-0 opacity-40 hover:opacity-100 transition-opacity">
+<span class="text-[10px] font-bold uppercase tracking-widest">Global Partners</span>
+<span class="material-symbols-outlined text-3xl" data-icon="museum">museum</span>
+<span class="material-symbols-outlined text-3xl" data-icon="school">school</span>
+<span class="material-symbols-outlined text-3xl" data-icon="public">public</span>
+</div>
+<div class="text-center md:text-right">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">© 2024 Strata Archive</p>
+<p class="text-[10px] text-on-surface-variant">Confidential Research Material • Educational Access Only</p>
+</div>
+</footer>
+</main>
+<script>
+(function () {
+  const routes = {
+    'Public Blog': '/',
+    'Articles': '/wiki-de-estudos-paleontologicos',
+    'About': '/acervo-digital-de-fosseis',
+    'Region': '/prestacao-de-contas',
+    'Contact': '/acesso-ao-portal-interno',
+    'Internal Area': '/acesso-ao-portal-interno',
+    'Resources': '/wiki-de-estudos-paleontologicos',
+    'Dashboard': '/dashboard/professor',
+    'Students': '/dashboard/aluno',
+    'Accountability': '/prestacao-de-contas',
+    'Excavations': '/acervo-digital-de-fosseis',
+    'Research': '/wiki-de-estudos-paleontologicos',
+    'Fossil Archive': '/acervo-digital-de-fosseis',
+    'Educational Wiki': '/wiki-de-estudos-paleontologicos',
+    'Research Tools': '/prestacao-de-contas',
+    'Internal Portal': '/acesso-ao-portal-interno',
+    'Explore The Portal': '/acervo-digital-de-fosseis',
+    'Learn More': '/wiki-de-estudos-paleontologicos',
+    'Sign In to Portal': '/acesso-ao-portal-interno',
+    'Login': '/acesso-ao-portal-interno',
+    'AUTHENTICATE ARCHIVE': '/dashboard/professor',
+    'Contribute Find': '/prestacao-de-contas',
+    'Filter': '/acervo-digital-de-fosseis',
+    'View Timeline': '/wiki-de-estudos-paleontologicos',
+    'Browse all': '/wiki-de-estudos-paleontologicos',
+    'View All Archives': '/wiki-de-estudos-paleontologicos',
+    'View All Work': '/dashboard/aluno',
+    'New Entry': '/prestacao-de-contas'
+  };
+
+  document.querySelectorAll('a[href="#"]').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) el.setAttribute('href', routes[text]);
+  });
+
+  document.querySelectorAll('button').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () { window.location.href = routes[text]; });
+    }
+  });
+
+  document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      window.location.href = '/dashboard/professor';
+    });
+  });
+})();
+</script></body></html>

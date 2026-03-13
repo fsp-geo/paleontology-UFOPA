@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fff8f1",
+              "surface-container-low": "#fbf2e6",
+              "secondary-fixed-dim": "#bacca8",
+              "surface-tint": "#785830",
+              "surface-container": "#f5ede1",
+              "on-error-container": "#93000a",
+              "on-surface": "#1e1b14",
+              "on-secondary-fixed": "#111f08",
+              "on-primary-fixed": "#2a1700",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#d6e9c3",
+              "outline-variant": "#d2c4b7",
+              "on-tertiary-fixed-variant": "#743320",
+              "on-surface-variant": "#4f453b",
+              "primary-fixed-dim": "#e9bf8e",
+              "primary": "#785830",
+              "surface-variant": "#e9e1d5",
+              "on-primary-fixed-variant": "#5e411b",
+              "on-tertiary-fixed": "#3b0900",
+              "inverse-primary": "#e9bf8e",
+              "surface-dim": "#e1d9cd",
+              "surface-container-highest": "#e9e1d5",
+              "surface": "#fff8f1",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed": "#ffdbd1",
+              "on-secondary-fixed-variant": "#3c4b30",
+              "on-secondary": "#ffffff",
+              "on-background": "#1e1b14",
+              "on-primary-container": "#4e330e",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb5a0",
+              "inverse-surface": "#343028",
+              "primary-fixed": "#ffddb7",
+              "surface-container-high": "#efe7db",
+              "tertiary-container": "#e28b72",
+              "secondary": "#536346",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#59694b",
+              "background": "#fff8f1",
+              "outline": "#81756a",
+              "on-error": "#ffffff",
+              "secondary-container": "#d6e9c3",
+              "inverse-on-surface": "#f8f0e3",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#612514",
+              "tertiary": "#924a35",
+              "primary-container": "#c29b6d"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .lithic-gradient {
+            background: linear-gradient(135deg, #785830 0%, #c29b6d 100%);
+        }
+        .glass-nav {
+            background: rgba(255, 248, 241, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d2c4b7; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="w-72 bg-surface-container flex flex-col h-screen sticky top-0 border-r border-outline-variant border-opacity-10">
+<div class="p-8">
+<h1 class="text-title-lg font-headline text-primary text-2xl tracking-tight">Strata Archive</h1>
+<p class="text-label-md font-label uppercase tracking-[0.2em] text-on-surface-variant mt-1">Paleontology Portal</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-primary-container text-on-primary-container transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-body font-medium">Fossil Archive</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-body font-medium">Educational Wiki</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="science">science</span>
+<span class="font-body font-medium">Research Tools</span>
+</a>
+</nav>
+<div class="p-6 border-t border-outline-variant border-opacity-10 space-y-1">
+<a class="flex items-center gap-4 px-4 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span class="font-body">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-2 text-sm text-on-surface-variant hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="logout">logout</span>
+<span class="font-body">Logout</span>
+</a>
+<div class="mt-6 flex items-center gap-3 px-4 py-3 bg-surface-container-high rounded-xl">
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover" data-alt="Researcher Profile Avatar Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVXAfrF7g-EmhKmayAjub5jetqmKEDkig35g04MOoejXFziRD-wsqoo5lvYFNlEj9vhbi5c0Ei8qU7dY9FRZH1PwRgNkyKJHiSriHdkWaRHFR5so5ulfsf63XvQF4MCPU_EVnxjNCTI5pVd3aX_sB4m_67FPcYBQmhk2MCL2XU0h40St2oo1bHh6XvwLT10BcD1F_yqfZiS8-0jUWhQHQCCYVlqDH2AhO9KH8Zjmb8Yr0NgBe9Q60Fy02_HQrtJmxVa1voLTThP34"/>
+<div>
+<p class="text-sm font-bold leading-none">Dr. Aris Thorne</p>
+<p class="text-[10px] text-on-surface-variant font-label uppercase tracking-wider mt-1">Lead Archivist</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col">
+<!-- TopAppBar -->
+<header class="glass-nav sticky top-0 z-30 flex items-center justify-between px-10 py-6">
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-on-surface cursor-pointer" data-icon="menu">menu</span>
+<h2 class="text-xl font-headline tracking-wide">Internal Portal</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant" data-icon="search">search</span>
+<input class="pl-11 pr-4 py-2 bg-surface-container-highest border-none rounded-full text-sm w-64 focus:ring-1 focus:ring-primary placeholder-on-surface-variant" placeholder="Search the archive..." type="text"/>
+</div>
+<button class="relative">
+<span class="material-symbols-outlined text-on-surface" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-tertiary rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center border border-outline-variant border-opacity-30 overflow-hidden">
+<img alt="Researcher Avatar" class="w-full h-full object-cover" data-alt="Senior Researcher Avatar Image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSKr-wfR556_s6VND4gpkN3cJ0FEa6mI0cIURC4z-3UolHAakLlNo2tljIyiKRZKY6cxXJKzpIfifHLrtSs3QTVtx3W5xl3rJrd9LJWYn8O6Sh9gFoCMADPBba8fybTjA5sANUsFjcQ4vpFrTZ4iKwOOkakBjXpGhmcNRg0kF7vNt22q6cnmKWnGPg-PgGAsklJBYDRBBqd9vEX7ZLgITqxG9iy3H6-2pBrVsEXAQgJMKX5s573t1j2oSS98khDpppcAaI_7dLKmI"/>
+</div>
+</div>
+</header>
+<section class="p-10 max-w-7xl mx-auto w-full">
+<!-- Hero Introduction -->
+<div class="mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
+<div class="max-w-2xl">
+<span class="text-label-md font-label text-tertiary font-bold tracking-[0.3em] uppercase mb-4 block">Catalogue of the Deep Past</span>
+<h3 class="text-5xl font-headline text-on-surface leading-tight">Digital Fossil Archive</h3>
+<p class="mt-6 text-body-lg text-on-surface-variant leading-relaxed opacity-80">
+                        Explore our high-fidelity stratigraphic collection. Our database provides detailed anatomical data, geological context, and interactive temporal mappings of life over 500 million years.
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-3 bg-primary text-on-primary font-body text-sm rounded transition-all hover:bg-surface-tint flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>Contribute Find</span>
+</button>
+<button class="px-6 py-3 bg-surface-container-high text-on-surface font-body text-sm rounded hover:bg-surface-container-highest transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+<span>Filter</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Gallery -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-20">
+<!-- Main Featured Item -->
+<article class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low p-1 transition-all">
+<div class="relative aspect-[16/9] overflow-hidden rounded-lg">
+<img alt="Ammonite Fossil" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Detailed Ammonite Fossil in Limestone Matrix" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD83BfWwZHnUaUjP2EH9ZqDu_3Ldm2Jkb9rMHmmjHmNNxk_9_qXgan7WBSGQtJiJv6qrnn5V7Krx6AXKY9kVHlWU_eUTgUceoF0EJpi6J9CTflu7YiWS-UHXl-ZH88RcpfUfHRzysqvD15ikQ2j6xeLWTd_XaMXr-8F0dKEzgwPrk34KXpsoPXh6PNrclx5MuFrO4LL3nK8iKiiLY3pMjmwBuRg-Ly4KpubQcXpcDY2ZwQb1yRK3zb1-u67WBaSD_PjAye2KOF73wo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-8 left-8 text-white">
+<span class="bg-secondary-container/90 text-on-secondary-container text-[10px] font-label px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block">Jurassic Period</span>
+<h4 class="text-3xl font-headline italic">Ammonoidea Sp.</h4>
+</div>
+</div>
+<div class="p-8 flex justify-between items-start">
+<div class="space-y-2">
+<p class="text-sm text-on-surface-variant leading-relaxed">Excavated from the Blue Lias formation in Dorset, UK. This specimen shows exceptional preservation of the aragonitic shell with visible suture lines.</p>
+<div class="flex gap-4 pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="location_on">location_on</span>
+<span class="text-xs font-label text-on-surface-variant" data-location="Dorset, UK">Lyme Regis, UK</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="calendar_month">calendar_month</span>
+<span class="text-xs font-label text-on-surface-variant">195 Million Years Ago</span>
+</div>
+</div>
+</div>
+<button class="p-3 bg-surface-container-high rounded-full hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Vertical Card -->
+<article class="md:col-span-4 bg-surface-container-lowest rounded-xl flex flex-col shadow-sm">
+<div class="h-64 overflow-hidden rounded-t-xl relative">
+<img alt="Pterosaur Fossil" class="w-full h-full object-cover" data-alt="Pterosaur Wing Bone Impression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkNqawK0TrAWpIJ_NaJ0W7V608-32mdMZgZ4EqnCnQTgDzns1z6sfbob-Gq-35i28WfHuruau93CTOzJLFH9HIasCTOyKvhSvBba8Yxc_JqMAmfLEWe8-t6xe8Pi12mv4VUslq174qiAR4qwdDRZd9VIlB7mja46MWFFheF4WzD9s78-2w6lYZsLP-H7drAiSL9ZeMNGbXsM_DJgJddbZH12Pn5ShFpbClGwZBskLBs-UPXKgeuHRbosfj7CoDGixaBf8G91tH-Tc"/>
+<div class="absolute top-4 right-4 bg-tertiary-container/90 text-on-tertiary-container text-[10px] font-label px-3 py-1 rounded-full uppercase">Rare Specimen</div>
+</div>
+<div class="p-8 flex-1 flex flex-col">
+<span class="text-[10px] font-label text-tertiary uppercase tracking-widest mb-2">Cretaceous</span>
+<h4 class="text-2xl font-headline mb-4 italic">Pterodactylus</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Discovery from the Solnhofen Limestone. Fine wing membrane impressions visible under UV light scanning.</p>
+<div class="mt-auto pt-6 border-t border-outline-variant border-opacity-20 flex justify-between items-center">
+<span class="text-xs font-bold text-on-surface/60 italic" data-location="Bavaria, Germany">Solnhofen, DE</span>
+<span class="material-symbols-outlined text-primary" data-icon="bookmark">bookmark</span>
+</div>
+</div>
+</article>
+<!-- Small Grid Card 1 -->
+<article class="md:col-span-4 bg-surface-container p-6 rounded-xl flex items-center gap-6">
+<div class="w-24 h-24 rounded-lg overflow-hidden shrink-0">
+<img alt="Trilobite Fossil" class="w-full h-full object-cover" data-alt="Ancient Trilobite Fossil" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCM11QNnJ8B45ILUC64lyELyYu9CUh3J4iYZaYafmuggry0iChknMMHAIdnJsQC7vnhfvrz9n1nUnORS-RetyD-ex1pA9EValHB8LSORMhAy5UJVHHRvod2ipVceLgnnHnFKs9XNnV288BjbHzyrJDNw60hxWS07NRCG62kCuo8Z2TJVoc8g4gjtrdwBXAHOrfC2GfXN5GPX7gAyHm16hAp7ITxOTFcZ1aokf2EhKZQG-IMNB44LA574ek4ef-HULk7PeDOo8GIHI"/>
+</div>
+<div>
+<span class="text-[9px] font-label text-on-secondary-fixed-variant uppercase tracking-widest bg-secondary-fixed px-2 py-0.5 rounded">Cambrian</span>
+<h4 class="text-xl font-headline mt-2 italic">Redlichiida</h4>
+<p class="text-xs text-on-surface-variant mt-1" data-location="Morocco">Anti-Atlas, Morocco</p>
+</div>
+</article>
+<!-- Small Grid Card 2 -->
+<article class="md:col-span-4 bg-surface-container p-6 rounded-xl flex items-center gap-6">
+<div class="w-24 h-24 rounded-lg overflow-hidden shrink-0">
+<img alt="Ancient Fish Fossil" class="w-full h-full object-cover" data-alt="Perfectly Preserved Ancient Fish Skeleton" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDosOdUd3giMl_GFwmqU0f0xE12BFWKZuoQuynJQUAtp7OAomr81WY_ski7IWXadn9WN_s5l-Kidd57YubBzlhvjwM96cuzyiYgqA-EXTfkdwlv5j41kCy4Rz-PonAU5ejFU3emf-d89HA-Zt1tAdVkiBoBGc4IIOqnO0sFHTTw_Zm40eBS0D2Lco8l_INAk8F64qby0Wr-Pv7MM0fRlqQd34Qwt5TAo5PwF2Bs9gdU62humP_SZAs_2tVpAr9ws51VirQklNfOaoY"/>
+</div>
+<div>
+<span class="text-[9px] font-label text-on-secondary-fixed-variant uppercase tracking-widest bg-secondary-fixed px-2 py-0.5 rounded">Eocene</span>
+<h4 class="text-xl font-headline mt-2 italic">Knightia eocaena</h4>
+<p class="text-xs text-on-surface-variant mt-1" data-location="Wyoming, USA">Green River, USA</p>
+</div>
+</article>
+<!-- Small Grid Card 3 -->
+<article class="md:col-span-4 bg-surface-container p-6 rounded-xl flex items-center gap-6">
+<div class="w-24 h-24 rounded-lg overflow-hidden shrink-0">
+<img alt="Fern Fossil" class="w-full h-full object-cover" data-alt="Carboniferous Fern Leaf Impression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVo2PhPYYqAfk6M-Y9EiyUWpU8vju5P7ozwINwqwHYBU7hE8kCY9hnyWnks6-HpH3BFYpk184pH5_wG7pYwkMJWf7m5P_yOuW6r-67mmNaTlJuyiar4hqpQxD2LibUU14BxM_a122Rr0pfbirdzOWphqzCQjTWS32M7C15VhExcGAJSoH768QfZf8DeulxwWog5L-iurQm_4jSdk4W2ARJnzba92RW-FD3X7pNE1GD8Il2OSV0JHQxmZNPVvJPA9u4fPnOgCV-WUI"/>
+</div>
+<div>
+<span class="text-[9px] font-label text-on-secondary-fixed-variant uppercase tracking-widest bg-secondary-fixed px-2 py-0.5 rounded">Carboniferous</span>
+<h4 class="text-xl font-headline mt-2 italic">Neuropteris</h4>
+<p class="text-xs text-on-surface-variant mt-1" data-location="Illinois, USA">Mazon Creek, USA</p>
+</div>
+</article>
+</div>
+<!-- Tonal Shift Section (Digital Sediment) -->
+<div class="bg-surface-container-low rounded-3xl p-12 mb-20">
+<div class="flex flex-col md:flex-row gap-16 items-center">
+<div class="md:w-1/2 space-y-6">
+<h3 class="text-4xl font-headline leading-tight">Advanced Research &amp; Stratigraphic Mapping</h3>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+                            Access our high-resolution CT scans and isotopic analysis for each specimen. Our "Digital Sediment" tool allows researchers to virtually excavate layers of discovery metadata.
+                        </p>
+<div class="flex gap-8 py-4">
+<div>
+<p class="text-3xl font-headline text-primary">2.4k+</p>
+<p class="text-xs font-label uppercase tracking-widest text-on-surface-variant">Archived Specimens</p>
+</div>
+<div>
+<p class="text-3xl font-headline text-primary">850</p>
+<p class="text-xs font-label uppercase tracking-widest text-on-surface-variant">Scanning Models</p>
+</div>
+<div>
+<p class="text-3xl font-headline text-primary">12</p>
+<p class="text-xs font-label uppercase tracking-widest text-on-surface-variant">Active Expeditions</p>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 w-full aspect-square rounded-2xl overflow-hidden shadow-2xl lithic-gradient p-1">
+<div class="bg-surface-container-lowest w-full h-full rounded-2xl flex items-center justify-center relative">
+<img alt="Archaeological Excavation Map" class="w-full h-full object-cover opacity-90 rounded-2xl" data-alt="3D Stratigraphic Map Visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcFEQbthAm5cw4ZcKLJ7JkYBen4MpjaooecNSC9D1cpUnt6PFV7W2KaZcMFklPQqbPBkSGJ3Zy81PjpUi-x8wDwg1bzMG7Xj86znJv22P1V9IW6j2DPhd6TSRHuSjaeMSR28btDwno3U9bqE-cnQCiQUNKHhWSWuiiBfWUT0da_lZIBDLJ3MXUGHooCtnINJxUzh97nLVjixKlAxcy7EgrJ1iJex69V1FPor4UsEg8b50LjFlvd_yVsIFOMNdzB3m-c1K8jF96ZLY"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-surface/90 p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="play_circle">play_circle</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Browse by Era (Interactive Chips Section) -->
+<div class="mb-20">
+<h4 class="text-label-md font-label text-on-surface-variant uppercase tracking-[0.4em] mb-10 text-center">Browse by Geological Era</h4>
+<div class="flex flex-wrap justify-center gap-4">
+<button class="px-8 py-3 rounded-full bg-surface-container-high hover:bg-secondary-container transition-all text-sm font-label uppercase tracking-widest text-on-surface hover:text-on-secondary-container">Cenozoic</button>
+<button class="px-8 py-3 rounded-full bg-secondary-container text-on-secondary-container transition-all text-sm font-label uppercase tracking-widest shadow-sm">Mesozoic</button>
+<button class="px-8 py-3 rounded-full bg-surface-container-high hover:bg-secondary-container transition-all text-sm font-label uppercase tracking-widest text-on-surface hover:text-on-secondary-container">Paleozoic</button>
+<button class="px-8 py-3 rounded-full bg-surface-container-high hover:bg-secondary-container transition-all text-sm font-label uppercase tracking-widest text-on-surface hover:text-on-secondary-container">Neoproterozoic</button>
+<button class="px-8 py-3 rounded-full bg-surface-container-high hover:bg-secondary-container transition-all text-sm font-label uppercase tracking-widest text-on-surface hover:text-on-secondary-container">Archean</button>
+</div>
+</div>
+</section>
+<!-- Footer Treatment -->
+<footer class="mt-auto py-16 px-10 border-t border-outline-variant border-opacity-10 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+<div class="text-center md:text-left">
+<h5 class="font-headline text-2xl mb-2">Strata Archive</h5>
+<p class="text-sm text-on-surface-variant opacity-60">Building the world's most comprehensive digital geological record since 1994.</p>
+</div>
+<div class="flex gap-12 grayscale opacity-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl" data-icon="account_balance">account_balance</span>
+<span class="text-[10px] font-label uppercase tracking-widest">Global Museum<br/>Association</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl" data-icon="public">public</span>
+<span class="text-[10px] font-label uppercase tracking-widest">UNESCO<br/>Heritage Partner</span>
+</div>
+</div>
+<div class="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant">
+                    © 2024 Strata Archive — Private Internal Access
+                </div>
+</div>
+</footer>
+</main>
+<script>
+(function () {
+  const routes = {
+    'Public Blog': '/',
+    'Articles': '/wiki-de-estudos-paleontologicos',
+    'About': '/acervo-digital-de-fosseis',
+    'Region': '/prestacao-de-contas',
+    'Contact': '/acesso-ao-portal-interno',
+    'Internal Area': '/acesso-ao-portal-interno',
+    'Resources': '/wiki-de-estudos-paleontologicos',
+    'Dashboard': '/dashboard/professor',
+    'Students': '/dashboard/aluno',
+    'Accountability': '/prestacao-de-contas',
+    'Excavations': '/acervo-digital-de-fosseis',
+    'Research': '/wiki-de-estudos-paleontologicos',
+    'Fossil Archive': '/acervo-digital-de-fosseis',
+    'Educational Wiki': '/wiki-de-estudos-paleontologicos',
+    'Research Tools': '/prestacao-de-contas',
+    'Internal Portal': '/acesso-ao-portal-interno',
+    'Explore The Portal': '/acervo-digital-de-fosseis',
+    'Learn More': '/wiki-de-estudos-paleontologicos',
+    'Sign In to Portal': '/acesso-ao-portal-interno',
+    'Login': '/acesso-ao-portal-interno',
+    'AUTHENTICATE ARCHIVE': '/dashboard/professor',
+    'Contribute Find': '/prestacao-de-contas',
+    'Filter': '/acervo-digital-de-fosseis',
+    'View Timeline': '/wiki-de-estudos-paleontologicos',
+    'Browse all': '/wiki-de-estudos-paleontologicos',
+    'View All Archives': '/wiki-de-estudos-paleontologicos',
+    'View All Work': '/dashboard/aluno',
+    'New Entry': '/prestacao-de-contas'
+  };
+
+  document.querySelectorAll('a[href="#"]').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) el.setAttribute('href', routes[text]);
+  });
+
+  document.querySelectorAll('button').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () { window.location.href = routes[text]; });
+    }
+  });
+
+  document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      window.location.href = '/dashboard/professor';
+    });
+  });
+})();
+</script></body></html>

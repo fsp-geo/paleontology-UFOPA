@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fff8f1",
+              "surface-container-low": "#fbf2e6",
+              "secondary-fixed-dim": "#bacca8",
+              "surface-tint": "#785830",
+              "surface-container": "#f5ede1",
+              "on-error-container": "#93000a",
+              "on-surface": "#1e1b14",
+              "on-secondary-fixed": "#111f08",
+              "on-primary-fixed": "#2a1700",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#d6e9c3",
+              "outline-variant": "#d2c4b7",
+              "on-tertiary-fixed-variant": "#743320",
+              "on-surface-variant": "#4f453b",
+              "primary-fixed-dim": "#e9bf8e",
+              "primary": "#785830",
+              "surface-variant": "#e9e1d5",
+              "on-primary-fixed-variant": "#5e411b",
+              "on-tertiary-fixed": "#3b0900",
+              "inverse-primary": "#e9bf8e",
+              "surface-dim": "#e1d9cd",
+              "surface-container-highest": "#e9e1d5",
+              "surface": "#fff8f1",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed": "#ffdbd1",
+              "on-secondary-fixed-variant": "#3c4b30",
+              "on-secondary": "#ffffff",
+              "on-background": "#1e1b14",
+              "on-primary-container": "#4e330e",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb5a0",
+              "inverse-surface": "#343028",
+              "primary-fixed": "#ffddb7",
+              "surface-container-high": "#efe7db",
+              "tertiary-container": "#e28b72",
+              "secondary": "#536346",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#59694b",
+              "background": "#fff8f1",
+              "outline": "#81756a",
+              "on-error": "#ffffff",
+              "secondary-container": "#d6e9c3",
+              "inverse-on-surface": "#f8f0e3",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#612514",
+              "tertiary": "#924a35",
+              "primary-container": "#c29b6d"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Newsreader', serif; }
+        .lithic-gradient {
+            background: linear-gradient(135deg, #785830 0%, #c29b6d 100%);
+        }
+        .glass-panel {
+            background-color: rgba(255, 248, 241, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col items-center justify-center p-6 selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Background Texture/Image Overlay -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+<img alt="Macro texture of ancient sedimentary rock" class="w-full h-full object-cover opacity-10 mix-blend-multiply" data-alt="Detailed macro shot of desert sandstone layers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw5UJ-S-_XjPCxRhwToMX44Tjs14DNMKheA1SSBza7ut8QwGu2OMu_knj_TnMNaVqIp3xk8yjt9fpvm2kIoAkAZ3SgeqwIXRN_YfbocIHPK0zeFKoU4ti5OhlNXj50oWBdNnJ1kX6kKf_zHBBAq9jVXjUgM-pDbEd-Pu6S8n4Dnug9N9Zl7ejig4wXJV4x03_qJ--LVDtcBYrJxqryrD5ZOg01L28w6bALxZKs7gcZn1ctxBdugtAxGzoh1pazVYdHP7iAzI-sB6U"/>
+<div class="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60"></div>
+</div>
+<!-- Exclusion Protocol: Login flow removes NavBars for focus -->
+<main class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden rounded-xl shadow-[0px_24px_48px_-12px_rgba(30,27,20,0.08)] bg-surface-container-lowest">
+<!-- Left Side: Editorial Branding -->
+<div class="lg:col-span-5 p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden bg-surface-container">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-12">
+<div class="w-10 h-10 lithic-gradient rounded-sm flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+<span class="font-label text-xs tracking-[0.2em] uppercase text-on-surface-variant font-bold">Internal Portal</span>
+</div>
+<h1 class="text-5xl lg:text-6xl text-primary leading-tight mb-6">
+                    PaleoPortal
+                </h1>
+<p class="font-headline text-2xl text-on-surface-variant italic mb-8">
+                    Strata Archive
+                </p>
+<div class="w-12 h-[1px] bg-outline-variant/30 mb-8"></div>
+<p class="font-body text-on-surface-variant leading-relaxed opacity-80 max-w-xs">
+                    Access the world's most comprehensive digital stratigraphy and fossilized record database. 
+                </p>
+</div>
+<div class="mt-12 relative z-10">
+<div class="flex -space-x-3 mb-4">
+<img alt="Researcher profile" class="w-10 h-10 rounded-full border-2 border-surface-container-lowest object-cover" data-alt="Male academic portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQArQRWsy6SAXi7JMZItph8WiL4sSwPVDOLeL2Sx4FQiG4E2cHp2FmfHIMEe9X6lptJoZFxjDQKByTPFKj2WeRNKEcnuyi3LRsE6sho1z0QFi8ZXRIEJAIxvHTv19CZD76DbOxAlgu9FQebw_sSpcjv9szDEQT112oQXBu5T6aywkv3YKsALeWoYboaUopeW7yJt_PX26dhM10tncdrNanKNQC8OAiO2ytOl99wIfj5Wg_Ng7oWuP71dIA8LWzKzAUDHmnyrqbMMo"/>
+<img alt="Researcher profile" class="w-10 h-10 rounded-full border-2 border-surface-container-lowest object-cover" data-alt="Female academic portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9GQUnhAeuyNXYrdOYi12qUIZXUBO8PfzvXxG6UfLwTL6DPHRoveqBkvpZU_EkTDPSNVpOgpZC1qVhzYaEdJOi4Hr30-l8R0tEOYjHe2ImR7ZpR14CQZ8yGYRAzfYQ11nmgiUMT5qG2ycaJPZVZTa6u9hklZi__JYdnDBwXPXvpcGwv49PngRUfna696x_T14MFh2DDReNt8KLEBjhLN10kkUbdHDAQInJnerVk6EAH4pVnB7PD_7MMHZXZ-pgQ8OCnqJ-8x9Vtco"/>
+<img alt="Researcher profile" class="w-10 h-10 rounded-full border-2 border-surface-container-lowest object-cover" data-alt="Male scientist portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzjMOZEl6uBc_ewAm-yIcvCw_cAwH-Zyf6lBmhZNU5MMsH8K7gdchQi43_V-6IF-KgEsklyv8cWLt-nPy6qE2rWGgO7vNi3If-gO9vHz3KJQy2suchEDbKFxomzBkUrYvBCTo0R-IB4FkEWOzO1fP35ZbeLvHKXQxC-99auURMoADVV3x1N6kB33HGS3LQu0hQrwjC9qLOXe2sNxKrm9_JenhyLHFsVt-DDeytU2NIhKBV7fFKauEzJ2HasBmLIuOoxsYM-CgTse0"/>
+<div class="w-10 h-10 rounded-full border-2 border-surface-container-lowest bg-secondary-container flex items-center justify-center text-[10px] font-bold text-on-secondary-container">
+                        +2k
+                    </div>
+</div>
+<p class="text-xs font-label text-on-surface-variant tracking-wider">JOINING 2,400+ ACTIVE RESEARCHERS</p>
+</div>
+<!-- Subtle Decorative Fossil Element -->
+<span class="material-symbols-outlined absolute -bottom-10 -right-10 text-[240px] text-surface-variant/40 rotate-12 pointer-events-none">
+                token
+            </span>
+</div>
+<!-- Right Side: Login Form -->
+<div class="lg:col-span-7 p-12 lg:p-20 flex flex-col justify-center bg-surface-container-lowest">
+<div class="max-w-md mx-auto w-full">
+<div class="mb-10">
+<h2 class="text-3xl text-on-surface mb-2">Welcome Back</h2>
+<p class="text-on-surface-variant text-sm font-body">Please enter your institutional credentials to access the strata archive.</p>
+</div>
+<form class="space-y-6">
+<div class="space-y-1.5">
+<label class="font-label text-[10px] uppercase tracking-widest text-outline font-bold ml-1">Institutional Email or ID</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-4 text-on-surface placeholder:text-outline/50 focus:ring-0 focus:border-b-2 focus:border-primary transition-all duration-200" placeholder="researcher@university.edu" type="email"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline/40 text-xl">alternate_email</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label text-[10px] uppercase tracking-widest text-outline font-bold ml-1">Password</label>
+<a class="text-[10px] uppercase tracking-widest text-tertiary font-bold hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-4 text-on-surface placeholder:text-outline/50 focus:ring-0 focus:border-b-2 focus:border-primary transition-all duration-200" placeholder="••••••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline/40 text-xl">lock</span>
+</div>
+</div>
+<div class="flex items-center gap-3 py-2">
+<input class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary/20 bg-surface-container-lowest" id="remember" type="checkbox"/>
+<label class="text-xs text-on-surface-variant font-body" for="remember">Keep me signed in for 30 days</label>
+</div>
+<div class="pt-4">
+<button class="w-full lithic-gradient text-on-primary py-4 rounded-sm font-label text-sm font-bold tracking-widest hover:brightness-110 shadow-lg shadow-primary/10 transition-all flex items-center justify-center gap-2" type="submit">
+                            AUTHENTICATE ARCHIVE
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</form>
+<div class="mt-12 pt-8 border-t border-outline-variant/15">
+<p class="text-center text-xs text-on-surface-variant font-body mb-6">Or continue with institutional SSO</p>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-high rounded-sm hover:bg-surface-variant transition-colors text-on-surface text-xs font-bold font-label tracking-tight">
+<span class="material-symbols-outlined text-lg">account_balance</span>
+                            UNIVERSITY
+                        </button>
+<button class="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-high rounded-sm hover:bg-surface-variant transition-colors text-on-surface text-xs font-bold font-label tracking-tight">
+<span class="material-symbols-outlined text-lg">science</span>
+                            RESEARCH LAB
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Meta-info -->
+<footer class="mt-12 flex flex-col items-center gap-6 w-full max-w-5xl">
+<div class="flex gap-8 opacity-40 grayscale">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-2xl">museum</span>
+<span class="font-label text-[10px] tracking-widest font-bold">NATURAL HISTORY FOUNDATION</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-2xl">public</span>
+<span class="font-label text-[10px] tracking-widest font-bold">GLOBAL STRATA NETWORK</span>
+</div>
+</div>
+<div class="flex gap-6">
+<a class="text-xs text-on-surface-variant hover:text-primary transition-colors underline decoration-outline-variant/30 underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-xs text-on-surface-variant hover:text-primary transition-colors underline decoration-outline-variant/30 underline-offset-4" href="#">Terms of Use</a>
+<a class="text-xs text-on-surface-variant hover:text-primary transition-colors underline decoration-outline-variant/30 underline-offset-4" href="#">Accessibility</a>
+</div>
+</footer>
+<script>
+(function () {
+  const routes = {
+    'Public Blog': '/',
+    'Articles': '/wiki-de-estudos-paleontologicos',
+    'About': '/acervo-digital-de-fosseis',
+    'Region': '/prestacao-de-contas',
+    'Contact': '/acesso-ao-portal-interno',
+    'Internal Area': '/acesso-ao-portal-interno',
+    'Resources': '/wiki-de-estudos-paleontologicos',
+    'Dashboard': '/dashboard/professor',
+    'Students': '/dashboard/aluno',
+    'Accountability': '/prestacao-de-contas',
+    'Excavations': '/acervo-digital-de-fosseis',
+    'Research': '/wiki-de-estudos-paleontologicos',
+    'Fossil Archive': '/acervo-digital-de-fosseis',
+    'Educational Wiki': '/wiki-de-estudos-paleontologicos',
+    'Research Tools': '/prestacao-de-contas',
+    'Internal Portal': '/acesso-ao-portal-interno',
+    'Explore The Portal': '/acervo-digital-de-fosseis',
+    'Learn More': '/wiki-de-estudos-paleontologicos',
+    'Sign In to Portal': '/acesso-ao-portal-interno',
+    'Login': '/acesso-ao-portal-interno',
+    'AUTHENTICATE ARCHIVE': '/dashboard/professor',
+    'Contribute Find': '/prestacao-de-contas',
+    'Filter': '/acervo-digital-de-fosseis',
+    'View Timeline': '/wiki-de-estudos-paleontologicos',
+    'Browse all': '/wiki-de-estudos-paleontologicos',
+    'View All Archives': '/wiki-de-estudos-paleontologicos',
+    'View All Work': '/dashboard/aluno',
+    'New Entry': '/prestacao-de-contas'
+  };
+
+  document.querySelectorAll('a[href="#"]').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) el.setAttribute('href', routes[text]);
+  });
+
+  document.querySelectorAll('button').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () { window.location.href = routes[text]; });
+    }
+  });
+
+  document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      window.location.href = '/dashboard/professor';
+    });
+  });
+})();
+</script></body></html>

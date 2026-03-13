@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#e9e1d5",
+              "on-tertiary-container": "#612514",
+              "surface-container-low": "#fbf2e6",
+              "on-tertiary-fixed": "#3b0900",
+              "on-primary-fixed": "#2a1700",
+              "primary-fixed": "#ffddb7",
+              "primary-container": "#c29b6d",
+              "secondary-fixed": "#d6e9c3",
+              "surface-bright": "#fff8f1",
+              "inverse-primary": "#e9bf8e",
+              "outline-variant": "#d2c4b7",
+              "on-error-container": "#93000a",
+              "outline": "#81756a",
+              "on-secondary-container": "#59694b",
+              "secondary": "#536346",
+              "error": "#ba1a1a",
+              "inverse-on-surface": "#f8f0e3",
+              "background": "#fff8f1",
+              "secondary-fixed-dim": "#bacca8",
+              "surface-container-high": "#efe7db",
+              "on-error": "#ffffff",
+              "surface-tint": "#785830",
+              "on-primary-container": "#4e330e",
+              "surface-dim": "#e1d9cd",
+              "on-primary": "#ffffff",
+              "surface": "#fff8f1",
+              "inverse-surface": "#343028",
+              "error-container": "#ffdad6",
+              "surface-container": "#f5ede1",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed-variant": "#743320",
+              "on-secondary-fixed-variant": "#3c4b30",
+              "tertiary-fixed-dim": "#ffb5a0",
+              "primary-fixed-dim": "#e9bf8e",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#4f453b",
+              "on-primary-fixed-variant": "#5e411b",
+              "tertiary-fixed": "#ffdbd1",
+              "primary": "#785830",
+              "on-secondary-fixed": "#111f08",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#e28b72",
+              "on-background": "#1e1b14",
+              "tertiary": "#924a35",
+              "surface-variant": "#e9e1d5",
+              "on-surface": "#1e1b14",
+              "secondary-container": "#d6e9c3"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fff8f1; color: #1e1b14; }
+        .font-headline { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { background: rgba(255, 248, 241, 0.8); backdrop-filter: blur(20px); }
+        input:focus, select:focus, textarea:focus { outline: none; border-bottom: 2px solid #785830 !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<nav class="glass-nav sticky top-0 z-50 px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<span class="font-headline text-2xl font-semibold tracking-tight text-primary">PaleoPortal</span>
+<div class="hidden md:flex gap-6">
+<a class="text-label-md font-label uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Public Blog</a>
+<a class="text-label-md font-label uppercase tracking-widest text-primary font-bold" href="#">Internal Area</a>
+<a class="text-label-md font-label uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-highest px-4 py-2 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-outline">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 w-32 lg:w-48" placeholder="Search..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-sm font-label uppercase tracking-widest text-xs font-bold hover:opacity-90 transition-opacity">Login</button>
+</div>
+</nav>
+<div class="flex min-h-screen">
+<aside class="w-72 bg-surface-container border-r border-outline-variant/10 hidden lg:flex flex-col p-8 sticky top-20 h-[calc(100vh-80px)]">
+<div class="mb-12">
+<div class="flex items-center gap-3 mb-2">
+<img alt="User Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Close-up portrait of a professional researcher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFiLPiXk32YPhAZgpsQ77Heqh8cczJ5jXfE2FpR1hDaPCeViVFOqWIz312Ga2EO-UX-ECcsmJ7UaPsukJ2062HYmXD6MnANW_Wf4mSncsxq-PEU4HQm0pfzDK5DIgpfl7D-8iwWEmFnhs8si2EP0khUmYwZVlH6oxDRjVxpxZPyetdjyWEYqSEnH5gbfdCERdsUn6SjcIFNRk-2x1ZJYWxyIJcmBGoAPTw9xDAShSru1S6IiDP8yAjHGzYX2hHtib1GXe-2feHAhg"/>
+<div>
+<p class="font-headline text-lg leading-tight">Management Panel</p>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Institutional Access</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high text-on-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high text-on-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">landscape</span>
+<span class="text-sm font-medium">Excavations</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high text-on-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">magnification_small</span>
+<span class="text-sm font-medium">Research</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high text-on-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">school</span>
+<span class="text-sm font-medium">Students</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md bg-surface-container-highest text-primary font-bold shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="text-sm">Accountability</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high text-on-surface-variant transition-all group mt-8" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 p-6 md:p-12 max-w-7xl mx-auto">
+<header class="mb-16">
+<span class="text-label-md uppercase tracking-[0.2em] text-tertiary font-bold mb-4 block">Institutional Financials</span>
+<h1 class="font-headline text-5xl md:text-6xl text-on-surface leading-tight mb-6">Expense Reporting</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Log and track your research expenditures. Our Digital Stratigraphy ensures every receipt is layered correctly for the Petrobras Paleontology Division audit process.
+                </p>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-12 items-start">
+<section class="xl:col-span-5 bg-surface-container-low p-8 rounded-md">
+<h2 class="font-headline text-2xl mb-8">New Entry</h2>
+<form class="space-y-8">
+<div class="space-y-6">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-outline">Category</label>
+<select class="bg-surface-container-highest border-none p-4 rounded-sm text-on-surface appearance-none focus:ring-0">
+<option>Travel &amp; Logistics</option>
+<option>Lab Materials</option>
+<option>Field Equipment</option>
+<option>Publications</option>
+<option>Others</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-outline">Value (BRL)</label>
+<input class="bg-surface-container-highest border-none p-4 rounded-sm text-on-surface" placeholder="0,00" type="number"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-outline">Date</label>
+<input class="bg-surface-container-highest border-none p-4 rounded-sm text-on-surface" type="date"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-outline">Description</label>
+<textarea class="bg-surface-container-highest border-none p-4 rounded-sm text-on-surface resize-none" placeholder="Brief explanation of the expense..." rows="3"></textarea>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-outline">Receipt / Invoice</label>
+<label class="group cursor-pointer bg-surface-container border-2 border-dashed border-outline-variant hover:border-primary transition-colors p-8 rounded-sm flex flex-col items-center justify-center gap-3">
+<input class="hidden" type="file"/>
+<span class="material-symbols-outlined text-3xl text-outline group-hover:text-primary">upload_file</span>
+<span class="text-xs text-on-surface-variant font-medium">Click to upload or drag receipt</span>
+</label>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary p-4 rounded-sm font-label uppercase tracking-widest font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-sm">send</span>
+                            Submit for Approval
+                        </button>
+</form>
+</section>
+<section class="xl:col-span-7">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline text-2xl">Submission History</h2>
+<div class="flex gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Approved: 12</span>
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Pending: 3</span>
+</div>
+</div>
+<div class="overflow-hidden bg-surface-container-low rounded-md">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant/10">
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-outline">Date</th>
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-outline">Description</th>
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-outline">Category</th>
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-outline">Value</th>
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-outline text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-4 text-sm">Oct 24, 2024</td>
+<td class="p-4">
+<p class="text-sm font-semibold">Araripe Basin Travel</p>
+<p class="text-[10px] text-on-surface-variant">Round-trip logistics and lodging</p>
+</td>
+<td class="p-4">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded uppercase tracking-tighter">Travel</span>
+</td>
+<td class="p-4 text-sm font-bold">R$ 1.250,00</td>
+<td class="p-4 text-right">
+<span class="text-[10px] text-secondary font-bold uppercase tracking-widest flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                            Approved
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-4 text-sm">Oct 18, 2024</td>
+<td class="p-4">
+<p class="text-sm font-semibold">Isotope Analysis Kit</p>
+<p class="text-[10px] text-on-surface-variant">Batch of 50 chemical reagents</p>
+</td>
+<td class="p-4">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded uppercase tracking-tighter">Lab</span>
+</td>
+<td class="p-4 text-sm font-bold">R$ 845,20</td>
+<td class="p-4 text-right">
+<span class="text-[10px] text-primary font-bold uppercase tracking-widest flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+                                            Pending
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-4 text-sm">Oct 12, 2024</td>
+<td class="p-4">
+<p class="text-sm font-semibold">Carbon Dating Service</p>
+<p class="text-[10px] text-on-surface-variant">External lab calibration</p>
+</td>
+<td class="p-4">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded uppercase tracking-tighter">Research</span>
+</td>
+<td class="p-4 text-sm font-bold">R$ 3.100,00</td>
+<td class="p-4 text-right">
+<span class="text-[10px] text-secondary font-bold uppercase tracking-widest flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                            Approved
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-4 text-sm">Oct 05, 2024</td>
+<td class="p-4">
+<p class="text-sm font-semibold">Brush Set &amp; Tools</p>
+<p class="text-[10px] text-on-surface-variant">Precision excavation kit</p>
+</td>
+<td class="p-4">
+<span class="text-[10px] bg-surface-container-highest px-2 py-1 rounded uppercase tracking-tighter">Field</span>
+</td>
+<td class="p-4 text-sm font-bold">R$ 120,00</td>
+<td class="p-4 text-right">
+<span class="text-[10px] text-error font-bold uppercase tracking-widest flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[12px]">error</span>
+                                            Rejected
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 bg-surface-container-high rounded-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Total Spent (Oct)</p>
+<p class="font-headline text-2xl">R$ 5.315,20</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-high rounded-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Remaining Budget</p>
+<p class="font-headline text-2xl">R$ 14.684,80</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<footer class="mt-32 border-t border-outline-variant/15 py-16 px-8 bg-surface-container">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="space-y-4">
+<span class="font-headline text-2xl text-primary">PaleoPortal</span>
+<p class="text-sm text-on-surface-variant max-w-xs">A digital stratigraphy platform for institutional research and paleontological archiving.</p>
+<p class="text-[10px] uppercase tracking-widest text-outline">© 2024 Petrobras Paleontology Division. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap gap-16">
+<div class="flex flex-col gap-3">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface">Division</span>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Institutional Site</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Public Archive</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Partnerships</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface">Support</span>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Us</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Internal Rules</a>
+</div>
+</div>
+<div class="bg-white/40 p-6 rounded-md backdrop-blur-sm border border-white/50">
+<p class="text-[10px] uppercase tracking-widest font-bold mb-4">Institutional Partners</p>
+<div class="flex items-center gap-6 opacity-60 grayscale">
+<img alt="Partner Logo" class="h-8 object-contain" data-alt="Abstract monochrome corporate logo for research partner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2BiW5gw9vZHTqRpIBW6dEYNhFdufc7cVo19INT8S43ydOfkZIOnhc2UIKVn-XYEY0pWnkTDeZArLHhs1Fxs-F4SmYsSDzVqZ3dtehJnnOq4MeyGH-qkOsnyqlMKtDunt9nnM-1UfV6iyjrkLSoAZLoE6fSJtp83C9PQVNtJt7BE_hD0prSSw1PSa0c_QItvGIhmJeHmgrILhLxtiV72SZm2AFBp4iYkUK6zQKs-ndFmFauRfzJkGWPmMqGi0xE9k5BpZ0UBGrRV4"/>
+<div class="w-px h-8 bg-outline-variant"></div>
+<img alt="Partner Logo" class="h-8 object-contain" data-alt="Abstract monochrome institutional logo for university partner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN57F9bIB-mLpS4SKpEKFeHAJxbIlKGdECI0S6DBtJJItT964oCHsD8FJ8WOR03OyEafLEpI9_AL4Fo3AqJxa8MJjG1QVJA5tzlZJTFRLuocBYbFFkI_fbc16L_r4b_pf7Mz7S9J81B4-6rS_5mNoXr9zNgCFMETKuqdYrGZEhfKdCg2SJiVIiPavCg8qhPIZCEDgNT_nW6QPUs-iqG4-hzvoYDuS_mlR6Awh2_aHfl_r_633wAKWAFheCbWhPygKFjXjVcImQZN8"/>
+</div>
+</div>
+</div>
+</footer>
+<button class="fixed bottom-8 right-8 h-14 px-6 bg-primary text-on-primary rounded-full flex items-center gap-3 shadow-[0px_24px_48px_-12px_rgba(30,27,20,0.15)] hover:scale-105 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined">add</span>
+<span class="text-sm font-bold uppercase tracking-widest">New Entry</span>
+</button>
+<script>
+(function () {
+  const routes = {
+    'Public Blog': '/',
+    'Articles': '/wiki-de-estudos-paleontologicos',
+    'About': '/acervo-digital-de-fosseis',
+    'Region': '/prestacao-de-contas',
+    'Contact': '/acesso-ao-portal-interno',
+    'Internal Area': '/acesso-ao-portal-interno',
+    'Resources': '/wiki-de-estudos-paleontologicos',
+    'Dashboard': '/dashboard/professor',
+    'Students': '/dashboard/aluno',
+    'Accountability': '/prestacao-de-contas',
+    'Excavations': '/acervo-digital-de-fosseis',
+    'Research': '/wiki-de-estudos-paleontologicos',
+    'Fossil Archive': '/acervo-digital-de-fosseis',
+    'Educational Wiki': '/wiki-de-estudos-paleontologicos',
+    'Research Tools': '/prestacao-de-contas',
+    'Internal Portal': '/acesso-ao-portal-interno',
+    'Explore The Portal': '/acervo-digital-de-fosseis',
+    'Learn More': '/wiki-de-estudos-paleontologicos',
+    'Sign In to Portal': '/acesso-ao-portal-interno',
+    'Login': '/acesso-ao-portal-interno',
+    'AUTHENTICATE ARCHIVE': '/dashboard/professor',
+    'Contribute Find': '/prestacao-de-contas',
+    'Filter': '/acervo-digital-de-fosseis',
+    'View Timeline': '/wiki-de-estudos-paleontologicos',
+    'Browse all': '/wiki-de-estudos-paleontologicos',
+    'View All Archives': '/wiki-de-estudos-paleontologicos',
+    'View All Work': '/dashboard/aluno',
+    'New Entry': '/prestacao-de-contas'
+  };
+
+  document.querySelectorAll('a[href="#"]').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) el.setAttribute('href', routes[text]);
+  });
+
+  document.querySelectorAll('button').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () { window.location.href = routes[text]; });
+    }
+  });
+
+  document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      window.location.href = '/dashboard/professor';
+    });
+  });
+})();
+</script></body></html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PaleoPortal - Student Publication Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#e9e1d5",
+              "on-tertiary-container": "#612514",
+              "surface-container-low": "#fbf2e6",
+              "on-tertiary-fixed": "#3b0900",
+              "on-primary-fixed": "#2a1700",
+              "primary-fixed": "#ffddb7",
+              "primary-container": "#c29b6d",
+              "secondary-fixed": "#d6e9c3",
+              "surface-bright": "#fff8f1",
+              "inverse-primary": "#e9bf8e",
+              "outline-variant": "#d2c4b7",
+              "on-error-container": "#93000a",
+              "outline": "#81756a",
+              "on-secondary-container": "#59694b",
+              "secondary": "#536346",
+              "error": "#ba1a1a",
+              "inverse-on-surface": "#f8f0e3",
+              "background": "#fff8f1",
+              "secondary-fixed-dim": "#bacca8",
+              "surface-container-high": "#efe7db",
+              "on-error": "#ffffff",
+              "surface-tint": "#785830",
+              "on-primary-container": "#4e330e",
+              "surface-dim": "#e1d9cd",
+              "on-primary": "#ffffff",
+              "surface": "#fff8f1",
+              "inverse-surface": "#343028",
+              "error-container": "#ffdad6",
+              "surface-container": "#f5ede1",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed-variant": "#743320",
+              "on-secondary-fixed-variant": "#3c4b30",
+              "tertiary-fixed-dim": "#ffb5a0",
+              "primary-fixed-dim": "#e9bf8e",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#4f453b",
+              "on-primary-fixed-variant": "#5e411b",
+              "tertiary-fixed": "#ffdbd1",
+              "primary": "#785830",
+              "on-secondary-fixed": "#111f08",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#e28b72",
+              "on-background": "#1e1b14",
+              "tertiary": "#924a35",
+              "surface-variant": "#e9e1d5",
+              "on-surface": "#1e1b14",
+              "secondary-container": "#d6e9c3"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .font-headline { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .lithic-gradient { background: linear-gradient(135deg, #785830 0%, #c29b6d 100%); }
+        .glass-nav { background: rgba(255, 248, 241, 0.8); backdrop-filter: blur(20px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="w-72 bg-surface-container flex flex-col sticky top-0 h-screen overflow-y-auto hide-scrollbar">
+<div class="p-8 flex flex-col gap-6">
+<div class="flex flex-col gap-1">
+<div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User Profile photo of a PhD student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhXrhzkGPIJDyZY-QASH1e1bhxcNyepXvw4jtXkFHWnLGACh3G7i_hcAwXc3VTEynwuSXU9dQzEc1DzkOqTRIz_k-ipHWApwh0H63fTHnwZP2NORKtfGNy-oeGhJd9qPdN4T81GFycZ4IGI7GqB9yvPVv8OmJaKU07a8-7s8GxF4pDtv32aDPAhqEbucWr90nfqsh6LlGL2m3vriRwdu3xD7u2GChf8hQkwQrzvGyL6gFHv22OXZfDeNO344gZw7Ihibzizgwm4XE"/>
+</div>
+<h2 class="font-headline text-title-lg text-on-surface mt-2">Management Panel</h2>
+<p class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Institutional Access</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-md bg-surface-container-highest text-on-surface" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">landscape</span>
+<span class="font-label text-sm font-medium">Excavations</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">magnification_small</span>
+<span class="font-label text-sm font-medium">Research</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label text-sm font-medium">Students</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-md hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-sm font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-8 opacity-40">
+<p class="text-[10px] uppercase tracking-tighter">Powered by Petrobras Paleontology Division</p>
+</div>
+</aside>
+<main class="flex-1 flex flex-col">
+<!-- TopNavBar -->
+<header class="h-20 flex items-center justify-between px-12 glass-nav z-10 sticky top-0">
+<div class="flex items-center gap-8">
+<h1 class="font-headline text-2xl font-bold tracking-tight text-primary">PaleoPortal</h1>
+<nav class="hidden md:flex gap-6">
+<a class="font-label text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Public Blog</a>
+<a class="font-label text-xs uppercase tracking-widest text-primary border-b border-primary" href="#">Internal Area</a>
+<a class="font-label text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Resources</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-6 py-2 font-label text-xs uppercase tracking-widest rounded-sm">Login</button>
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center">
+<img class="w-6 h-6 object-contain opacity-80 grayscale" data-alt="Institutional Logo of the Paleontology Division" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhsgemgff0tqr7QD7_N7ILqaXXAqaFDpiix_9ykzQDaSmUTgmNVJatRJt2AYfIqjZBvR5_E0yQH74PqBIxEdyWa-mBOBEE3Xe-VKc2Cmx6Z5GVCtnU76wXi3jW2PyizLUtCW9RnJGemowKaZNXRRgnXPrsX16hDV5lT47wmFMwqdglNn005UXupPE6NNu5qdfthQG63olbN2k6nCsgUemzgF4tkpqxhxiAbnheCYVP8Ukplr4OCV8ta-G-Nwo0SmDE5vlyNloTa4A"/>
+</div>
+</div>
+</header>
+<section class="p-12 max-w-7xl w-full mx-auto space-y-16">
+<!-- Hero Title & Asymmetry -->
+<div class="grid grid-cols-12 gap-8 items-end">
+<div class="col-span-12 lg:col-span-8">
+<p class="font-label text-xs uppercase tracking-[0.2em] text-tertiary mb-4">Student Publication Hub</p>
+<h2 class="font-headline text-5xl md:text-6xl text-on-surface leading-tight">Advancing the stratigraphy of <span class="italic">Mesozoic</span> findings.</h2>
+</div>
+<div class="col-span-12 lg:col-span-4 pb-2">
+<div class="bg-surface-container p-6 rounded-md">
+<p class="font-body text-sm text-on-surface-variant italic leading-relaxed">"Every fossil is a word; every publication is a chapter in the Earth's long-lost biography."</p>
+</div>
+</div>
+</div>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Financial Summary (Prestação de Contas) -->
+<div class="md:col-span-4 bg-surface-container-low p-8 rounded-md flex flex-col justify-between">
+<div>
+<h3 class="font-headline text-2xl mb-2">Prestação de Contas</h3>
+<p class="text-xs text-on-surface-variant font-label uppercase tracking-widest mb-6">Annual Research Grant 2024</p>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-outline-variant/10 pb-2">
+<span class="text-sm font-label uppercase text-on-surface-variant">Allocated</span>
+<span class="text-xl font-headline text-primary">R$ 45.000</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/10 pb-2">
+<span class="text-sm font-label uppercase text-on-surface-variant">Expended</span>
+<span class="text-xl font-headline text-tertiary">R$ 28.340</span>
+</div>
+<div class="pt-4">
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[63%]"></div>
+</div>
+<p class="text-[10px] mt-2 font-label uppercase tracking-tighter text-on-surface-variant">63% of budget utilized</p>
+</div>
+</div>
+</div>
+<!-- Main Submission Area -->
+<div class="md:col-span-8 bg-surface-container-highest rounded-md overflow-hidden flex flex-col">
+<div class="p-8 lithic-gradient text-on-primary">
+<h3 class="font-headline text-3xl mb-1">New Version Upload</h3>
+<p class="text-sm opacity-90">Current Project: "Triassic Marine Reptiles in the Pelotas Basin"</p>
+</div>
+<div class="p-8 flex-1 bg-surface-container-lowest m-4 rounded-md flex flex-col items-center justify-center border-2 border-dashed border-outline-variant/30 text-center gap-4 py-12">
+<span class="material-symbols-outlined text-4xl text-primary/40">cloud_upload</span>
+<div>
+<p class="font-label text-sm text-on-surface mb-1">Drag and drop your manuscript (.pdf, .docx)</p>
+<p class="text-xs text-on-surface-variant">Latest version: v2.4 (Submitted 12 Oct 2023)</p>
+</div>
+<button class="mt-4 px-8 py-3 bg-surface-container-high font-label text-xs uppercase tracking-widest text-on-surface hover:bg-surface-container-highest transition-colors">Select Files</button>
+</div>
+</div>
+<!-- Professor Feedback History -->
+<div class="md:col-span-7 bg-surface-container-low p-8 rounded-md">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline text-2xl">Feedback History</h3>
+<span class="material-symbols-outlined text-on-surface-variant">history</span>
+</div>
+<div class="space-y-10">
+<div class="flex gap-6">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full bg-primary mb-2"></div>
+<div class="w-px flex-1 bg-outline-variant/30"></div>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary mb-1">Nov 04, 2024 • Dr. Aristhone Silveira</p>
+<p class="font-body text-sm text-on-surface leading-relaxed">Revision requested for the stratigraphic sequence diagrams in Section 3.2. Ensure the geochemical data aligns with the latest Core 45 results.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full bg-outline-variant/40 mb-2"></div>
+<div class="w-px flex-1 bg-outline-variant/30"></div>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Oct 15, 2024 • Prof. Helena M.</p>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">Abstract accepted. Suggesting expansion of the 'Methods' section to include the new scanning electron microscopy findings.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Publish Toggle & Public Blog Status -->
+<div class="md:col-span-5 bg-surface-container p-8 rounded-md flex flex-col gap-6">
+<h3 class="font-headline text-2xl">Final Publication</h3>
+<div class="bg-surface-container-lowest p-6 rounded-md flex items-center justify-between">
+<div class="flex gap-4 items-center">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">public</span>
+</div>
+<div>
+<p class="font-label text-sm">Public Blog Visibility</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Controlled by institutional review</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="flex-1 flex flex-col justify-end">
+<div class="bg-surface-bright p-4 rounded-md border border-outline-variant/20 flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary">info</span>
+<p class="text-xs text-on-surface-variant leading-normal">Publication to the public blog is only available after all peer-reviews are cleared and marked as "Final Version".</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Resources / Research Papers Section -->
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<h3 class="font-headline text-3xl">Reference Library</h3>
+<a class="font-label text-xs uppercase tracking-widest text-tertiary underline underline-offset-4" href="#">Browse all</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container-high rounded-md mb-4 overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Microscopic view of fossilized sediment structure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3s5kkXk87iqCHwK6ElrpSBSYFeGo8SO2TQz2D_8yeGQ81kK1sgtwTyxX8MyEeIL6_wrRxdnRm22cmxQuXVKPvuzzETGIFrIjunDHJh6z-9fcERY0BVVhLtSczF-XsSLRDtnv422lhog-sISx96Yz1gPeuSy43SfsB3czrpqGhvxN3Rz4AH13rMto2mHkmXMeqy5SIJJyJIjpSis1vwScETHScVz1_mYh6kZN6W-7lDocLOFwh3aVVk3o9NJRGntuVH0HHyUN7aY0"/>
+<div class="absolute bottom-4 left-4 bg-secondary-container px-3 py-1 rounded-sm">
+<span class="text-[10px] font-label uppercase text-on-secondary-container">Sedimentology</span>
+</div>
+</div>
+<h4 class="font-headline text-xl text-on-surface">Pelotas Basin Geochemistry</h4>
+<p class="text-xs text-on-surface-variant mt-1 uppercase font-label">Volume 14 • 2024</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container-high rounded-md mb-4 overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Large excavation site in a desert landscape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW2X3-fmCBIdKMzKHKzelo3Ked4HZ_1MccP7CEeuadOziONn6CKr38XyA__jYimwfTqssUSkvhAqnfIflFpqU6aNEJ03Ib_PMsT75WTFD4cUPuZgFfibg4u8YyXr9YW_69BCWs2KYhVxMhF04_3SU1MGoN5Gl5uGHhh4m6tVTc00FOQyQs5BucOXui9PBAUsAXP1kKjuDdZ5g4GHd1JKv6nYbNkAvfti8o8ZNUIB5Iax37Rcxk3IV9EjIJyoYRR3rF3gTElZ6XKZ4"/>
+<div class="absolute bottom-4 left-4 bg-secondary-container px-3 py-1 rounded-sm">
+<span class="text-[10px] font-label uppercase text-on-secondary-container">Excavation</span>
+</div>
+</div>
+<h4 class="font-headline text-xl text-on-surface">Techniques in Arid Digging</h4>
+<p class="text-xs text-on-surface-variant mt-1 uppercase font-label">Standard Operating Procedures</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container-high rounded-md mb-4 overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Antique botanical or geological illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwKzdMdBbKYs7Xk_Sdr0_2pX0o-gbMPAOFCDeqhaFYdXpdgVI-TdEZPodcj4pLst6G3VWFbdvy6CEcenvF3TtgP4NY3EUJd2P3hHGNeV_dmo7kSYQv0vgeTSz_98PmxWS7qexNSte5XZKis9ccPBReIfL-E8-qPv05FDuG9XFiOUE8zhPS7fFYrmkviKDLTZ1kZGRukWmi7s62bK2oNPgUTtLCpnm-r16eCwKDMuh5cW4wDtko0M5TFmwiTd-G6TZn3WrzpxZ7E9Y"/>
+<div class="absolute bottom-4 left-4 bg-secondary-container px-3 py-1 rounded-sm">
+<span class="text-[10px] font-label uppercase text-on-secondary-container">Archive</span>
+</div>
+</div>
+<h4 class="font-headline text-xl text-on-surface">Historical Fossil Taxonomies</h4>
+<p class="text-xs text-on-surface-variant mt-1 uppercase font-label">Legacy Digitization Project</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="mt-auto border-t border-outline-variant/10 p-12 bg-surface-container-low">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col gap-2">
+<p class="font-label text-xs text-on-surface-variant">© 2024 Petrobras Paleontology Division. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary" href="#">Contact Us</a>
+<a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary" href="#">Privacy Policy</a>
+<a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary" href="#">Institutional Site</a>
+</div>
+</div>
+</footer>
+<!-- FAB -->
+<div class="fixed bottom-12 right-12">
+<button class="lithic-gradient text-on-primary h-[56px] px-8 rounded-full flex items-center gap-3 shadow-2xl hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label text-sm uppercase tracking-widest font-bold">New Entry</span>
+</button>
+</div>
+</main>
+<script>
+(function () {
+  const routes = {
+    'Public Blog': '/',
+    'Articles': '/wiki-de-estudos-paleontologicos',
+    'About': '/acervo-digital-de-fosseis',
+    'Region': '/prestacao-de-contas',
+    'Contact': '/acesso-ao-portal-interno',
+    'Internal Area': '/acesso-ao-portal-interno',
+    'Resources': '/wiki-de-estudos-paleontologicos',
+    'Dashboard': '/dashboard/professor',
+    'Students': '/dashboard/aluno',
+    'Accountability': '/prestacao-de-contas',
+    'Excavations': '/acervo-digital-de-fosseis',
+    'Research': '/wiki-de-estudos-paleontologicos',
+    'Fossil Archive': '/acervo-digital-de-fosseis',
+    'Educational Wiki': '/wiki-de-estudos-paleontologicos',
+    'Research Tools': '/prestacao-de-contas',
+    'Internal Portal': '/acesso-ao-portal-interno',
+    'Explore The Portal': '/acervo-digital-de-fosseis',
+    'Learn More': '/wiki-de-estudos-paleontologicos',
+    'Sign In to Portal': '/acesso-ao-portal-interno',
+    'Login': '/acesso-ao-portal-interno',
+    'AUTHENTICATE ARCHIVE': '/dashboard/professor',
+    'Contribute Find': '/prestacao-de-contas',
+    'Filter': '/acervo-digital-de-fosseis',
+    'View Timeline': '/wiki-de-estudos-paleontologicos',
+    'Browse all': '/wiki-de-estudos-paleontologicos',
+    'View All Archives': '/wiki-de-estudos-paleontologicos',
+    'View All Work': '/dashboard/aluno',
+    'New Entry': '/prestacao-de-contas'
+  };
+
+  document.querySelectorAll('a[href="#"]').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) el.setAttribute('href', routes[text]);
+  });
+
+  document.querySelectorAll('button').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () { window.location.href = routes[text]; });
+    }
+  });
+
+  document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      window.location.href = '/dashboard/professor';
+    });
+  });
+})();
+</script></body></html>

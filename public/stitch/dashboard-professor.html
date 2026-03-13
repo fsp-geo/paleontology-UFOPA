@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PaleoPortal - Management Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-highest": "#e9e1d5",
+                        "on-tertiary-container": "#612514",
+                        "surface-container-low": "#fbf2e6",
+                        "on-tertiary-fixed": "#3b0900",
+                        "on-primary-fixed": "#2a1700",
+                        "primary-fixed": "#ffddb7",
+                        "primary-container": "#c29b6d",
+                        "secondary-fixed": "#d6e9c3",
+                        "surface-bright": "#fff8f1",
+                        "inverse-primary": "#e9bf8e",
+                        "outline-variant": "#d2c4b7",
+                        "on-error-container": "#93000a",
+                        "outline": "#81756a",
+                        "on-secondary-container": "#59694b",
+                        "secondary": "#536346",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f8f0e3",
+                        "background": "#fff8f1",
+                        "secondary-fixed-dim": "#bacca8",
+                        "surface-container-high": "#efe7db",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#785830",
+                        "on-primary-container": "#4e330e",
+                        "surface-dim": "#e1d9cd",
+                        "on-primary": "#ffffff",
+                        "surface": "#fff8f1",
+                        "inverse-surface": "#343028",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#f5ede1",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#743320",
+                        "on-secondary-fixed-variant": "#3c4b30",
+                        "tertiary-fixed-dim": "#ffb5a0",
+                        "primary-fixed-dim": "#e9bf8e",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#4f453b",
+                        "on-primary-fixed-variant": "#5e411b",
+                        "tertiary-fixed": "#ffdbd1",
+                        "primary": "#785830",
+                        "on-secondary-fixed": "#111f08",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#e28b72",
+                        "on-background": "#1e1b14",
+                        "tertiary": "#924a35",
+                        "surface-variant": "#e9e1d5",
+                        "on-surface": "#1e1b14",
+                        "secondary-container": "#d6e9c3"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fff8f1;
+            color: #1e1b14;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-headline { font-family: 'Newsreader', serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="w-72 bg-surface-container flex flex-col border-r border-outline-variant/15 sticky top-0 h-screen">
+<div class="p-8 flex flex-col gap-1">
+<div class="flex items-center gap-3 mb-6">
+<img alt="User Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Close up professional portrait of a professor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNdK98Txc4QWkne3u3eEjnI6wbMBA1dblW0CpU2BLSepgRoEX0r-wFh02C0ot23AA2SV-iCNPxk2orWHuW2dvASYghNWHoDFesIF3EKjYH2U66Qq5SKLABVYZkmMwJKp4TPY94eDNukSZkTIK9lF2jBJ7pVDLRqE4JU6eX9N7cmSzWfYaAvAbMxP6mxhS2fv3W9_LKQiKU0RgrW87nNIqf2YtMUcrgpT9PRXbDX1m91ipy7pgvE43yi3BxrRJU7e_IgNSlgFkPXEY"/>
+<div>
+<h2 class="text-on-surface font-headline font-semibold text-lg leading-tight">Management Panel</h2>
+<p class="text-on-surface-variant text-xs font-label tracking-wider">Institutional Access</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-8">
+<a class="flex items-center gap-4 px-4 py-3 bg-primary/10 text-primary rounded-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-md transition-colors" href="#">
+<span class="material-symbols-outlined">landscape</span>
+<span class="font-label font-medium">Excavations</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-md transition-colors" href="#">
+<span class="material-symbols-outlined">magnification_small</span>
+<span class="font-label font-medium">Research</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-md transition-colors" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label font-medium">Students</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-md transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-8">
+<div class="bg-surface-container-high p-4 rounded-md">
+<p class="text-[10px] font-label uppercase tracking-widest text-outline mb-2">Active Grants</p>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4"></div>
+</div>
+<p class="text-xs text-on-surface mt-2 font-medium">75% Budget Utilized</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar -->
+<header class="h-20 bg-surface/80 backdrop-blur-xl sticky top-0 z-10 flex items-center justify-between px-12 border-b border-outline-variant/15">
+<div class="flex items-center gap-8">
+<h1 class="font-headline text-2xl font-bold tracking-tight text-primary">PaleoPortal</h1>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-sm font-label text-on-surface-variant hover:text-primary transition-colors" href="#">Public Blog</a>
+<a class="text-sm font-label text-on-surface transition-colors font-semibold" href="#">Internal Area</a>
+<a class="text-sm font-label text-on-surface-variant hover:text-primary transition-colors" href="#">Resources</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container-highest px-4 py-2 rounded-full w-64">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 placeholder:text-outline w-full ml-2" placeholder="Search archive..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 text-sm font-label font-bold rounded-sm tracking-wide shadow-sm hover:brightness-110 transition-all">Login</button>
+<img alt="Institutional Logo" class="w-10 h-10 object-contain opacity-60 grayscale hover:grayscale-0 transition-all" data-alt="Abstract institutional logo with earth tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAteKp4kHALen-DioVXAITndUo57ZTUmx7N4Xe__1IZWQKDwVZ82tqfGd5t8MR2XNziCccPpV0LNvga0XA8JxeFYu8hCb98t7Br-KE6kg5Ed50h2lDxWC_BpdFp3Bme_uUCRI9rBAHi20pmRQExH8kbQWjpicPwq-iqLKbeLcOjB7eOfQ_XRex63xMddFd1UahDIjQfdBLWvkT7XfMa078l4I3FXLL7nnHNBMUAVDAINX0qNVPd_rPzzI1WuwZ-7FjcSxoLUF8wADY"/>
+</div>
+</header>
+<div class="p-12 space-y-16">
+<!-- Welcome Section -->
+<section class="grid grid-cols-12 gap-8 items-end">
+<div class="col-span-12 lg:col-span-8">
+<span class="text-xs font-label uppercase tracking-[0.2em] text-tertiary mb-4 block">Research Overview</span>
+<h2 class="font-headline text-5xl text-on-surface max-w-2xl leading-tight">Welcome back, Professor Aristhène.</h2>
+<p class="mt-6 font-body text-lg text-on-surface-variant max-w-xl">You have 12 pending student submissions and 4 active excavation sites requiring data verification this week.</p>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Statistics Bento Box -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-low p-8 rounded-md flex flex-col justify-between min-h-[300px]">
+<div>
+<span class="material-symbols-outlined text-primary mb-6 text-3xl">analytics</span>
+<h3 class="font-headline text-2xl text-on-surface mb-2">Research Impact</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-sm font-label text-on-surface-variant">Active Citations</span>
+<span class="text-xl font-headline font-bold">1,204</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm font-label text-on-surface-variant">H-Index</span>
+<span class="text-xl font-headline font-bold">42</span>
+</div>
+</div>
+</div>
+<!-- Featured Excavation Bento Box -->
+<div class="col-span-12 lg:col-span-8 relative overflow-hidden rounded-md group">
+<img alt="Excavation site" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Wide shot of a paleontological dig site in a desert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCslvgQhT7eYJQ43wKoyr8xKXR_7rWPOHI2ZLmkmh0yfDTNven9UZ1aNfQsaNd3RPE8eVANLsvDiI_jx2FlxF-syuMrT1xYF9a7JqpPXZ_2MLNuCuS0ELyL4-M1ooFw0T8KfZLZhi3L2YjZOOYmXhrCz3pwM7lgy3rSgMhNs8r4zVr_f1_jS_SfP-pI6t24aD5sfKwy6ZKa03__7V-3z-pboPSxUI5_zdWp6cXI6XjXYFm_YkZ4yDmLZ10oHaqUK2w1bXvu_kq7p7w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/20 to-transparent"></div>
+<div class="relative h-full p-8 flex flex-col justify-end text-on-primary">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-label font-bold px-3 py-1 rounded-full w-fit mb-4">ACTIVE DIG</span>
+<h3 class="font-headline text-3xl mb-2">Araripe Basin Expedition</h3>
+<p class="font-body text-surface-container-highest max-w-md opacity-90">Site VII: Fossiliferous layers of the Romualdo Formation. Ongoing taxonomic analysis of Pterosauria remains.</p>
+</div>
+</div>
+<!-- Recent Submissions Table-ish List -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container p-8 rounded-md">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline text-2xl text-on-surface">Student Submissions</h3>
+<button class="text-tertiary font-label text-sm font-bold border-b-2 border-transparent hover:border-tertiary transition-all">View All Work</button>
+</div>
+<div class="space-y-4">
+<!-- Submission Item -->
+<div class="group bg-surface-container-low p-5 rounded-md flex items-center justify-between hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">EM</div>
+<div>
+<h4 class="font-label font-bold text-sm text-on-surface">Elena Morel</h4>
+<p class="text-xs text-on-surface-variant">Taphonomy Report: Site IV</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-[10px] font-label font-bold px-3 py-1 bg-tertiary-container/30 text-on-tertiary-container rounded-full">Under Review</span>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">rate_review</button>
+</div>
+</div>
+<!-- Submission Item -->
+<div class="group bg-surface-container-low p-5 rounded-md flex items-center justify-between hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">JW</div>
+<div>
+<h4 class="font-label font-bold text-sm text-on-surface">Julian Webb</h4>
+<p class="text-xs text-on-surface-variant">Carbon Dating Matrix: Section A</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-[10px] font-label font-bold px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full">Approved</span>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">check_circle</button>
+</div>
+</div>
+<!-- Submission Item -->
+<div class="group bg-surface-container-low p-5 rounded-md flex items-center justify-between hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">SC</div>
+<div>
+<h4 class="font-label font-bold text-sm text-on-surface">Sarah Chen</h4>
+<p class="text-xs text-on-surface-variant">Macro-evolutionary Thesis Draft</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-[10px] font-label font-bold px-3 py-1 bg-error-container text-on-error-container rounded-full uppercase">Needs Revision</span>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">history_edu</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Tools/Excavations Status -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-6">
+<div class="bg-primary p-8 rounded-md text-on-primary">
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline text-2xl">Upcoming Lectures</h3>
+<span class="material-symbols-outlined">event</span>
+</div>
+<div class="space-y-4">
+<div class="border-l-2 border-on-primary/30 pl-4">
+<p class="text-xs font-label uppercase tracking-widest opacity-80">Today 14:00</p>
+<p class="font-bold">Mesozoic Ecosystems</p>
+</div>
+<div class="border-l-2 border-on-primary/30 pl-4">
+<p class="text-xs font-label uppercase tracking-widest opacity-80">Tomorrow 09:30</p>
+<p class="font-bold">Advanced Stratigraphy Lab</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high p-8 rounded-md">
+<h3 class="font-label font-bold text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                SITE LOCALIZATION
+                            </h3>
+<div class="h-40 bg-surface-container-highest rounded-md overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-500">
+<img alt="Map view" class="w-full h-full object-cover" data-alt="Detailed map segment showing arid terrain and elevation" data-location="Maranhão, Brazil" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAssuI5HXMr6jsktWAWYWF9Qc7o64GZZVfs0OcoBPRLBVJav1_WyDV4aw-_Wa4d1wFwf12HYORZdqyYuD9nqfZVtz4DAgaIJaTG8OakMkQxgjR91G-7md_5AFHfSai1HaX7AfrO7t4x9Wm2Or-9EjY4BhT02g1Dkd2ivaYNiK72i3kXNWvgnIVR1DiNPsyCGdofQglvhxCfJ3rOxB2McRbxwvnoVZ_u49MxQKjnC8A0VlEy-1Ye_GmD7lDomXmIcOyiBc6xwj0uMAE"/>
+<div class="absolute top-4 left-4 bg-surface px-2 py-1 rounded-sm text-[10px] font-bold shadow-sm">GPS: -7.234, -47.456</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto py-12 px-12 border-t border-outline-variant/15 flex flex-col md:flex-row justify-between items-center gap-8 bg-surface-container-low">
+<p class="text-xs font-label text-outline tracking-wider">© 2024 Petrobras Paleontology Division. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="text-xs font-label text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Us</a>
+<a class="text-xs font-label text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-xs font-label text-on-surface-variant hover:text-primary transition-colors" href="#">Institutional Site</a>
+</div>
+</footer>
+</main>
+</div>
+<!-- FAB -->
+<button class="fixed bottom-8 right-8 flex items-center gap-3 bg-primary text-on-primary px-8 h-[56px] rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all z-20">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label font-bold tracking-wider text-sm uppercase">New Entry</span>
+</button>
+<script>
+(function () {
+  const routes = {
+    'Public Blog': '/',
+    'Articles': '/wiki-de-estudos-paleontologicos',
+    'About': '/acervo-digital-de-fosseis',
+    'Region': '/prestacao-de-contas',
+    'Contact': '/acesso-ao-portal-interno',
+    'Internal Area': '/acesso-ao-portal-interno',
+    'Resources': '/wiki-de-estudos-paleontologicos',
+    'Dashboard': '/dashboard/professor',
+    'Students': '/dashboard/aluno',
+    'Accountability': '/prestacao-de-contas',
+    'Excavations': '/acervo-digital-de-fosseis',
+    'Research': '/wiki-de-estudos-paleontologicos',
+    'Fossil Archive': '/acervo-digital-de-fosseis',
+    'Educational Wiki': '/wiki-de-estudos-paleontologicos',
+    'Research Tools': '/prestacao-de-contas',
+    'Internal Portal': '/acesso-ao-portal-interno',
+    'Explore The Portal': '/acervo-digital-de-fosseis',
+    'Learn More': '/wiki-de-estudos-paleontologicos',
+    'Sign In to Portal': '/acesso-ao-portal-interno',
+    'Login': '/acesso-ao-portal-interno',
+    'AUTHENTICATE ARCHIVE': '/dashboard/professor',
+    'Contribute Find': '/prestacao-de-contas',
+    'Filter': '/acervo-digital-de-fosseis',
+    'View Timeline': '/wiki-de-estudos-paleontologicos',
+    'Browse all': '/wiki-de-estudos-paleontologicos',
+    'View All Archives': '/wiki-de-estudos-paleontologicos',
+    'View All Work': '/dashboard/aluno',
+    'New Entry': '/prestacao-de-contas'
+  };
+
+  document.querySelectorAll('a[href="#"]').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) el.setAttribute('href', routes[text]);
+  });
+
+  document.querySelectorAll('button').forEach((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (routes[text]) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function () { window.location.href = routes[text]; });
+    }
+  });
+
+  document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      window.location.href = '/dashboard/professor';
+    });
+  });
+})();
+</script></body></html>
