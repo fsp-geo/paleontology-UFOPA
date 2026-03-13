@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
     const redirectTo =
       process.env.NEXT_PUBLIC_SITE_URL ||
-      `${request.nextUrl.origin}/acesso-ao-portal-interno`;
+      `${request.nextUrl.origin}/convite/aceitar`;
 
     const { data, error } = await adminClient.auth.admin.inviteUserByEmail(email, {
       redirectTo,
