@@ -1,5 +1,22 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type {ReactNode} from 'react';
+import {
+  BookOpen,
+  Circle,
+  Compass,
+  FlaskConical,
+  Globe,
+  Landmark,
+  LayoutDashboard,
+  LibraryBig,
+  Search,
+  Settings,
+  ShieldCheck,
+  UserRound,
+  Users,
+} from 'lucide-react';
+import type {LucideIcon} from 'lucide-react';
 
 export function MaterialIcon({
   children,
@@ -10,14 +27,25 @@ export function MaterialIcon({
   className?: string;
   filled?: boolean;
 }) {
-  return (
-    <span
-      className={`material-symbols-outlined ${className}`}
-      style={{fontVariationSettings: `'FILL' ${filled ? 1 : 0}, 'wght' 400, 'GRAD' 0, 'opsz' 24`}}
-    >
-      {children}
-    </span>
-  );
+  const iconName = String(children).trim().toLowerCase();
+  const iconMap: Record<string, LucideIcon> = {
+    search: Search,
+    dashboard: LayoutDashboard,
+    home: Compass,
+    school: Landmark,
+    account_balance: Landmark,
+    science: FlaskConical,
+    public: Globe,
+    museum: LibraryBig,
+    group: Users,
+    person: UserRound,
+    manage_accounts: ShieldCheck,
+    settings: Settings,
+    menu_book: BookOpen,
+  };
+  const Icon = iconMap[iconName] || Circle;
+
+  return <Icon aria-hidden="true" className={className} fill={filled ? 'currentColor' : 'none'} strokeWidth={1.9} />;
 }
 
 export function PublicHeader() {
@@ -140,7 +168,7 @@ export function InternalSidebar({
     <aside className="hide-scrollbar sticky top-0 hidden h-screen w-72 flex-col overflow-y-auto border-r border-outline-variant/15 bg-surface-container lg:flex">
       <div className="p-8">
         <div className="mb-6 flex items-center gap-3">
-          <img alt="User Profile" className="h-12 w-12 rounded-full object-cover" src={userImage} />
+          <Image alt="User Profile" className="h-12 w-12 rounded-full object-cover" src={userImage} width={48} height={48} />
           <div>
             <h2 className="font-headline text-lg font-semibold leading-tight text-on-surface">{title}</h2>
             <p className="text-xs tracking-wider text-on-surface-variant">{subtitle}</p>

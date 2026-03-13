@@ -1,8 +1,10 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { ArrowRight, FlaskConical, Globe, Landmark, LibraryBig, Lock, Mail, Mountain, Orbit } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/components/AuthProvider';
 
@@ -109,10 +111,13 @@ export default function AccessPortalPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background p-6 text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        <img
+        <Image
           alt="Macro texture of ancient sedimentary rock"
           className="h-full w-full object-cover opacity-10 mix-blend-multiply"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw5UJ-S-_XjPCxRhwToMX44Tjs14DNMKheA1SSBza7ut8QwGu2OMu_knj_TnMNaVqIp3xk8yjt9fpvm2kIoAkAZ3SgeqwIXRN_YfbocIHPK0zeFKoU4ti5OhlNXj50oWBdNnJ1kX6kKf_zHBBAq9jVXjUgM-pDbEd-Pu6S8n4Dnug9N9Zl7ejig4wXJV4x03_qJ--LVDtcBYrJxqryrD5ZOg01L28w6bALxZKs7gcZn1ctxBdugtAxGzoh1pazVYdHP7iAzI-sB6U"
+          fill
+          priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60" />
       </div>
@@ -122,9 +127,7 @@ export default function AccessPortalPage() {
           <div className="relative z-10">
             <div className="mb-12 flex items-center gap-3">
               <div className="lithic-gradient flex h-10 w-10 items-center justify-center rounded-sm text-on-primary">
-                <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24"}}>
-                  landscape
-                </span>
+                <Mountain aria-hidden="true" className="h-6 w-6" fill="currentColor" strokeWidth={1.8} />
               </div>
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant">Internal Portal</span>
             </div>
@@ -142,12 +145,16 @@ export default function AccessPortalPage() {
                 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQArQRWsy6SAXi7JMZItph8WiL4sSwPVDOLeL2Sx4FQiG4E2cHp2FmfHIMEe9X6lptJoZFxjDQKByTPFKj2WeRNKEcnuyi3LRsE6sho1z0QFi8ZXRIEJAIxvHTv19CZD76DbOxAlgu9FQebw_sSpcjv9szDEQT112oQXBu5T6aywkv3YKsALeWoYboaUopeW7yJt_PX26dhM10tncdrNanKNQC8OAiO2ytOl99wIfj5Wg_Ng7oWuP71dIA8LWzKzAUDHmnyrqbMMo',
                 'https://lh3.googleusercontent.com/aida-public/AB6AXuB9GQUnhAeuyNXYrdOYi12qUIZXUBO8PfzvXxG6UfLwTL6DPHRoveqBkvpZU_EkTDPSNVpOgpZC1qVhzYaEdJOi4Hr30-l8R0tEOYjHe2ImR7ZpR14CQZ8yGYRAzfYQ11nmgiUMT5qG2ycaJPZVZTa6u9hklZi__JYdnDBwXPXvpcGwv49PngRUfna696x_T14MFh2DDReNt8KLEBjhLN10kkUbdHDAQInJnerVk6EAH4pVnB7PD_7MMHZXZ-pgQ8OCnqJ-8x9Vtco',
                 'https://lh3.googleusercontent.com/aida-public/AB6AXuAzjMOZEl6uBc_ewAm-yIcvCw_cAwH-Zyf6lBmhZNU5MMsH8K7gdchQi43_V-6IF-KgEsklyv8cWLt-nPy6qE2rWGgO7vNi3If-gO9vHz3KJQy2suchEDbKFxomzBkUrYvBCTo0R-IB4FkEWOzO1fP35ZbeLvHKXQxC-99auURMoADVV3x1N6kB33HGS3LQu0hQrwjC9qLOXe2sNxKrm9_JenhyLHFsVt-DDeytU2NIhKBV7fFKauEzJ2HasBmLIuOoxsYM-CgTse0',
-              ].map((src) => (
-                <img
+              ].map((src, index) => (
+                <Image
                   key={src}
                   alt="Researcher profile"
                   className="h-10 w-10 rounded-full border-2 border-surface-container-lowest object-cover"
                   src={src}
+                  width={40}
+                  height={40}
+                  sizes="40px"
+                  priority={index === 0}
                 />
               ))}
               <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-surface-container-lowest bg-secondary-container text-[10px] font-bold text-on-secondary-container">
@@ -157,9 +164,7 @@ export default function AccessPortalPage() {
             <p className="text-xs font-label tracking-wider text-on-surface-variant">JOINING 2,400+ ACTIVE RESEARCHERS</p>
           </div>
 
-          <span className="material-symbols-outlined pointer-events-none absolute -bottom-10 -right-10 rotate-12 text-[240px] text-surface-variant/40">
-            token
-          </span>
+          <Orbit aria-hidden="true" className="pointer-events-none absolute -bottom-10 -right-10 h-[240px] w-[240px] rotate-12 text-surface-variant/40" strokeWidth={1.2} />
         </div>
 
         <div className="flex flex-col justify-center bg-surface-container-lowest p-12 lg:col-span-7 lg:p-20">
@@ -185,9 +190,7 @@ export default function AccessPortalPage() {
                     onChange={(event) => setEmail(event.target.value)}
                     required
                   />
-                  <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-xl text-outline/40">
-                    alternate_email
-                  </span>
+                  <Mail aria-hidden="true" className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-outline/40" strokeWidth={1.8} />
                 </div>
               </div>
 
@@ -207,9 +210,7 @@ export default function AccessPortalPage() {
                     onChange={(event) => setPassword(event.target.value)}
                     required
                   />
-                  <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-xl text-outline/40">
-                    lock
-                  </span>
+                  <Lock aria-hidden="true" className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-outline/40" strokeWidth={1.8} />
                 </div>
               </div>
 
@@ -233,7 +234,7 @@ export default function AccessPortalPage() {
                   disabled={submitting || loading}
                 >
                   {submitting ? 'AUTHENTICATING...' : 'AUTHENTICATE ARCHIVE'}
-                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
                 </button>
               </div>
             </form>
@@ -245,14 +246,14 @@ export default function AccessPortalPage() {
                   type="button"
                   className="flex items-center justify-center gap-3 rounded-sm bg-surface-container-high px-4 py-3 text-xs font-bold tracking-tight text-on-surface transition-colors hover:bg-surface-variant"
                 >
-                  <span className="material-symbols-outlined text-lg">account_balance</span>
+                  <Landmark aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} />
                   UNIVERSITY
                 </button>
                 <button
                   type="button"
                   className="flex items-center justify-center gap-3 rounded-sm bg-surface-container-high px-4 py-3 text-xs font-bold tracking-tight text-on-surface transition-colors hover:bg-surface-variant"
                 >
-                  <span className="material-symbols-outlined text-lg">science</span>
+                  <FlaskConical aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} />
                   RESEARCH LAB
                 </button>
               </div>
@@ -270,11 +271,11 @@ export default function AccessPortalPage() {
       <footer className="mt-12 flex w-full max-w-5xl flex-col items-center gap-6">
         <div className="flex gap-8 opacity-40 grayscale">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-2xl">museum</span>
+            <LibraryBig aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
             <span className="text-[10px] font-bold tracking-widest">NATURAL HISTORY FOUNDATION</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-2xl">public</span>
+            <Globe aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
             <span className="text-[10px] font-bold tracking-widest">GLOBAL STRATA NETWORK</span>
           </div>
         </div>
