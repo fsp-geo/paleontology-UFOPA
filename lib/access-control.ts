@@ -3,8 +3,8 @@ const ROLE_PRIORITY = ['admin', 'gestor', 'professor', 'pesquisador', 'aluno', '
 export const DEFAULT_ROLE = 'visitante';
 
 export const ROLE_HOME_PATH: Record<string, string> = {
-  admin: '/dashboard/professor',
-  gestor: '/prestacao-de-contas',
+  admin: '/gestao-de-usuarios',
+  gestor: '/gestao-de-usuarios',
   professor: '/dashboard/professor',
   pesquisador: '/acervo-digital-de-fosseis',
   aluno: '/dashboard/aluno',
@@ -12,6 +12,10 @@ export const ROLE_HOME_PATH: Record<string, string> = {
 };
 
 const PATH_ROLE_RULES = [
+  {
+    path: '/gestao-de-usuarios',
+    roles: ['admin', 'gestor'],
+  },
   {
     path: '/dashboard/professor',
     roles: ['admin', 'gestor', 'professor'],

@@ -81,6 +81,7 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   const protectedPaths = [
+    '/gestao-de-usuarios',
     '/dashboard',
     '/prestacao-de-contas',
     '/acervo-digital-de-fosseis',
