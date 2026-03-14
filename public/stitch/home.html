@@ -348,6 +348,8 @@
   });
 
   document.querySelectorAll('button').forEach((el) => {
+    if (el.hasAttribute('data-route')) return;
+
     const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
     if (routes[text]) {
       el.style.cursor = 'pointer';
