@@ -99,7 +99,7 @@
 <h2 class="text-on-surface text-xl font-headline font-bold leading-tight tracking-tight">PaleoPortal</h2>
 </div>
 <nav class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant text-sm font-medium hover:text-primary transition-colors" href="#">Articles</a>
+<a class="text-on-surface-variant text-sm font-medium hover:text-primary transition-colors" href="/acesso-ao-portal-interno?origin=public">Articles</a>
 <a class="text-on-surface-variant text-sm font-medium hover:text-primary transition-colors" href="#">About</a>
 <a class="text-on-surface-variant text-sm font-medium hover:text-primary transition-colors" href="#">Region</a>
 <a class="text-on-surface-variant text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
@@ -110,9 +110,9 @@
 <span class="material-symbols-outlined text-outline text-[20px]">search</span>
 <input class="bg-transparent border-none focus:ring-0 text-sm w-48 p-0 placeholder:text-outline" placeholder="Search archives..." type="text"/>
 </div>
-<button class="flex items-center justify-center rounded-lg h-10 px-6 bg-primary text-on-primary text-sm font-bold tracking-wide hover:bg-on-primary-fixed-variant transition-colors shadow-sm" data-route="/acesso-ao-portal-interno?origin=public">
+<a class="flex items-center justify-center rounded-lg h-10 px-6 bg-primary text-on-primary text-sm font-bold tracking-wide hover:bg-on-primary-fixed-variant transition-colors shadow-sm" href="/acesso-ao-portal-interno?origin=public">
                     Internal Area
-                </button>
+                </a>
 </div>
 </header>
 <main class="flex-grow">
@@ -130,9 +130,9 @@
                             Discover the importance of our fossil records and their role in understanding Earth's history through layers of time and sediment.
                         </p>
 <div class="flex flex-wrap gap-4">
-<button class="bg-primary text-on-primary px-8 py-4 font-bold rounded shadow-lg hover:translate-y-[-2px] transition-all">
+<a class="bg-primary text-on-primary px-8 py-4 font-bold rounded shadow-lg hover:translate-y-[-2px] transition-all inline-flex items-center justify-center" href="/acesso-ao-portal-interno?origin=public">
                                 Explore The Portal
-                            </button>
+                            </a>
 <button class="bg-surface-container-high text-on-surface px-8 py-4 font-bold rounded hover:bg-surface-container-highest transition-all">
                                 Learn More
                             </button>
@@ -154,7 +154,7 @@
 <h2 class="font-headline text-4xl font-bold text-on-surface mb-4">Recent Discoveries &amp; Research</h2>
 <p class="text-on-surface-variant text-lg">Detailed insights from the field, geological surveys, and fossil preservation techniques.</p>
 </div>
-<a class="text-tertiary font-bold flex items-center gap-2 hover:underline group" href="#">
+<a class="text-tertiary font-bold flex items-center gap-2 hover:underline group" href="/acesso-ao-portal-interno?origin=public">
                             View All Archives 
                             <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </a>
@@ -219,10 +219,10 @@
 <p class="text-on-surface-variant text-lg leading-relaxed">
                                 Are you a contributor or researcher? Access our internal network to submit findings, collaborate on active excavations, and access exclusive geological datasets.
                             </p>
-<button class="bg-primary text-on-primary px-10 py-4 font-bold rounded shadow-xl hover:bg-on-primary-fixed-variant transition-all flex items-center gap-3" data-route="/acesso-ao-portal-interno?origin=public">
+                            <a class="bg-primary text-on-primary px-10 py-4 font-bold rounded shadow-xl hover:bg-on-primary-fixed-variant transition-all inline-flex items-center gap-3" href="/acesso-ao-portal-interno?origin=public">
 <span class="material-symbols-outlined" data-icon="login">login</span>
                                 Sign In to Portal
-                            </button>
+                            </a>
 </div>
 <div class="w-full md:w-1/3 flex justify-center">
 <div class="size-48 rounded-full border-4 border-dashed border-outline-variant flex items-center justify-center p-4">
@@ -298,33 +298,11 @@
 (function () {
   const routes = {
     'Public Blog': '/',
-    'Articles': '/wiki-de-estudos-paleontologicos',
-    'About': '/acervo-digital-de-fosseis',
-    'Region': '/prestacao-de-contas',
-    'Contact': '/acesso-ao-portal-interno',
-    'Internal Area': '/acesso-ao-portal-interno',
-    'Resources': '/wiki-de-estudos-paleontologicos',
-    'Dashboard': '/dashboard/professor',
-    'Students': '/dashboard/aluno',
-    'Accountability': '/prestacao-de-contas',
-    'Excavations': '/acervo-digital-de-fosseis',
-    'Research': '/wiki-de-estudos-paleontologicos',
-    'Fossil Archive': '/acervo-digital-de-fosseis',
-    'Educational Wiki': '/wiki-de-estudos-paleontologicos',
-    'Research Tools': '/prestacao-de-contas',
-    'Internal Portal': '/acesso-ao-portal-interno',
-    'Explore The Portal': '/acervo-digital-de-fosseis',
-    'Learn More': '/wiki-de-estudos-paleontologicos',
-    'Sign In to Portal': '/acesso-ao-portal-interno',
-    'Login': '/acesso-ao-portal-interno',
-    'AUTHENTICATE ARCHIVE': '/dashboard/professor',
-    'Contribute Find': '/prestacao-de-contas',
-    'Filter': '/acervo-digital-de-fosseis',
-    'View Timeline': '/wiki-de-estudos-paleontologicos',
-    'Browse all': '/wiki-de-estudos-paleontologicos',
-    'View All Archives': '/wiki-de-estudos-paleontologicos',
-    'View All Work': '/dashboard/aluno',
-    'New Entry': '/prestacao-de-contas'
+    'Articles': '/acesso-ao-portal-interno?origin=public',
+    'Explore The Portal': '/acesso-ao-portal-interno?origin=public',
+    'Sign In to Portal': '/acesso-ao-portal-interno?origin=public',
+    'Internal Area': '/acesso-ao-portal-interno?origin=public',
+    'View All Archives': '/acesso-ao-portal-interno?origin=public'
   };
 
   document.querySelectorAll('[data-route]').forEach((el) => {
@@ -344,7 +322,14 @@
 
   document.querySelectorAll('a[href="#"]').forEach((el) => {
     const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
-    if (routes[text]) el.setAttribute('href', routes[text]);
+    if (routes[text]) {
+      el.setAttribute('href', routes[text]);
+      return;
+    }
+
+    el.addEventListener('click', function (event) {
+      event.preventDefault();
+    });
   });
 
   document.querySelectorAll('button').forEach((el) => {
@@ -354,13 +339,18 @@
     if (routes[text]) {
       el.style.cursor = 'pointer';
       el.addEventListener('click', function () { window.location.href = routes[text]; });
+      return;
     }
+
+    el.addEventListener('click', function (event) {
+      event.preventDefault();
+    });
   });
 
   document.querySelectorAll('form').forEach((form) => {
     form.addEventListener('submit', function (event) {
       event.preventDefault();
-      window.location.href = '/dashboard/professor';
+      window.location.href = '/acesso-ao-portal-interno?origin=public';
     });
   });
 })();
