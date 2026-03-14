@@ -25,7 +25,7 @@ export default async function ResearcherDashboardPage() {
       title: 'Submissoes',
       value: accountability.totalEntries,
       description: 'Quantidade de prestacoes e materiais enviados pelo seu perfil.',
-      href: '/prestacao-de-contas',
+      href: '/submissoes',
       icon: FileUp,
     },
     {
@@ -39,14 +39,14 @@ export default async function ResearcherDashboardPage() {
       title: 'Trabalhos',
       value: 'Producoes',
       description: 'Espaco de organizacao dos seus materiais e relatorios.',
-      href: '/wiki-de-estudos-paleontologicos',
+      href: '/trabalhos',
       icon: FolderOpenDot,
     },
     {
       title: 'Posts do site',
       value: 'Colaboracao',
       description: 'Submeta conteudo para publicacao no portal institucional.',
-      href: '/wiki-de-estudos-paleontologicos',
+      href: '/posts-site',
       icon: Newspaper,
     },
   ];

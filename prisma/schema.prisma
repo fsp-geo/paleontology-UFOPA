@@ -30,6 +30,8 @@ model User {
   assignedRoles  UserRole[]  @relation("AssignedRoles")
   accountabilityEntries         AccountabilityEntry[] @relation("AccountabilitySubmitter")
   reviewedAccountabilityEntries AccountabilityEntry[] @relation("AccountabilityReviewer")
+  submissions               Submission[] @relation("SubmissionAuthor")
+  reviewedSubmissions       Submission[] @relation("SubmissionReviewer")
 }
 
 model Role {
@@ -72,4 +74,22 @@ model AccountabilityEntry {
   updatedAt     DateTime @updatedAt
   submitter     User     @relation("AccountabilitySubmitter", fields: [submitterId], references: [id], onDelete: Cascade)
   reviewer      User?    @relation("AccountabilityReviewer", fields: [reviewerId], references: [id])
+}
+
+model Submission {
+  id            String   @id @default(cuid())
+  type          String
+  title         String
+  summary       String
+  body          String
+  status        String   @default("pending")
+  authorId      String
+  reviewerId    String?
+  reviewerNotes String?
+  reviewedAt    DateTime?
+  publishedAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  author        User     @relation("SubmissionAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  reviewer      User?    @relation("SubmissionReviewer", fields: [reviewerId], references: [id])
 }

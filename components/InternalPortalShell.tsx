@@ -1,6 +1,6 @@
 import type { ComponentType, ReactNode } from 'react';
 import Link from 'next/link';
-import { BookOpen, BriefcaseBusiness, FolderKanban, LayoutDashboard, LogOut, ScrollText, Users } from 'lucide-react';
+import { BookOpen, BriefcaseBusiness, ClipboardCheck, FolderKanban, LayoutDashboard, LogOut, Newspaper, ScrollText, SendHorizontal, Users } from 'lucide-react';
 
 type InternalPortalShellProps = {
   title: string;
@@ -53,6 +53,30 @@ const NAV_ITEMS: NavItem[] = [
     href: '/prestacao-de-contas',
     label: 'Prestacao de Contas',
     icon: BriefcaseBusiness,
+    visible: (roles) => roles.includes('professor') || roles.includes('pesquisador'),
+  },
+  {
+    href: '/aprovacoes',
+    label: 'Aprovacoes',
+    icon: ClipboardCheck,
+    visible: (roles) => roles.includes('professor'),
+  },
+  {
+    href: '/submissoes',
+    label: 'Submissoes',
+    icon: SendHorizontal,
+    visible: (roles) => roles.includes('pesquisador'),
+  },
+  {
+    href: '/trabalhos',
+    label: 'Trabalhos',
+    icon: FolderKanban,
+    visible: (roles) => roles.includes('professor') || roles.includes('pesquisador'),
+  },
+  {
+    href: '/posts-site',
+    label: 'Posts site',
+    icon: Newspaper,
     visible: (roles) => roles.includes('professor') || roles.includes('pesquisador'),
   },
   {

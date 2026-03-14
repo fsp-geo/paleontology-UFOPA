@@ -33,6 +33,22 @@ const PATH_ROLE_RULES = [
     roles: ['professor', 'pesquisador'],
   },
   {
+    path: '/aprovacoes',
+    roles: ['professor'],
+  },
+  {
+    path: '/submissoes',
+    roles: ['pesquisador'],
+  },
+  {
+    path: '/trabalhos',
+    roles: ['professor', 'pesquisador'],
+  },
+  {
+    path: '/posts-site',
+    roles: ['professor', 'pesquisador'],
+  },
+  {
     path: '/acervo-digital-de-fosseis',
     roles: ['admin', 'gestor', 'professor', 'pesquisador', 'aluno'],
   },

@@ -84,6 +84,10 @@ export async function middleware(request: NextRequest) {
     '/gestao-de-usuarios',
     '/dashboard',
     '/prestacao-de-contas',
+    '/aprovacoes',
+    '/submissoes',
+    '/trabalhos',
+    '/posts-site',
     '/acervo-digital-de-fosseis',
     '/wiki-de-estudos-paleontologicos',
   ]

@@ -25,7 +25,7 @@ export default async function ProfessorDashboardPage() {
       title: 'Aprovacoes pendentes',
       value: accountability.pendingEntries,
       description: 'Prestacoes aguardando avaliacao do professor responsavel.',
-      href: '/prestacao-de-contas',
+      href: '/aprovacoes',
       icon: CheckCheck,
     },
     {
@@ -39,7 +39,7 @@ export default async function ProfessorDashboardPage() {
       title: 'Posts do site',
       value: 'Editorial',
       description: 'Curadoria de publicacoes, chamadas e comunicados institucionais.',
-      href: '/wiki-de-estudos-paleontologicos',
+      href: '/posts-site',
       icon: Files,
     },
     {
