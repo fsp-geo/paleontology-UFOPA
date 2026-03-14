@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useTransition } from 'react';
 import { LoaderCircle, MailPlus, RefreshCw, Save, ShieldCheck, Users } from 'lucide-react';
+import { LogoutButton } from '@/components/LogoutButton';
 
 type ManagedUser = {
   id: string;
@@ -237,6 +238,10 @@ export function UserManagementWorkspace({
                 <p className="mt-3 text-4xl font-semibold text-stone-900">{roles.length}</p>
                 <p className="mt-2 text-sm text-stone-500">Niveis disponiveis para distribuicao de acesso.</p>
               </div>
+              <LogoutButton
+                label="Sair do sistema"
+                className="inline-flex items-center justify-center gap-2 rounded-[22px] border border-stone-300 bg-white px-5 py-5 text-sm font-semibold text-stone-700 transition hover:border-stone-500 hover:text-stone-950"
+              />
             </div>
           </div>
 
