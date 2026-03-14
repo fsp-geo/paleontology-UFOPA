@@ -28,35 +28,7 @@ export default function AccessPortalPage() {
       return;
     }
 
-    let active = true;
-
-    const resolveRedirect = async () => {
-      try {
-        const response = await fetch(`/api/auth/profile?next=${encodeURIComponent(nextPath)}`, {
-          cache: 'no-store',
-        });
-
-        if (!response.ok) {
-          router.replace('/dashboard');
-          return;
-        }
-
-        const data = await response.json();
-        if (active) {
-          router.replace(data.redirectPath || '/dashboard');
-        }
-      } catch {
-        if (active) {
-          router.replace('/dashboard');
-        }
-      }
-    };
-
-    resolveRedirect();
-
-    return () => {
-      active = false;
-    };
+    router.replace(nextPath || '/dashboard');
   }, [loading, nextPath, router, user]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -82,25 +54,7 @@ export default function AccessPortalPage() {
     }
 
     if (data.user) {
-      try {
-        await fetch('/api/auth/sync', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({user: data.user}),
-        });
-        const profileResponse = await fetch(`/api/auth/profile?next=${encodeURIComponent(nextPath)}`, {
-          cache: 'no-store',
-        });
-
-        if (profileResponse.ok) {
-          const profileData = await profileResponse.json();
-          router.replace(profileData.redirectPath || '/dashboard');
-          router.refresh();
-          return;
-        }
-      } catch {}
-
-      router.replace('/dashboard');
+      router.replace(nextPath || '/dashboard');
       router.refresh();
       return;
     }
