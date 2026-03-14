@@ -6,6 +6,13 @@ import { canAccessPath } from './lib/access-control'
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  if (pathname === '/stitch/acesso-ao-portal-interno.html') {
+    const redirectUrl = request.nextUrl.clone()
+    redirectUrl.pathname = '/acesso-ao-portal-interno'
+    redirectUrl.search = ''
+    return NextResponse.redirect(redirectUrl)
+  }
+
   if (pathname.startsWith('/api/')) {
     return NextResponse.next({
       request: {

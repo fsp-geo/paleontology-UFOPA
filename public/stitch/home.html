@@ -110,7 +110,7 @@
 <span class="material-symbols-outlined text-outline text-[20px]">search</span>
 <input class="bg-transparent border-none focus:ring-0 text-sm w-48 p-0 placeholder:text-outline" placeholder="Search archives..." type="text"/>
 </div>
-<button class="flex items-center justify-center rounded-lg h-10 px-6 bg-primary text-on-primary text-sm font-bold tracking-wide hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
+<button class="flex items-center justify-center rounded-lg h-10 px-6 bg-primary text-on-primary text-sm font-bold tracking-wide hover:bg-on-primary-fixed-variant transition-colors shadow-sm" data-route="/acesso-ao-portal-interno">
                     Internal Area
                 </button>
 </div>
@@ -219,7 +219,7 @@
 <p class="text-on-surface-variant text-lg leading-relaxed">
                                 Are you a contributor or researcher? Access our internal network to submit findings, collaborate on active excavations, and access exclusive geological datasets.
                             </p>
-<button class="bg-primary text-on-primary px-10 py-4 font-bold rounded shadow-xl hover:bg-on-primary-fixed-variant transition-all flex items-center gap-3">
+<button class="bg-primary text-on-primary px-10 py-4 font-bold rounded shadow-xl hover:bg-on-primary-fixed-variant transition-all flex items-center gap-3" data-route="/acesso-ao-portal-interno">
 <span class="material-symbols-outlined" data-icon="login">login</span>
                                 Sign In to Portal
                             </button>
@@ -326,6 +326,21 @@
     'View All Work': '/dashboard/aluno',
     'New Entry': '/prestacao-de-contas'
   };
+
+  document.querySelectorAll('[data-route]').forEach((el) => {
+    const route = el.getAttribute('data-route');
+    if (!route) return;
+
+    if (el.tagName === 'A') {
+      el.setAttribute('href', route);
+      return;
+    }
+
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', function () {
+      window.location.href = route;
+    });
+  });
 
   document.querySelectorAll('a[href="#"]').forEach((el) => {
     const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
