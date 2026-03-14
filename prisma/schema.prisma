@@ -26,7 +26,6 @@ model User {
   lastLoginAt    DateTime?
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
-  drillHoles     DrillHole[]
   userRoles      UserRole[]  @relation("ProfileRoles")
   assignedRoles  UserRole[]  @relation("AssignedRoles")
 }
@@ -52,45 +51,4 @@ model UserRole {
   role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   @@unique([userId, roleId])
-}
-
-model Rig {
-  id           String      @id @default(cuid())
-  name         String      @unique
-  type         String?     // RC, Diamantada, etc.
-  status       String      // ATIVA, MANUTENCAO, PARADA
-  contractor   String?
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  drillHoles   DrillHole[]
-}
-
-model DrillHole {
-  id             String    @id @default(cuid())
-  holeId         String    @unique
-  project        String
-  area           String?
-  status         String    // PLANEJADO, EM_ANDAMENTO, PAUSADO, CONCLUIDO, SUSPENSO
-  method         String?   // RC, DDH, etc.
-  targetDepth    Float
-  currentDepth   Float     @default(0)
-  azimuth        Float?
-  dip            Float?
-  startedAt      DateTime?
-  finishedAt     DateTime?
-  rigId          String?
-  rig            Rig?      @relation(fields: [rigId], references: [id])
-  createdById    String?
-  createdBy      User?     @relation(fields: [createdById], references: [id])
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-}
-
-model DashboardMetric {
-  id        String   @id @default(cuid())
-  label     String
-  value     String
-  change    String?
-  type      String   // e.g., "PRODUCTION", "DRILLING", "AVAILABILITY"
-  updatedAt DateTime @updatedAt
 }
