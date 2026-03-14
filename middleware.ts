@@ -130,6 +130,10 @@ export async function middleware(request: NextRequest) {
   }
 
   if (user && pathname === '/acesso-ao-portal-interno') {
+    if (request.nextUrl.searchParams.get('origin') === 'public') {
+      return response
+    }
+
     const profileResponse = await fetch(`${request.nextUrl.origin}/api/auth/profile`, {
       headers: {
         cookie: request.headers.get('cookie') ?? '',

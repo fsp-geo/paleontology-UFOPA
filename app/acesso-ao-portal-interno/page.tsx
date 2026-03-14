@@ -22,14 +22,21 @@ export default function AccessPortalPage() {
 
     return new URLSearchParams(window.location.search).get('next') || '/dashboard/professor';
   });
+  const [allowPublicLoginScreen] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return new URLSearchParams(window.location.search).get('origin') === 'public';
+  });
 
   useEffect(() => {
-    if (loading || !user) {
+    if (loading || !user || allowPublicLoginScreen) {
       return;
     }
 
     router.replace(nextPath || '/dashboard');
-  }, [loading, nextPath, router, user]);
+  }, [allowPublicLoginScreen, loading, nextPath, router, user]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
