@@ -4,9 +4,9 @@ export const DEFAULT_ROLE = 'visitante';
 
 export const ROLE_HOME_PATH: Record<string, string> = {
   admin: '/gestao-de-usuarios',
-  gestor: '/gestao-de-usuarios',
+  gestor: '/dashboard/professor',
   professor: '/dashboard/professor',
-  pesquisador: '/acervo-digital-de-fosseis',
+  pesquisador: '/dashboard/pesquisador',
   aluno: '/dashboard/aluno',
   visitante: '/wiki-de-estudos-paleontologicos',
 };
@@ -14,11 +14,15 @@ export const ROLE_HOME_PATH: Record<string, string> = {
 const PATH_ROLE_RULES = [
   {
     path: '/gestao-de-usuarios',
-    roles: ['admin', 'gestor'],
+    roles: ['admin'],
   },
   {
     path: '/dashboard/professor',
     roles: ['admin', 'gestor', 'professor'],
+  },
+  {
+    path: '/dashboard/pesquisador',
+    roles: ['admin', 'gestor', 'pesquisador'],
   },
   {
     path: '/dashboard/aluno',
@@ -26,7 +30,7 @@ const PATH_ROLE_RULES = [
   },
   {
     path: '/prestacao-de-contas',
-    roles: ['admin', 'gestor'],
+    roles: ['professor', 'pesquisador'],
   },
   {
     path: '/acervo-digital-de-fosseis',

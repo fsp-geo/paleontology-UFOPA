@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState, useTransition } from 'react';
-import { LoaderCircle, MailPlus, RefreshCw, Save, ShieldCheck, Users } from 'lucide-react';
+import { LoaderCircle, MailPlus, RefreshCw, Save, ShieldCheck, Trash2, Users } from 'lucide-react';
 import { LogoutButton } from '@/components/LogoutButton';
 
 type ManagedUser = {
@@ -52,6 +52,7 @@ export function UserManagementWorkspace({
   const [isRefreshing, startRefresh] = useTransition();
   const [isSubmittingInvite, startInvite] = useTransition();
   const [savingUserId, setSavingUserId] = useState<string | null>(null);
+  const [deletingUserId, setDeletingUserId] = useState<string | null>(null);
   const [inviteForm, setInviteForm] = useState({
     name: '',
     email: '',
@@ -205,6 +206,42 @@ export function UserManagementWorkspace({
       });
       setFeedback(`Convite enviado para ${data.user?.email || inviteForm.email}.`);
     });
+  };
+
+  const deleteUser = (userId: string, email: string) => {
+    const confirmed = window.confirm(`Excluir ${email} do sistema? Essa acao remove o acesso no portal e no Supabase.`);
+    if (!confirmed) {
+      return;
+    }
+
+    setDeletingUserId(userId);
+    setError(null);
+    setFeedback(null);
+
+    void fetch(`/api/users/${userId}`, {
+      method: 'DELETE',
+    })
+      .then(async (response) => {
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Nao foi possivel excluir o usuario.');
+        }
+
+        setUsers((current) => current.filter((user) => user.id !== userId));
+        setDrafts((current) => {
+          const next = { ...current };
+          delete next[userId];
+          return next;
+        });
+        setFeedback(`Conta ${email} removida com sucesso.`);
+      })
+      .catch((err: Error) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setDeletingUserId(null);
+      });
   };
 
   return (
@@ -398,7 +435,7 @@ export function UserManagementWorkspace({
                           </div>
                         </div>
 
-                        <div className="grid gap-4 xl:grid-cols-[1fr_1fr_1fr_1fr_auto]">
+                        <div className="grid gap-4 xl:grid-cols-[1fr_1fr_1fr_1fr_auto_auto]">
                           <label className="space-y-1.5 text-sm text-stone-700">
                             <span className="font-medium">Papel</span>
                             <select
@@ -473,6 +510,18 @@ export function UserManagementWorkspace({
                             >
                               {savingUserId === user.id ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
                               Salvar
+                            </button>
+                          </div>
+
+                          <div className="flex items-end">
+                            <button
+                              type="button"
+                              onClick={() => deleteUser(user.id, user.email)}
+                              disabled={deletingUserId === user.id || primaryRole === 'admin'}
+                              className="inline-flex h-[50px] min-w-[132px] items-center justify-center gap-2 rounded-full border border-rose-200 bg-rose-50 px-5 text-sm font-semibold text-rose-700 transition hover:border-rose-300 hover:bg-rose-100 disabled:cursor-not-allowed disabled:border-stone-200 disabled:bg-stone-100 disabled:text-stone-400"
+                            >
+                              {deletingUserId === user.id ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
+                              Excluir
                             </button>
                           </div>
                         </div>

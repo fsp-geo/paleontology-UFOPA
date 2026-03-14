@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getCurrentUserContext, hasAnyAllowedRole } from '@/lib/current-user';
+import { createAdminClient, isSupabaseAdminConfigured } from '@/lib/supabase-admin';
 import { getManageableRoles, replaceUserRoles, MANAGE_USERS_ROLES, USER_STATUSES, USER_TYPES } from '@/lib/user-management';
 
 function isValidOption(value: string, options: readonly string[]) {
@@ -103,6 +104,70 @@ export async function PATCH(
         roleCodes: hydratedUser!.userRoles.map((item) => item.role.code),
       },
     });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const context = await getCurrentUserContext();
+
+    if (!context) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    if (!hasAnyAllowedRole(context.roleCodes, [...MANAGE_USERS_ROLES])) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
+    const { id } = await params;
+
+    if (id === context.supabaseUser.id) {
+      return NextResponse.json({ error: 'Voce nao pode excluir a propria conta por esta tela' }, { status: 400 });
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: { id },
+      include: {
+        userRoles: {
+          include: {
+            role: true,
+          },
+        },
+      },
+    });
+
+    if (!existingUser) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
+
+    if (existingUser.userRoles.some((item) => item.role.code === 'admin')) {
+      return NextResponse.json({ error: 'Contas admin devem ser removidas manualmente por seguranca' }, { status: 400 });
+    }
+
+    if (!isSupabaseAdminConfigured) {
+      return NextResponse.json({ error: 'Supabase admin client unavailable' }, { status: 503 });
+    }
+
+    const adminClient = createAdminClient();
+    if (!adminClient) {
+      return NextResponse.json({ error: 'Supabase admin client unavailable' }, { status: 503 });
+    }
+
+    const { error } = await adminClient.auth.admin.deleteUser(id);
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+
+    await prisma.user.delete({
+      where: { id },
+    });
+
+    return NextResponse.json({ success: true, deletedUserId: id });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

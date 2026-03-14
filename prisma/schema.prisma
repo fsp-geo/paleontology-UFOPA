@@ -28,6 +28,8 @@ model User {
   updatedAt      DateTime    @updatedAt
   userRoles      UserRole[]  @relation("ProfileRoles")
   assignedRoles  UserRole[]  @relation("AssignedRoles")
+  accountabilityEntries         AccountabilityEntry[] @relation("AccountabilitySubmitter")
+  reviewedAccountabilityEntries AccountabilityEntry[] @relation("AccountabilityReviewer")
 }
 
 model Role {
@@ -51,4 +53,23 @@ model UserRole {
   role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   @@unique([userId, roleId])
+}
+
+model AccountabilityEntry {
+  id            String   @id @default(cuid())
+  title         String
+  description   String
+  category      String
+  amountInCents Int
+  expenseDate   DateTime
+  status        String   @default("pending")
+  receiptUrl    String?
+  submitterId   String
+  reviewerId    String?
+  reviewerNotes String?
+  reviewedAt    DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  submitter     User     @relation("AccountabilitySubmitter", fields: [submitterId], references: [id], onDelete: Cascade)
+  reviewer      User?    @relation("AccountabilityReviewer", fields: [reviewerId], references: [id])
 }

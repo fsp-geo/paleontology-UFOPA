@@ -1,6 +1,6 @@
 import { prisma } from './prisma';
 
-export const MANAGE_USERS_ROLES = ['admin', 'gestor'] as const;
+export const MANAGE_USERS_ROLES = ['admin'] as const;
 
 export const USER_STATUSES = ['active', 'invited', 'inactive', 'suspended'] as const;
 export const USER_TYPES = ['internal', 'public', 'student', 'researcher'] as const;
