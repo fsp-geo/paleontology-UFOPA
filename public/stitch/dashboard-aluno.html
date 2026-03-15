@@ -83,6 +83,33 @@
         .student-dashboard-shell .text-sm { font-size: 16px !important; line-height: 1.55 !important; }
         .student-dashboard-shell .text-lg { line-height: 1.7 !important; }
         .student-dashboard-shell .font-label { letter-spacing: 0.02em; }
+        .profile-loading {
+            color: transparent !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-loading::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.4rem;
+            background: linear-gradient(90deg, rgba(233,225,213,0.85) 0%, rgba(244,237,225,1) 50%, rgba(233,225,213,0.85) 100%);
+            background-size: 200% 100%;
+            animation: profile-loading-wave 1.4s ease-in-out infinite;
+        }
+        .profile-loading-line {
+            min-height: 1.3em;
+        }
+        .profile-loading-title {
+            min-height: 1.1em;
+        }
+        .profile-loading-name {
+            min-height: 1.2em;
+        }
+        @keyframes profile-loading-wave {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
         @keyframes active-day-pulse {
             0%, 100% { opacity: 0.8; transform: translateY(0); }
             50% { opacity: 1; transform: translateY(-2px); }
@@ -149,7 +176,7 @@
 <span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span>
 </button>
 <div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest border border-outline-variant/30">
-<img alt="User Profile" class="w-full h-full object-cover" data-alt="Portrait of a young male student in academic setting" id="student-top-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_d20JXj8LrlBQzCusDpL9tYq36n7erMKol3lHiJXEkyErj_T00vILlcnX7xV19K7uK9ecQqP2y-olddBiKE-sG-FxzTvnWZJ6dpG1mtfNHhJYAyk6OSg0Q58ywp0_LxVtStDx95xew42ydDG7-j-de20nzEmZ58r2tPDuLDKr1u1buG2R0qBvR3DylpzbYm_FOJB8egmGuJTQTEHGhgpHWP8yi4q5drutSDqg9XbdFG1bgToXEIOxIaGY0UuyIUjIEXYODfXz03Q"/>
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Portrait of a young male student in academic setting" id="student-top-avatar" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA="/>
 </div>
 </div>
 </nav>
@@ -201,11 +228,11 @@
 </div>
 <div class="mt-5 flex items-center gap-3 rounded-xl bg-surface-container-high px-4 py-3">
 <div class="h-10 w-10 overflow-hidden rounded-full">
-<img alt="Student Profile" class="h-full w-full object-cover" data-alt="Portrait of the logged student user" id="student-sidebar-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_d20JXj8LrlBQzCusDpL9tYq36n7erMKol3lHiJXEkyErj_T00vILlcnX7xV19K7uK9ecQqP2y-olddBiKE-sG-FxzTvnWZJ6dpG1mtfNHhJYAyk6OSg0Q58ywp0_LxVtStDx95xew42ydDG7-j-de20nzEmZ58r2tPDuLDKr1u1buG2R0qBvR3DylpzbYm_FOJB8egmGuJTQTEHGhgpHWP8yi4q5drutSDqg9XbdFG1bgToXEIOxIaGY0UuyIUjIEXYODfXz03Q"/>
+<img alt="Student Profile" class="h-full w-full object-cover" data-alt="Portrait of the logged student user" id="student-sidebar-avatar" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA="/>
 </div>
 <div>
-<p class="text-sm font-bold leading-none" id="student-profile-name">Novo Explorador</p>
-<p class="mt-1 text-[10px] uppercase tracking-wider text-on-surface-variant font-label" id="student-profile-level">Ovo de Trilobita</p>
+<p class="text-sm font-bold leading-none profile-loading profile-loading-name" id="student-profile-name">&nbsp;</p>
+<p class="mt-1 text-[10px] uppercase tracking-wider text-on-surface-variant font-label profile-loading profile-loading-title" id="student-profile-level">&nbsp;</p>
 </div>
 </div>
 </div>
@@ -217,10 +244,8 @@
 <header class="mb-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
 <div class="md:col-span-7">
 <p class="text-label text-tertiary uppercase tracking-[0.2em] mb-3 font-semibold">Welcome back, Archivist</p>
-<h1 class="font-headline text-5xl md:text-6xl text-on-background leading-tight mb-6" id="student-welcome-name">Novo Explorador</h1>
-<p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed" id="student-welcome-summary">
-                    You have not accumulated study data yet. Explore the archive and the educational wiki to begin building your learning history.
-                </p>
+<h1 class="font-headline text-5xl md:text-6xl text-on-background leading-tight mb-6 profile-loading profile-loading-line" id="student-welcome-name">&nbsp;</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed profile-loading profile-loading-line" id="student-welcome-summary">&nbsp;</p>
 </div>
 <div class="md:col-span-5 flex justify-start md:justify-end">
 <div class="bg-surface-container-highest p-6 rounded-xl flex items-center gap-6 shadow-sm">
@@ -625,6 +650,12 @@
       }
       if (streak) streak.textContent = profile.streakDays + ' Days';
       if (rank) rank.textContent = profile.levelTitle;
+
+      [welcomeName, profileName, profileLevel, summary].forEach((element) => {
+        if (element) {
+          element.classList.remove('profile-loading', 'profile-loading-line', 'profile-loading-title', 'profile-loading-name');
+        }
+      });
 
       populateHoursChart(profile.weeklyHours || []);
       populateTopicProgress(dashboard.topicProgress || []);
