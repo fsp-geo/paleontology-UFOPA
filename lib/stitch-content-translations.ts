@@ -184,6 +184,42 @@ const ptByFile: Record<string, TranslationMap> = {
   'partnerships.html': {
     'Collaborative Network': 'Rede Colaborativa',
     'Partnerships': 'Parcerias',
+    'Institutional Network': 'Rede Institucional',
+    'Global Academic Alliances': 'Aliancas Academicas Globais',
+    'The Strata Archive operates as a collaborative nexus between Petrobras Paleontology Division and the world\'s leading research institutions. Our partnerships ensure the rigorous preservation and scholarly analysis of geological history.':
+      'O Strata Archive opera como um nucleo colaborativo entre a Divisao de Paleontologia da Petrobras e instituicoes de pesquisa de referencia mundial. Nossas parcerias garantem a preservacao rigorosa e a analise academica da historia geologica.',
+    'Strategic Collaborators': 'Colaboradores Estrategicos',
+    'Federal University of Rio de Janeiro': 'Universidade Federal do Rio de Janeiro',
+    'Our primary academic partner for over three decades, focusing on Mesozoic stratigraphy and coastal sedimentology. This collaboration includes shared laboratory access and joint PhD programs.':
+      'Nossa principal parceira academica ha mais de tres decadas, com foco em estratigrafia mesozoica e sedimentologia costeira. Essa colaboracao inclui acesso laboratorial compartilhado e programas conjuntos de doutorado.',
+    'Strategic Partner': 'Parceiro Estrategico',
+    'Brazil': 'Brasil',
+    'Collaborative digitization of the Brazilian South Atlantic fossil collection, enabling remote research capabilities.':
+      'Digitalizacao colaborativa da colecao fossilifera do Atlantico Sul brasileiro, viabilizando pesquisa remota.',
+    'Joint research in molecular geochemistry and sedimentary modeling.':
+      'Pesquisa conjunta em geoquimica molecular e modelagem sedimentar.',
+    'A Borderless Scientific Network': 'Uma Rede Cientifica Sem Fronteiras',
+    'Strata Archive maintains nodes of excellence across four continents. Each partner university provides localized expertise that enriches our global understanding of paleontology and geology.':
+      'O Strata Archive mantem nucleos de excelencia em quatro continentes. Cada universidade parceira oferece conhecimento localizado que amplia nossa compreensao global da paleontologia e da geologia.',
+    'South America Hub': 'Polo da America do Sul',
+    'Led by Petrobras and UFRJ, focusing on Pre-Salt basins.':
+      'Liderado pela Petrobras e pela UFRJ, com foco em bacias do Pre-Sal.',
+    'European Research Axis': 'Eixo de Pesquisa Europeu',
+    'Focusing on carbonate reservoirs and microbialites.':
+      'Voltado a reservatorios carbonaticos e microbialitos.',
+    'Live Connections': 'Conexoes Ativas',
+    'Paleo-climate Simulation': 'Simulacao Paleoclimatica',
+    'Patagonian Paleofauna': 'Paleofauna Patagonica',
+    'Micro-tomography Hub': 'Polo de Microtomografia',
+    'Supporting Institutions': 'Instituicoes de Apoio',
+    'Public and private entities that provide funding, ethical oversight, and logistical support for our field expeditions.':
+      'Entidades publicas e privadas que oferecem financiamento, supervisao etica e apoio logistico para nossas expedicoes de campo.',
+    'Apply for Partnership': 'Candidatar-se a Parceria',
+    'Academic Development': 'Desenvolvimento Academico',
+    'Research Council': 'Conselho de Pesquisa',
+    'Regional Funding': 'Fomento Regional',
+    'Museum Collection': 'Colecao Museologica',
+    'Environmental Ethics': 'Etica Ambiental',
   },
   'petrobras-esg.html': {
     'Sustainability Framework': 'Estrutura de Sustentabilidade',
