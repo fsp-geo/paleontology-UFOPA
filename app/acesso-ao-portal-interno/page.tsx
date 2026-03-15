@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, FlaskConical, Globe, Landmark, LibraryBig, Lock, Mail, Mountain, Orbit, UserRound } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { sanitizeNextPath } from '@/lib/access-control';
 import { useAuth } from '@/components/AuthProvider';
 
 export default function AccessPortalPage() {
@@ -21,10 +22,10 @@ export default function AccessPortalPage() {
   const [feedback, setFeedback] = useState<string | null>(null);
   const [nextPath] = useState(() => {
     if (typeof window === 'undefined') {
-      return '/dashboard/professor';
+      return null;
     }
 
-    return new URLSearchParams(window.location.search).get('next') || '/dashboard/professor';
+    return sanitizeNextPath(new URLSearchParams(window.location.search).get('next'));
   });
   const [allowPublicLoginScreen] = useState(() => {
     if (typeof window === 'undefined') {
@@ -39,8 +40,38 @@ export default function AccessPortalPage() {
       return;
     }
 
-    router.replace(nextPath || '/dashboard');
+    void fetch(`/api/auth/profile${nextPath ? `?next=${encodeURIComponent(nextPath)}` : ''}`, {
+      cache: 'no-store',
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error('Falha ao carregar o destino do usuario.');
+        }
+
+        return response.json();
+      })
+      .then((profile) => {
+        router.replace(profile.redirectPath || profile.homePath || '/dashboard');
+        router.refresh();
+      })
+      .catch(() => {
+        router.replace('/dashboard');
+        router.refresh();
+      });
   }, [allowPublicLoginScreen, loading, nextPath, router, user]);
+
+  const resolveRedirectPath = async () => {
+    const response = await fetch(`/api/auth/profile${nextPath ? `?next=${encodeURIComponent(nextPath)}` : ''}`, {
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      return '/dashboard';
+    }
+
+    const profile = await response.json();
+    return profile.redirectPath || profile.homePath || '/dashboard';
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -108,7 +139,8 @@ export default function AccessPortalPage() {
       }
 
       if (data.session?.user) {
-        router.replace('/dashboard/aluno');
+        const redirectPath = await resolveRedirectPath();
+        router.replace(redirectPath);
         router.refresh();
         return;
       }
@@ -133,7 +165,8 @@ export default function AccessPortalPage() {
     }
 
     if (data.user) {
-      router.replace(nextPath || '/dashboard');
+      const redirectPath = await resolveRedirectPath();
+      router.replace(redirectPath);
       router.refresh();
       return;
     }

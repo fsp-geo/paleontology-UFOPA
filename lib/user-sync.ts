@@ -55,10 +55,8 @@ async function ensureRolesExist() {
   );
 }
 
-function extractRoleCodes(user: SyncableSupabaseUser) {
-  const metadataRoles = user.user_metadata?.roles;
+function extractRoleCodes(user: SyncableSupabaseUser, existingRoleCodes: string[]) {
   const appRoles = user.app_metadata?.roles;
-  const metadataRole = user.user_metadata?.role;
   const appRole = user.app_metadata?.role;
   const userType =
     typeof user.user_metadata?.user_type === 'string'
@@ -69,16 +67,16 @@ function extractRoleCodes(user: SyncableSupabaseUser) {
     : [];
   const source = Array.isArray(appRoles)
     ? appRoles
-    : Array.isArray(metadataRoles)
-      ? metadataRoles
-      : appRole
-        ? [appRole]
-        : metadataRole
-          ? [metadataRole]
-          : [];
+    : appRole
+      ? [appRole]
+      : [];
   const normalized = source
     .map((role) => String(role).trim().toLowerCase())
     .filter(Boolean);
+
+  if (existingRoleCodes.length > 0) {
+    return existingRoleCodes;
+  }
 
   if (normalized.length > 0) {
     return Array.from(new Set(normalized));
@@ -187,7 +185,8 @@ export async function syncUser(supabaseUser: SyncableSupabaseUser) {
     },
   });
 
-  const roleCodes = extractRoleCodes(supabaseUser);
+  const existingRoleCodes = Array.from(new Set(profile.userRoles.map((item) => item.role.code)));
+  const roleCodes = extractRoleCodes(supabaseUser, existingRoleCodes);
   const roles = await prisma.role.findMany({
     where: {
       code: {
@@ -196,8 +195,8 @@ export async function syncUser(supabaseUser: SyncableSupabaseUser) {
     },
   });
 
-  const existingRoleCodes = new Set(profile.userRoles.map((item) => item.role.code));
-  const missingRoles = roles.filter((role) => !existingRoleCodes.has(role.code));
+  const persistedRoleCodes = new Set(profile.userRoles.map((item) => item.role.code));
+  const missingRoles = roles.filter((role) => !persistedRoleCodes.has(role.code));
 
   if (missingRoles.length > 0) {
     await prisma.userRole.createMany({
