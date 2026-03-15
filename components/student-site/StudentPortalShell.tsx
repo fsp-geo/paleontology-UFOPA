@@ -66,7 +66,6 @@ export function StudentPortalShell({
         </div>
 
         <div className="flex items-center gap-4 lg:gap-6">
-          <LocaleSwitcher locale={locale} className="hidden items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant md:flex" />
           <label className="relative hidden md:block">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant">
               search
@@ -139,6 +138,9 @@ export function StudentPortalShell({
             </div>
 
             <div className="mt-6 space-y-1">
+              <div className="px-4 py-2">
+                <LocaleSwitcher locale={locale} />
+              </div>
               <button
                 className="flex w-full cursor-not-allowed items-center gap-4 px-4 py-2.5 text-left text-sm text-on-surface-variant/60"
                 disabled

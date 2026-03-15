@@ -43,6 +43,16 @@ export function PublicContentEnhancer({ containerId }: PublicContentEnhancerProp
       return;
     }
 
+    container.querySelectorAll<HTMLElement>('.material-symbols-outlined').forEach((element) => {
+      const dataIcon = element.getAttribute('data-icon');
+      if (dataIcon) {
+        element.textContent = dataIcon;
+      }
+
+      element.setAttribute('translate', 'no');
+      element.setAttribute('aria-hidden', 'true');
+    });
+
     const listeners: Array<() => void> = [];
 
     container.querySelectorAll<HTMLElement>('[data-route]').forEach((element) => {

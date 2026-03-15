@@ -88,7 +88,6 @@ export function PublicSiteShell({ children, locale }: PublicSiteShellProps) {
         </div>
 
         <div className="flex items-center gap-4 lg:gap-6">
-          <LocaleSwitcher locale={locale} className="hidden items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant md:flex" />
           <label className="hidden items-center gap-2 rounded-lg border border-transparent bg-surface-container-highest px-3 py-1.5 focus-within:border-primary/30 lg:flex">
             <Search aria-hidden="true" className="h-5 w-5 text-outline" />
             <input
@@ -181,10 +180,11 @@ export function PublicSiteShell({ children, locale }: PublicSiteShellProps) {
 
           <div className="flex flex-col items-center justify-between gap-4 text-xs text-outline md:flex-row">
             <p>{pt ? '© 2024 Projeto PaleoPortal. Todos os direitos reservados.' : '© 2024 PaleoPortal Project. All rights reserved.'}</p>
-            <div className="flex gap-6">
-              <Link className="hover:text-on-surface-variant" href="/privacy-policy">
-                {pt ? 'Política de Privacidade' : 'Privacy Policy'}
-              </Link>
+          <div className="flex gap-6">
+            <LocaleSwitcher locale={locale} />
+            <Link className="hover:text-on-surface-variant" href="/privacy-policy">
+              {pt ? 'Política de Privacidade' : 'Privacy Policy'}
+            </Link>
               <Link className="hover:text-on-surface-variant" href="/terms-of-use">
                 {pt ? 'Termos de Uso' : 'Terms of Use'}
               </Link>

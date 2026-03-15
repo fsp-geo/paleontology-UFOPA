@@ -1,5 +1,6 @@
 import { PublicSiteShell } from '@/components/public-site/PublicSiteShell';
 import { PublicContentEnhancer } from '@/components/public-site/PublicContentEnhancer';
+import { StitchIconEnhancer } from '@/components/stitch/StitchIconEnhancer';
 import { getPublicStitchPage } from '@/lib/public-stitch-page';
 import { getSiteLocale } from '@/lib/site-locale-server';
 
@@ -16,6 +17,7 @@ export async function PublicStitchPage({ fileName, containerId }: PublicStitchPa
     <PublicSiteShell locale={locale}>
       {page.styles ? <style dangerouslySetInnerHTML={{ __html: page.styles }} /> : null}
       <div id={containerId} dangerouslySetInnerHTML={{ __html: page.content }} />
+      <StitchIconEnhancer containerId={containerId} />
       <PublicContentEnhancer containerId={containerId} />
     </PublicSiteShell>
   );

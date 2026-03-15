@@ -1,6 +1,10 @@
 import type { SiteLocale } from '@/lib/site-locale';
 
 type TranslationMap = Record<string, string>;
+type ProtectedSegment = {
+  token: string;
+  content: string;
+};
 
 const commonPtReplacements: TranslationMap = {
   'Search archives...': 'Pesquisar arquivos...',
@@ -43,6 +47,10 @@ const ptByFile: Record<string, TranslationMap> = {
     'Isotope Analysis of Petrified Wood': 'Análise isotópica de madeira petrificada',
     'Reconstructing paleoclimate humidity levels through carbon isotope ratios in gymnosperms.':
       'Reconstruindo níveis de umidade paleoclimática por meio das razões isotópicas de carbono em gimnospermas.',
+    'Journal of Paleosciences': 'Revista de Paleociências',
+    'Dr. Helena Silva, et al.': 'Dra. Helena Silva et al.',
+    'Sept 2023': 'Set 2023',
+    'Dec 2023': 'Dez 2023',
   },
   'contact.html': {
     'GET IN TOUCH': 'ENTRE EM CONTATO',
@@ -67,6 +75,13 @@ const ptByFile: Record<string, TranslationMap> = {
     'CURATORIAL SERVICES': 'SERVIÇOS DE CURADORIA',
     'ETHICS &amp; LEGAL': 'ÉTICA E QUESTÕES LEGAIS',
     'Global Archives': 'Acervos Globais',
+    'Headquarters &amp; Central Vault': 'Sede e Acervo Central',
+    'Digital Stratigraphy Lab': 'Laboratório de Estratigrafia Digital',
+    'Open to the Scholarly Community': 'Aberto à Comunidade Acadêmica',
+    'Our main archive is accessible to accredited researchers from Monday to Friday, 09:00 — 17:00. Prior appointment via the digital portal is mandatory.':
+      'Nosso acervo principal está acessível a pesquisadores credenciados de segunda a sexta, das 09:00 às 17:00. O agendamento prévio pelo portal digital é obrigatório.',
+    'SCHEDULE VISIT': 'AGENDAR VISITA',
+    'VIEW ON MAPS': 'VER NO MAPA',
   },
   'api-documentation.html': {
     'Introduction': 'Introdução',
@@ -88,6 +103,20 @@ const ptByFile: Record<string, TranslationMap> = {
       'Endpoint central para busca de camadas geológicas históricas. É possível filtrar por bacia, período ou presença de fósseis.',
     'Parameters': 'Parâmetros',
     'Response Schema': 'Esquema de Resposta',
+    'Developer Resources': 'Recursos para Desenvolvedores',
+    'Division Ethics': 'Ética da Divisão',
+    'Certified Archive': 'Acervo Certificado',
+    'Featured Collection': 'Coleção em Destaque',
+    'The Jurassic Deep Sea': 'O Mar Profundo do Jurássico',
+    'Python SDK v3.0': 'SDK Python v3.0',
+    'Automate your research workflow with our native Python integration. Supports pandas and NumPy out of the box.':
+      'Automatize seu fluxo de pesquisa com nossa integração nativa para Python. Compatível com pandas e NumPy desde a instalação.',
+    'R Statistics': 'Estatísticas em R',
+    'Direct plotting of stratigraphic columns for academic papers.':
+      'Plotagem direta de colunas estratigráficas para artigos acadêmicos.',
+    'View GitHub': 'Ver no GitHub',
+    'Data access is granted strictly for scientific research and educational purposes. Commercial reuse is prohibited under international ethics standards.':
+      'O acesso aos dados é concedido estritamente para pesquisa científica e fins educacionais. O reuso comercial é proibido pelos padrões internacionais de ética.',
   },
   'legal-notices.html': {
     'Institutional Framework': 'Estrutura Institucional',
@@ -108,6 +137,21 @@ const ptByFile: Record<string, TranslationMap> = {
     'Data Sovereignty': 'Soberania de Dados',
     'Researcher Liability': 'Responsabilidade do Pesquisador',
     'Supervisory Authorities': 'Autoridades Supervisoras',
+    'Petrobras Paleontology Division (PPD), a specialized scientific unit dedicated to the preservation and study of stratigraphic records within the South Atlantic basin.':
+      'Divisão de Paleontologia da Petrobras (PPD), unidade científica especializada dedicada à preservação e ao estudo de registros estratigráficos na bacia do Atlântico Sul.',
+    'Authorized under the Federal Scientific Preservation Act, Section IV, maintaining the integrity of national geological heritage through digital archiving.':
+      'Autorizado pela Lei Federal de Preservação Científica, Seção IV, mantendo a integridade do patrimônio geológico nacional por meio do arquivamento digital.',
+    'Non-commercial scientific use of all archived fossil records.':
+      'Uso científico não comercial de todos os registros fósseis arquivados.',
+    'Ethical provenance verification for every registered specimen.':
+      'Verificação ética de procedência para cada espécime registrado.',
+    'Commitment to the Open Science Framework (OSF) guidelines.':
+      'Compromisso com as diretrizes do Open Science Framework (OSF).',
+    'Our archival procedures strictly adhere to ISO 14721:2012 (OAIS) for long-term digital preservation and ethical paleontology standards.':
+      'Nossos procedimentos arquivísticos seguem rigorosamente a ISO 14721:2012 (OAIS) para preservação digital de longo prazo e padrões éticos da paleontologia.',
+    'Review our protocols regarding the digitalization of sensitive archaeological sites.':
+      'Consulte nossos protocolos sobre a digitalização de sítios arqueológicos sensíveis.',
+    'Revised May 2024': 'Revisado em Maio de 2024',
   },
   'privacy-policy.html': {
     'Privacy Protocol': 'Protocolo de Privacidade',
@@ -184,6 +228,14 @@ const studentPtReplacements: Record<string, TranslationMap> = {
     'Behavioral Archaeology': 'Arqueologia Comportamental',
     'Chronological Strata': 'Estratos Cronológicos',
     'View Timeline': 'Ver Linha do Tempo',
+    'Paleozoic': 'Paleozoico',
+    'Mesozoic': 'Mesozoico',
+    'Cenozoic': 'Cenozoico',
+    'Study Methodology': 'Metodologia de Estudo',
+    'Field Excavation': 'Escavação de Campo',
+    'Isotopic Analysis': 'Análise Isotópica',
+    '3D Photogrammetry': 'Fotogrametria 3D',
+    'Confidential Research Material • Educational Access Only': 'Material confidencial de pesquisa • Acesso apenas educacional',
   },
   'acervo-digital-de-fosseis.html': {
     'Catalogue of the Deep Past': 'Catálogo do Passado Profundo',
@@ -197,6 +249,9 @@ const studentPtReplacements: Record<string, TranslationMap> = {
     'Cambrian': 'Cambriano',
     'Eocene': 'Eoceno',
     'Carboniferous': 'Carbonífero',
+    'Jurassic Explorer': 'Explorador Jurássico',
+    'Geological Context': 'Contexto Geológico',
+    'Chronological Position': 'Posição Cronológica',
   },
 };
 
@@ -205,12 +260,51 @@ function applyReplacements(source: string, replacements: TranslationMap) {
   return entries.reduce((output, [from, to]) => output.replaceAll(from, to), source);
 }
 
+function protectSegments(source: string, pattern: RegExp, transform?: (match: string) => string) {
+  const segments: ProtectedSegment[] = [];
+  let index = 0;
+
+  const protectedSource = source.replace(pattern, (match) => {
+    const token = `__STITCH_PROTECTED_${index++}__`;
+    segments.push({
+      token,
+      content: transform ? transform(match) : match,
+    });
+    return token;
+  });
+
+  return { protectedSource, segments };
+}
+
+function restoreSegments(source: string, segments: ProtectedSegment[]) {
+  return segments.reduce((output, segment) => output.replace(segment.token, segment.content), source);
+}
+
+function ensureMaterialSymbolDataIcon(match: string) {
+  return match.replace(
+    /<span([^>]*class="[^"]*material-symbols-outlined[^"]*"[^>]*)>([\s\S]*?)<\/span>/i,
+    (_full, attrs: string, rawIcon: string) => {
+      const icon = rawIcon.trim();
+      const hasDataIcon = /data-icon=/i.test(attrs);
+      const finalAttrs = hasDataIcon ? attrs : `${attrs} data-icon="${icon}"`;
+      return `<span${finalAttrs}>${icon}</span>`;
+    },
+  );
+}
+
 export function translateStitchContent(fileName: string, source: string, locale: SiteLocale) {
   if (locale !== 'pt-BR') {
     return source;
   }
 
-  let translated = applyReplacements(source, commonPtReplacements);
+  const protectedCode = protectSegments(source, /<pre[\s\S]*?<\/pre>/gi);
+  const protectedIcons = protectSegments(
+    protectedCode.protectedSource,
+    /<span[^>]*class="[^"]*material-symbols-outlined[^"]*"[^>]*>[\s\S]*?<\/span>/gi,
+    ensureMaterialSymbolDataIcon,
+  );
+
+  let translated = applyReplacements(protectedIcons.protectedSource, commonPtReplacements);
   const pageMap = ptByFile[fileName];
 
   if (pageMap) {
@@ -222,6 +316,9 @@ export function translateStitchContent(fileName: string, source: string, locale:
   if (studentMap) {
     translated = applyReplacements(translated, studentMap);
   }
+
+  translated = restoreSegments(translated, protectedIcons.segments);
+  translated = restoreSegments(translated, protectedCode.segments);
 
   return translated;
 }

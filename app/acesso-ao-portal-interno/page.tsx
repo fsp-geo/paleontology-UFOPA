@@ -300,10 +300,6 @@ export default function AccessPortalPage() {
               </p>
             </div>
 
-            <div className="mb-6 flex justify-end">
-              <LocaleSwitcher locale={locale} />
-            </div>
-
             <form className="space-y-6" onSubmit={handleSubmit}>
               {mode === 'signup' ? (
                 <div className="space-y-1.5">
@@ -493,6 +489,7 @@ export default function AccessPortalPage() {
           </div>
         </div>
         <div className="flex gap-6">
+          <LocaleSwitcher locale={locale} />
           <Link
             className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary"
             href="/privacy-policy"

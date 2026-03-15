@@ -1,5 +1,6 @@
 import { StudentPortalShell } from '@/components/student-site/StudentPortalShell';
 import { StudentContentAccessTracker } from '@/components/student-site/StudentContentAccessTracker';
+import { StitchIconEnhancer } from '@/components/stitch/StitchIconEnhancer';
 import { getStudentStitchPage } from '@/lib/student-stitch-page';
 import { getSiteLocale } from '@/lib/site-locale-server';
 
@@ -30,6 +31,7 @@ export async function StudentStitchPage({
 }: StudentStitchPageProps) {
   const locale = await getSiteLocale();
   const page = await getStudentStitchPage(fileName, locale);
+  const containerId = `student-stitch-${fileName.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`;
 
   return (
     <StudentPortalShell
@@ -42,7 +44,8 @@ export async function StudentStitchPage({
     >
       {page.styles ? <style dangerouslySetInnerHTML={{ __html: page.styles }} /> : null}
       {accessLog ? <StudentContentAccessTracker {...accessLog} /> : null}
-      <div dangerouslySetInnerHTML={{ __html: page.content }} />
+      <div id={containerId} dangerouslySetInnerHTML={{ __html: page.content }} />
+      <StitchIconEnhancer containerId={containerId} />
     </StudentPortalShell>
   );
 }
