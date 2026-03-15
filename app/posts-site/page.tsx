@@ -29,6 +29,8 @@ export default async function SitePostsPage() {
       description="Propostas editoriais e textos do portal. Pesquisadores submetem rascunhos e professores decidem a aprovacao para publicacao."
       roleCodes={context.roleCodes}
       currentPath="/posts-site"
+      userName={context.profile?.name || context.supabaseUser.email || 'Usuario'}
+      userRoleLabel={context.roleCodes.includes('professor') ? 'Professor' : 'Pesquisador'}
     >
       <SubmissionWorkspace
         roleCodes={context.roleCodes}

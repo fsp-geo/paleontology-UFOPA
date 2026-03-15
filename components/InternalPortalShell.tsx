@@ -1,6 +1,7 @@
 import type { ComponentType, ReactNode } from 'react';
 import Link from 'next/link';
-import { BookOpen, BriefcaseBusiness, ClipboardCheck, FolderKanban, LayoutDashboard, LogOut, Newspaper, ScrollText, SendHorizontal, Users } from 'lucide-react';
+import { BookOpen, BriefcaseBusiness, ClipboardCheck, FolderKanban, LayoutDashboard, LogOut, Newspaper, ScrollText, SendHorizontal, Settings, Wrench, Users } from 'lucide-react';
+import { AuthenticatedSessionTracker } from '@/components/AuthenticatedSessionTracker';
 
 type InternalPortalShellProps = {
   title: string;
@@ -8,6 +9,8 @@ type InternalPortalShellProps = {
   description: string;
   roleCodes: string[];
   currentPath: string;
+  userName: string;
+  userRoleLabel: string;
   children: ReactNode;
 };
 
@@ -33,9 +36,9 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     href: '/dashboard/aluno',
-    label: 'Dashboard Aluno',
+    label: 'My Learning',
     icon: FolderKanban,
-    visible: (roles) => roles.includes('admin') || roles.includes('aluno'),
+    visible: (roles) => roles.includes('aluno'),
   },
   {
     href: '/acervo-digital-de-fosseis',
@@ -93,12 +96,22 @@ export function InternalPortalShell({
   description,
   roleCodes,
   currentPath,
+  userName,
+  userRoleLabel,
   children,
 }: InternalPortalShellProps) {
   const visibleItems = NAV_ITEMS.filter((item) => item.visible(roleCodes));
+  const initials = userName
+    .split(/\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() || '')
+    .join('') || 'U';
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_right,_rgba(157,120,73,0.2),_transparent_24%),linear-gradient(180deg,_#f7f0e6_0%,_#f4ede2_45%,_#efe6da_100%)] text-stone-900">
+      <AuthenticatedSessionTracker sourcePrefix="portal" />
       <div className="mx-auto grid min-h-screen max-w-[1600px] lg:grid-cols-[288px_1fr]">
         <aside className="border-r border-stone-200/80 bg-[#f4ebde]/90 px-6 py-8 backdrop-blur">
           <div className="rounded-[28px] border border-stone-200/80 bg-white/70 p-6 shadow-[0_18px_48px_-24px_rgba(46,31,11,0.35)]">
@@ -131,13 +144,43 @@ export function InternalPortalShell({
             })}
           </nav>
 
-          <Link
-            href="/sair"
-            className="mt-8 inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-500 hover:text-stone-950"
-          >
-            <LogOut className="h-4 w-4" />
-            Sair
-          </Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-4 py-2.5 text-sm font-semibold text-stone-600"
+              disabled
+              aria-disabled="true"
+            >
+              <Wrench className="h-4 w-4" />
+              Ferramentas
+            </button>
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-4 py-2.5 text-sm font-semibold text-stone-600"
+              disabled
+              aria-disabled="true"
+            >
+              <Settings className="h-4 w-4" />
+              Settings
+            </button>
+            <Link
+              href="/sair"
+              className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-500 hover:text-stone-950"
+            >
+              <LogOut className="h-4 w-4" />
+              Sair
+            </Link>
+          </div>
+
+          <div className="mt-6 flex items-center gap-3 rounded-[22px] border border-stone-200/80 bg-white/70 px-4 py-4 shadow-sm">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-stone-900 text-sm font-bold tracking-[0.18em] text-stone-50">
+              {initials}
+            </div>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-bold text-stone-900">{userName}</p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-stone-500">{userRoleLabel}</p>
+            </div>
+          </div>
         </aside>
 
         <main className="px-6 py-8 lg:px-10">

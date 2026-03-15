@@ -54,9 +54,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Supabase admin client unavailable' }, { status: 503 });
     }
 
-    const redirectTo =
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      `${request.nextUrl.origin}/convite/aceitar`;
+    const baseSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || request.nextUrl.origin;
+    const redirectTo = `${baseSiteUrl.replace(/\/$/, '')}/convite/aceitar`;
 
     const { data, error } = await adminClient.auth.admin.inviteUserByEmail(email, {
       redirectTo,

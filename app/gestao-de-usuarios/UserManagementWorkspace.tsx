@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useTransition } from 'react';
 import { LoaderCircle, MailPlus, RefreshCw, Save, ShieldCheck, Trash2, Users } from 'lucide-react';
+import { AuthenticatedSessionTracker } from '@/components/AuthenticatedSessionTracker';
 import { LogoutButton } from '@/components/LogoutButton';
 
 type ManagedUser = {
@@ -246,6 +247,7 @@ export function UserManagementWorkspace({
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(146,114,72,0.16),_transparent_32%),linear-gradient(180deg,_#f6f0e6_0%,_#f3ece1_40%,_#efe7da_100%)] text-stone-900">
+      <AuthenticatedSessionTracker sourcePrefix="admin" />
       <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-10">
         <section className="overflow-hidden rounded-[28px] border border-stone-200/80 bg-white/80 shadow-[0_24px_70px_-28px_rgba(38,27,12,0.25)] backdrop-blur">
           <div className="grid gap-8 border-b border-stone-200/80 px-8 py-8 lg:grid-cols-[1.3fr_0.7fr]">

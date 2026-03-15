@@ -29,6 +29,8 @@ export default async function SubmissionsPage() {
       description="Envie trabalhos e propostas de posts do site a partir de uma unica area. Os materiais seguem para avaliacao do professor responsavel."
       roleCodes={context.roleCodes}
       currentPath="/submissoes"
+      userName={context.profile?.name || context.supabaseUser.email || 'Pesquisador'}
+      userRoleLabel="Pesquisador"
     >
       <SubmissionWorkspace
         roleCodes={context.roleCodes}

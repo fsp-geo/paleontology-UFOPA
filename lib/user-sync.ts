@@ -60,6 +60,13 @@ function extractRoleCodes(user: SyncableSupabaseUser) {
   const appRoles = user.app_metadata?.roles;
   const metadataRole = user.user_metadata?.role;
   const appRole = user.app_metadata?.role;
+  const userType =
+    typeof user.user_metadata?.user_type === 'string'
+      ? user.user_metadata.user_type.trim().toLowerCase()
+      : null;
+  const providers = Array.isArray(user.app_metadata?.providers)
+    ? user.app_metadata.providers.map((provider) => String(provider).trim().toLowerCase())
+    : [];
   const source = Array.isArray(appRoles)
     ? appRoles
     : Array.isArray(metadataRoles)
@@ -73,7 +80,19 @@ function extractRoleCodes(user: SyncableSupabaseUser) {
     .map((role) => String(role).trim().toLowerCase())
     .filter(Boolean);
 
-  return normalized.length > 0 ? Array.from(new Set(normalized)) : ['visitante'];
+  if (normalized.length > 0) {
+    return Array.from(new Set(normalized));
+  }
+
+  if (userType === 'public') {
+    return ['aluno'];
+  }
+
+  if (providers.includes('google')) {
+    return ['aluno'];
+  }
+
+  return ['visitante'];
 }
 
 export async function syncUser(supabaseUser: SyncableSupabaseUser) {

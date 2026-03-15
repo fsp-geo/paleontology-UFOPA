@@ -9,29 +9,34 @@ datasource db {
 }
 
 model User {
-  id             String      @id
-  email          String      @unique
-  name           String?
-  status         String      @default("active")
-  userType       String      @default("internal")
-  institution    String?
-  department     String?
-  lattesUrl      String?
-  scholarUrl     String?
-  researchgateUrl String?
-  sigaaLogin     String?
-  invitedById    String?
-  invitedBy      User?       @relation("UserInvites", fields: [invitedById], references: [id])
-  invitedUsers   User[]      @relation("UserInvites")
-  lastLoginAt    DateTime?
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
-  userRoles      UserRole[]  @relation("ProfileRoles")
-  assignedRoles  UserRole[]  @relation("AssignedRoles")
-  accountabilityEntries         AccountabilityEntry[] @relation("AccountabilitySubmitter")
-  reviewedAccountabilityEntries AccountabilityEntry[] @relation("AccountabilityReviewer")
-  submissions               Submission[] @relation("SubmissionAuthor")
-  reviewedSubmissions       Submission[] @relation("SubmissionReviewer")
+  id                            String                  @id
+  email                         String                  @unique
+  name                          String?
+  status                        String                  @default("active")
+  userType                      String                  @default("internal")
+  institution                   String?
+  department                    String?
+  lattesUrl                     String?
+  scholarUrl                    String?
+  researchgateUrl               String?
+  sigaaLogin                    String?
+  invitedById                   String?
+  invitedBy                     User?                   @relation("UserInvites", fields: [invitedById], references: [id])
+  invitedUsers                  User[]                  @relation("UserInvites")
+  lastLoginAt                   DateTime?
+  createdAt                     DateTime                @default(now())
+  updatedAt                     DateTime                @updatedAt
+  userRoles                     UserRole[]              @relation("ProfileRoles")
+  assignedRoles                 UserRole[]              @relation("AssignedRoles")
+  accountabilityEntries         AccountabilityEntry[]   @relation("AccountabilitySubmitter")
+  reviewedAccountabilityEntries AccountabilityEntry[]   @relation("AccountabilityReviewer")
+  submissions                   Submission[]            @relation("SubmissionAuthor")
+  reviewedSubmissions           Submission[]            @relation("SubmissionReviewer")
+  studentProfile                StudentProfile?
+  learningSessions              LearningSession[]
+  topicProgress                 LearningTopicProgress[]
+  contentAccessLogs             ContentAccessLog[]
+  earnedAchievements            UserAchievement[]
 }
 
 model Role {
@@ -45,51 +50,169 @@ model Role {
 }
 
 model UserRole {
-  id         String   @id @default(cuid())
-  userId     String
-  roleId     String
-  assignedAt DateTime @default(now())
+  id           String   @id @default(cuid())
+  userId       String
+  roleId       String
+  assignedAt   DateTime @default(now())
   assignedById String?
-  assignedBy User?    @relation("AssignedRoles", fields: [assignedById], references: [id])
-  user       User     @relation("ProfileRoles", fields: [userId], references: [id], onDelete: Cascade)
-  role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  assignedBy   User?    @relation("AssignedRoles", fields: [assignedById], references: [id])
+  user         User     @relation("ProfileRoles", fields: [userId], references: [id], onDelete: Cascade)
+  role         Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   @@unique([userId, roleId])
 }
 
 model AccountabilityEntry {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   title         String
   description   String
   category      String
   amountInCents Int
   expenseDate   DateTime
-  status        String   @default("pending")
+  status        String    @default("pending")
   receiptUrl    String?
   submitterId   String
   reviewerId    String?
   reviewerNotes String?
   reviewedAt    DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  submitter     User     @relation("AccountabilitySubmitter", fields: [submitterId], references: [id], onDelete: Cascade)
-  reviewer      User?    @relation("AccountabilityReviewer", fields: [reviewerId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  submitter     User      @relation("AccountabilitySubmitter", fields: [submitterId], references: [id], onDelete: Cascade)
+  reviewer      User?     @relation("AccountabilityReviewer", fields: [reviewerId], references: [id])
 }
 
 model Submission {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   type          String
   title         String
   summary       String
   body          String
-  status        String   @default("pending")
+  status        String    @default("pending")
   authorId      String
   reviewerId    String?
   reviewerNotes String?
   reviewedAt    DateTime?
   publishedAt   DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  author        User     @relation("SubmissionAuthor", fields: [authorId], references: [id], onDelete: Cascade)
-  reviewer      User?    @relation("SubmissionReviewer", fields: [reviewerId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  author        User      @relation("SubmissionAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  reviewer      User?     @relation("SubmissionReviewer", fields: [reviewerId], references: [id])
+}
+
+model StudentProfile {
+  userId            String                @id
+  points            Int                   @default(0)
+  streakDays        Int                   @default(1)
+  levelTitle        String                @default("Explorer I")
+  totalStudyMinutes Int                   @default(0)
+  preferredTopics   String[]              @default([])
+  lastActiveDate    DateTime?
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+  user              User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recommendations   StudyRecommendation[]
+}
+
+model LearningSession {
+  id              String    @id @default(cuid())
+  userId          String
+  startedAt       DateTime
+  endedAt         DateTime?
+  durationMinutes Int       @default(0)
+  activityDate    DateTime
+  source          String    @default("site")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, activityDate])
+}
+
+model LearningTopic {
+  id               String                  @id @default(cuid())
+  slug             String                  @unique
+  title            String
+  category         String
+  description      String?
+  estimatedMinutes Int?
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+  progressEntries  LearningTopicProgress[]
+}
+
+model LearningTopicProgress {
+  id              String        @id @default(cuid())
+  userId          String
+  topicId         String
+  percentComplete Int           @default(0)
+  minutesSpent    Int           @default(0)
+  completedAt     DateTime?
+  lastReadAt      DateTime      @default(now())
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic           LearningTopic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, topicId])
+}
+
+model ContentAccessLog {
+  id          String   @id @default(cuid())
+  userId      String
+  contentType String
+  contentKey  String
+  title       String
+  category    String
+  sourcePath  String?
+  accessedAt  DateTime @default(now())
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, accessedAt])
+}
+
+model AchievementDefinition {
+  id            String            @id @default(cuid())
+  code          String            @unique
+  title         String
+  category      String
+  description   String?
+  icon          String?
+  pointsAwarded Int               @default(0)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  userAwards    UserAchievement[]
+}
+
+model UserAchievement {
+  id            String                @id @default(cuid())
+  userId        String
+  achievementId String
+  contextLabel  String?
+  earnedAt      DateTime              @default(now())
+  createdAt     DateTime              @default(now())
+  user          User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement   AchievementDefinition @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@index([userId, earnedAt])
+}
+
+model StudyRecommendation {
+  id               String         @id @default(cuid())
+  studentProfileId String
+  title            String
+  summary          String
+  contentType      String
+  href             String
+  estimatedMinutes Int?
+  matchReason      String?
+  imageUrl         String?
+  priority         Int            @default(0)
+  isActive         Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [userId], onDelete: Cascade)
+
+  @@index([studentProfileId, isActive, priority])
 }

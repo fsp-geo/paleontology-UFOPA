@@ -3,7 +3,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { ArrowRight, CheckCircle2, Lock, ShieldCheck } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
@@ -18,7 +17,6 @@ function extractHashParams() {
 }
 
 export default function AcceptInvitePage() {
-  const router = useRouter();
   const client = supabase;
   const [inviteState, setInviteState] = useState<InviteState>('loading');
   const [password, setPassword] = useState('');
@@ -130,16 +128,7 @@ export default function AcceptInvitePage() {
 
     setInviteState('success');
 
-    const response = await fetch('/api/auth/profile', { cache: 'no-store' }).catch(() => null);
-    if (response?.ok) {
-      const profile = await response.json();
-      router.replace(profile.homePath || '/dashboard');
-      router.refresh();
-      return;
-    }
-
-    router.replace('/dashboard');
-    router.refresh();
+    await client.auth.signOut().catch(() => null);
   };
 
   return (
@@ -257,9 +246,32 @@ export default function AcceptInvitePage() {
                   </button>
                 </form>
               ) : (
-                <p className="text-base leading-7 text-stone-700">
-                  Estamos redirecionando voce para a area apropriada do portal.
-                </p>
+                <div className="space-y-6">
+                  <p className="text-base leading-7 text-stone-700">
+                    Cadastro finalizado com sucesso. Sua senha ja foi definida e seu acesso esta pronto para uso.
+                  </p>
+
+                  <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-sm leading-7 text-emerald-900">
+                    Para manter o fluxo claro e seguro, o proximo passo e entrar normalmente pela tela de login do portal.
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    <Link
+                      href="/acesso-ao-portal-interno?origin=public"
+                      className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-stone-700"
+                    >
+                      Ir para o login
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+
+                    <Link
+                      href="/"
+                      className="inline-flex items-center rounded-full border border-stone-300 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-stone-700 transition hover:border-stone-500 hover:text-stone-900"
+                    >
+                      Voltar para a home
+                    </Link>
+                  </div>
+                </div>
               )}
             </div>
           ) : null}

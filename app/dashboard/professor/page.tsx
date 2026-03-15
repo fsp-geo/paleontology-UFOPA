@@ -58,6 +58,8 @@ export default async function ProfessorDashboardPage() {
       description="A partir daqui o perfil de professor acompanha aprovacoes, acessa a prestacao de contas, revisa o conteudo do site e navega pelos modulos internos liberados."
       roleCodes={context.roleCodes}
       currentPath="/dashboard/professor"
+      userName={context.profile?.name || context.supabaseUser.email || 'Professor'}
+      userRoleLabel="Professor"
     >
       <section className="grid gap-5 xl:grid-cols-4">
         {cards.map((card) => {

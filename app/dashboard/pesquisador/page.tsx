@@ -58,6 +58,8 @@ export default async function ResearcherDashboardPage() {
       description="Este painel concentra submissao de materiais, acompanhamento da prestacao de contas e atalhos para os modulos de acervo e estudos."
       roleCodes={context.roleCodes}
       currentPath="/dashboard/pesquisador"
+      userName={context.profile?.name || context.supabaseUser.email || 'Pesquisador'}
+      userRoleLabel="Pesquisador"
     >
       <section className="grid gap-5 xl:grid-cols-4">
         {cards.map((card) => {

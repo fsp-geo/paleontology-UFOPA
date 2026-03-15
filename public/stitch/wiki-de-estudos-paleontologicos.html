@@ -91,15 +91,15 @@
 <p class="text-xs uppercase tracking-[0.15em] text-on-surface-variant mt-1 font-semibold">Paleontology Portal</p>
 </div>
 <nav class="flex-1 px-4 space-y-2 mt-4">
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="/dashboard" id="primary-nav-link">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span class="font-medium">Dashboard</span>
+<span class="font-medium" id="primary-nav-label">Dashboard</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="/acervo-digital-de-fosseis">
 <span class="material-symbols-outlined" data-icon="database">database</span>
 <span class="font-medium">Fossil Archive</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded transition-colors" href="#">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded transition-colors" href="/wiki-de-estudos-paleontologicos">
 <span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
 <span class="font-medium">Educational Wiki</span>
 </a>
@@ -110,10 +110,10 @@
 </nav>
 <div class="mt-auto p-4 border-t border-outline-variant border-opacity-10">
 <div class="flex items-center gap-3 p-4 mb-4">
-<img class="w-10 h-10 rounded-full object-cover" data-alt="Researcher Profile Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRaWc4_3HvFYWBpGF_cr59KOOvy-X69H7K_4Qmgjow4vv3mov7hLgkyydZbYIyP2mwwNWW4aYhLHjjYDGoUJq1oeQ88K2NToNFRe2QHdz8F726ll3Z8tnllUdOfPID78aPgDDwTCMf_4cKVZOGpAyw-1ZvCbLRPImfrD-E3G8mVmd4yoKjkOKkpCDDwlzVuEfJ-qY3-_DAhfkPLiRbT30odEsuI4cOJdM4BYZSV5m6WAZ2Cg9dUcxb28vIE7YU9qJpQpJ79YZcInA"/>
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Researcher Profile Avatar" id="sidebar-user-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRaWc4_3HvFYWBpGF_cr59KOOvy-X69H7K_4Qmgjow4vv3mov7hLgkyydZbYIyP2mwwNWW4aYhLHjjYDGoUJq1oeQ88K2NToNFRe2QHdz8F726ll3Z8tnllUdOfPID78aPgDDwTCMf_4cKVZOGpAyw-1ZvCbLRPImfrD-E3G8mVmd4yoKjkOKkpCDDwlzVuEfJ-qY3-_DAhfkPLiRbT30odEsuI4cOJdM4BYZSV5m6WAZ2Cg9dUcxb28vIE7YU9qJpQpJ79YZcInA"/>
 <div>
-<p class="text-sm font-semibold text-on-surface">Dr. Aris Thorne</p>
-<p class="text-[10px] uppercase tracking-wider text-on-surface-variant">Lead Researcher</p>
+<p class="text-sm font-semibold text-on-surface" id="sidebar-user-name">Usuario autenticado</p>
+<p class="text-[10px] uppercase tracking-wider text-on-surface-variant" id="sidebar-user-role">Perfil interno</p>
 </div>
 </div>
 <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" href="#">
@@ -133,7 +133,7 @@
 <button class="text-on-surface-variant">
 <span class="material-symbols-outlined" data-icon="menu">menu</span>
 </button>
-<h2 class="font-serif text-lg font-medium text-on-surface">Internal Portal</h2>
+<h2 class="font-serif text-lg font-medium text-on-surface" id="portal-title">Internal Portal</h2>
 </div>
 <div class="flex items-center gap-6">
 <div class="relative flex items-center">
@@ -144,6 +144,9 @@
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 <span class="absolute top-0 right-0 w-2 h-2 bg-tertiary rounded-full"></span>
 </button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Authenticated User Avatar" id="top-user-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRaWc4_3HvFYWBpGF_cr59KOOvy-X69H7K_4Qmgjow4vv3mov7hLgkyydZbYIyP2mwwNWW4aYhLHjjYDGoUJq1oeQ88K2NToNFRe2QHdz8F726ll3Z8tnllUdOfPID78aPgDDwTCMf_4cKVZOGpAyw-1ZvCbLRPImfrD-E3G8mVmd4yoKjkOKkpCDDwlzVuEfJ-qY3-_DAhfkPLiRbT30odEsuI4cOJdM4BYZSV5m6WAZ2Cg9dUcxb28vIE7YU9qJpQpJ79YZcInA"/>
+</div>
 </div>
 </header>
 <!-- Content Canvas -->
@@ -320,40 +323,30 @@
 </main>
 <script>
 (function () {
+  const sessionState = {
+    lastFlushedAt: Date.now(),
+    intervalId: null,
+    trackingEnabled: false,
+  };
+
   const routes = {
-    'Public Blog': '/',
-    'Articles': '/wiki-de-estudos-paleontologicos',
-    'About': '/acervo-digital-de-fosseis',
-    'Region': '/prestacao-de-contas',
-    'Contact': '/acesso-ao-portal-interno',
-    'Internal Area': '/acesso-ao-portal-interno',
-    'Resources': '/wiki-de-estudos-paleontologicos',
-    'Dashboard': '/dashboard/professor',
-    'Students': '/dashboard/aluno',
-    'Accountability': '/prestacao-de-contas',
-    'Excavations': '/acervo-digital-de-fosseis',
-    'Research': '/wiki-de-estudos-paleontologicos',
+    'Dashboard': '/dashboard',
+    'My Learning': '/dashboard/aluno',
     'Fossil Archive': '/acervo-digital-de-fosseis',
     'Educational Wiki': '/wiki-de-estudos-paleontologicos',
-    'Research Tools': '/prestacao-de-contas',
-    'Internal Portal': '/acesso-ao-portal-interno',
-    'Explore The Portal': '/acervo-digital-de-fosseis',
+    'Internal Portal': '/dashboard',
     'Learn More': '/wiki-de-estudos-paleontologicos',
-    'Sign In to Portal': '/acesso-ao-portal-interno',
-    'Login': '/acesso-ao-portal-interno',
-    'AUTHENTICATE ARCHIVE': '/dashboard/professor',
-    'Contribute Find': '/prestacao-de-contas',
-    'Filter': '/acervo-digital-de-fosseis',
     'View Timeline': '/wiki-de-estudos-paleontologicos',
-    'Browse all': '/wiki-de-estudos-paleontologicos',
-    'View All Archives': '/wiki-de-estudos-paleontologicos',
-    'View All Work': '/dashboard/aluno',
-    'New Entry': '/prestacao-de-contas'
+    'Browse all': '/wiki-de-estudos-paleontologicos'
   };
 
   document.querySelectorAll('a[href="#"]').forEach((el) => {
     const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
-    if (routes[text]) el.setAttribute('href', routes[text]);
+    if (routes[text]) {
+      el.setAttribute('href', routes[text]);
+    } else {
+      el.addEventListener('click', function (event) { event.preventDefault(); });
+    }
   });
 
   document.querySelectorAll('button').forEach((el) => {
@@ -361,14 +354,130 @@
     if (routes[text]) {
       el.style.cursor = 'pointer';
       el.addEventListener('click', function () { window.location.href = routes[text]; });
+    } else {
+      el.addEventListener('click', function (event) { event.preventDefault(); });
     }
   });
 
   document.querySelectorAll('form').forEach((form) => {
     form.addEventListener('submit', function (event) {
       event.preventDefault();
-      window.location.href = '/dashboard/professor';
     });
+  });
+
+  function sendJson(url, payload) {
+    const body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: 'application/json' });
+      navigator.sendBeacon(url, blob);
+      return;
+    }
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+      keepalive: true,
+      credentials: 'include',
+    }).catch(function () {});
+  }
+
+  function avatarDataUrl(label) {
+    const safeLabel = String(label || 'U').slice(0, 2).toUpperCase();
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+        <rect width="160" height="160" rx="80" fill="#2f2418" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+          font-family="Manrope, Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="4" fill="#f8f0e3">${safeLabel}</text>
+      </svg>
+    `;
+
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+
+  function flushTrackedMinutes(force) {
+    if (!sessionState.trackingEnabled) return;
+    const elapsedMinutes = Math.floor((Date.now() - sessionState.lastFlushedAt) / 60000);
+    const durationMinutes = force && elapsedMinutes < 1
+      ? Math.round((Date.now() - sessionState.lastFlushedAt) / 60000)
+      : elapsedMinutes;
+
+    if (durationMinutes <= 0) return;
+
+    sendJson('/api/dashboard/aluno/session', {
+      durationMinutes,
+      source: 'wiki-de-estudos-paleontologicos',
+    });
+
+    sessionState.lastFlushedAt = Date.now();
+  }
+
+  function startSessionTracking() {
+    sessionState.intervalId = window.setInterval(function () {
+      if (document.visibilityState === 'visible') {
+        flushTrackedMinutes(false);
+      }
+    }, 60000);
+  }
+
+  fetch('/api/auth/profile', { cache: 'no-store', credentials: 'include' })
+    .then(function (response) {
+      if (!response.ok) return null;
+      return response.json();
+    })
+    .then(function (profile) {
+      if (!profile || !Array.isArray(profile.roleCodes) || !profile.roleCodes.includes('aluno')) {
+        return;
+      }
+
+      const primaryNavLink = document.getElementById('primary-nav-link');
+      const primaryNavLabel = document.getElementById('primary-nav-label');
+      const portalTitle = document.getElementById('portal-title');
+      const sidebarUserName = document.getElementById('sidebar-user-name');
+      const sidebarUserRole = document.getElementById('sidebar-user-role');
+      const topUserAvatar = document.getElementById('top-user-avatar');
+      const sidebarUserAvatar = document.getElementById('sidebar-user-avatar');
+      const avatarSrc = avatarDataUrl(profile.avatarInitials);
+
+      if (primaryNavLink) {
+        primaryNavLink.setAttribute('href', '/dashboard/aluno');
+      }
+
+      if (primaryNavLabel) {
+        primaryNavLabel.textContent = 'My Learning';
+      }
+
+      if (portalTitle) {
+        portalTitle.textContent = 'My Learning';
+      }
+
+      if (sidebarUserName) sidebarUserName.textContent = profile.displayName;
+      if (sidebarUserRole) sidebarUserRole.textContent = profile.displayRoleLabel;
+      if (topUserAvatar) topUserAvatar.setAttribute('src', avatarSrc);
+      if (sidebarUserAvatar) sidebarUserAvatar.setAttribute('src', avatarSrc);
+
+      sessionState.trackingEnabled = true;
+      sendJson('/api/dashboard/aluno/content-access', {
+        contentKey: 'educational-wiki-page',
+        contentType: 'wiki',
+        title: 'Educational Wiki',
+        category: 'Wiki',
+        sourcePath: window.location.pathname,
+      });
+      startSessionTracking();
+    })
+    .catch(function () {});
+
+  window.addEventListener('pagehide', function () {
+    flushTrackedMinutes(true);
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') {
+      flushTrackedMinutes(true);
+    } else {
+      sessionState.lastFlushedAt = Date.now();
+    }
   });
 })();
 </script></body></html>

@@ -29,6 +29,8 @@ export default async function ApprovalsPage() {
       description="Aqui o professor acompanha todos os trabalhos e posts em andamento, com foco nos materiais pendentes para revisao e aprovacao."
       roleCodes={context.roleCodes}
       currentPath="/aprovacoes"
+      userName={context.profile?.name || context.supabaseUser.email || 'Professor'}
+      userRoleLabel="Professor"
     >
       <SubmissionWorkspace
         roleCodes={context.roleCodes}

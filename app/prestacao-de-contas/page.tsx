@@ -29,6 +29,8 @@ export default async function AccountabilityPage() {
       description="Pesquisadores registram despesas e acompanham o historico. Professores recebem as prestacoes pendentes e fazem a aprovacao ou devolucao diretamente pelo portal."
       roleCodes={context.roleCodes}
       currentPath="/prestacao-de-contas"
+      userName={context.profile?.name || context.supabaseUser.email || 'Usuario'}
+      userRoleLabel={context.roleCodes.includes('professor') ? 'Professor' : 'Pesquisador'}
     >
       <AccountabilityWorkspace
         roleCodes={context.roleCodes}

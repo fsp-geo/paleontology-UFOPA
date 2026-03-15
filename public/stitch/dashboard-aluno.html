@@ -83,6 +83,54 @@
         .student-dashboard-shell .text-sm { font-size: 16px !important; line-height: 1.55 !important; }
         .student-dashboard-shell .text-lg { line-height: 1.7 !important; }
         .student-dashboard-shell .font-label { letter-spacing: 0.02em; }
+        @keyframes active-day-pulse {
+            0%, 100% { opacity: 0.8; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-2px); }
+        }
+        .hours-chart-column.is-today .hours-chart-fill {
+            animation: active-day-pulse 2.4s ease-in-out infinite;
+            box-shadow: 0 0 0 1px rgba(120, 88, 48, 0.08), 0 10px 18px -12px rgba(120, 88, 48, 0.45);
+        }
+        .hours-chart-column.is-today .hours-chart-value {
+            opacity: 1 !important;
+            color: #785830;
+            font-weight: 700;
+        }
+        .hours-chart-column.is-today .hours-chart-label {
+            color: #785830;
+            font-weight: 700;
+        }
+        .hours-chart-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 0.9rem;
+            align-items: end;
+        }
+        .hours-chart-column {
+            position: relative;
+            height: 100%;
+            min-height: 12rem;
+            border-radius: 1rem 1rem 0 0;
+            overflow: visible;
+        }
+        .hours-chart-track {
+            position: absolute;
+            inset: 0;
+            background: #e9e1d5;
+            border-radius: 1rem 1rem 0 0;
+            overflow: hidden;
+        }
+        .hours-chart-fill {
+            min-height: 0;
+            border-radius: 1rem 1rem 0 0;
+            transition: height 900ms cubic-bezier(0.16, 1, 0.3, 1), background-color 300ms ease, box-shadow 300ms ease;
+        }
+        .hours-chart-value {
+            top: -1.9rem;
+            white-space: nowrap;
+            font-size: 11px;
+            line-height: 1;
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface overflow-x-hidden">
@@ -101,7 +149,7 @@
 <span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span>
 </button>
 <div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest border border-outline-variant/30">
-<img alt="User Profile" class="w-full h-full object-cover" data-alt="Portrait of a young male student in academic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_d20JXj8LrlBQzCusDpL9tYq36n7erMKol3lHiJXEkyErj_T00vILlcnX7xV19K7uK9ecQqP2y-olddBiKE-sG-FxzTvnWZJ6dpG1mtfNHhJYAyk6OSg0Q58ywp0_LxVtStDx95xew42ydDG7-j-de20nzEmZ58r2tPDuLDKr1u1buG2R0qBvR3DylpzbYm_FOJB8egmGuJTQTEHGhgpHWP8yi4q5drutSDqg9XbdFG1bgToXEIOxIaGY0UuyIUjIEXYODfXz03Q"/>
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Portrait of a young male student in academic setting" id="student-top-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_d20JXj8LrlBQzCusDpL9tYq36n7erMKol3lHiJXEkyErj_T00vILlcnX7xV19K7uK9ecQqP2y-olddBiKE-sG-FxzTvnWZJ6dpG1mtfNHhJYAyk6OSg0Q58ywp0_LxVtStDx95xew42ydDG7-j-de20nzEmZ58r2tPDuLDKr1u1buG2R0qBvR3DylpzbYm_FOJB8egmGuJTQTEHGhgpHWP8yi4q5drutSDqg9XbdFG1bgToXEIOxIaGY0UuyIUjIEXYODfXz03Q"/>
 </div>
 </div>
 </nav>
@@ -114,7 +162,7 @@
 </div>
 <div>
 <h2 class="font-headline text-xl leading-none">Strata Archive</h2>
-<p class="text-[11px] uppercase tracking-widest text-on-surface-variant font-label">User Dashboard</p>
+<p class="text-[11px] uppercase tracking-widest text-on-surface-variant font-label">My Learning</p>
 </div>
 </div>
 </div>
@@ -123,13 +171,13 @@
 <span class="material-symbols-outlined">dashboard</span>
 <span class="font-label text-base">My Learning</span>
 </a>
-<a class="flex items-center gap-3 px-5 py-3.5 text-on-surface-variant hover:bg-surface-container-highest rounded font-medium transition-all" href="#">
+<a class="flex items-center gap-3 px-5 py-3.5 text-on-surface-variant hover:bg-surface-container-highest rounded font-medium transition-all" data-track-category="Archive" data-track-key="digital-fossil-archive" data-track-title="Digital Fossil Archive" href="/acervo-digital-de-fosseis">
 <span class="material-symbols-outlined">database</span>
 <span class="font-label text-base">Fossil Archive</span>
 </a>
-<a class="flex items-center gap-3 px-5 py-3.5 text-on-surface-variant hover:bg-surface-container-highest rounded font-medium transition-all" href="#">
+<a class="flex items-center gap-3 px-5 py-3.5 text-on-surface-variant hover:bg-surface-container-highest rounded font-medium transition-all" data-track-category="Wiki" data-track-key="educational-wiki" data-track-title="Educational Wiki" href="/wiki-de-estudos-paleontologicos">
 <span class="material-symbols-outlined">menu_book</span>
-<span class="font-label text-base">Scientific Wiki</span>
+<span class="font-label text-base">Educational Wiki</span>
 </a>
 <a class="flex items-center gap-3 px-5 py-3.5 text-on-surface-variant hover:bg-surface-container-highest rounded font-medium transition-all" href="#">
 <span class="material-symbols-outlined">construction</span>
@@ -153,11 +201,11 @@
 </div>
 <div class="mt-5 flex items-center gap-3 rounded-xl bg-surface-container-high px-4 py-3">
 <div class="h-10 w-10 overflow-hidden rounded-full">
-<img alt="Student Profile" class="h-full w-full object-cover" data-alt="Portrait of the logged student user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_d20JXj8LrlBQzCusDpL9tYq36n7erMKol3lHiJXEkyErj_T00vILlcnX7xV19K7uK9ecQqP2y-olddBiKE-sG-FxzTvnWZJ6dpG1mtfNHhJYAyk6OSg0Q58ywp0_LxVtStDx95xew42ydDG7-j-de20nzEmZ58r2tPDuLDKr1u1buG2R0qBvR3DylpzbYm_FOJB8egmGuJTQTEHGhgpHWP8yi4q5drutSDqg9XbdFG1bgToXEIOxIaGY0UuyIUjIEXYODfXz03Q"/>
+<img alt="Student Profile" class="h-full w-full object-cover" data-alt="Portrait of the logged student user" id="student-sidebar-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_d20JXj8LrlBQzCusDpL9tYq36n7erMKol3lHiJXEkyErj_T00vILlcnX7xV19K7uK9ecQqP2y-olddBiKE-sG-FxzTvnWZJ6dpG1mtfNHhJYAyk6OSg0Q58ywp0_LxVtStDx95xew42ydDG7-j-de20nzEmZ58r2tPDuLDKr1u1buG2R0qBvR3DylpzbYm_FOJB8egmGuJTQTEHGhgpHWP8yi4q5drutSDqg9XbdFG1bgToXEIOxIaGY0UuyIUjIEXYODfXz03Q"/>
 </div>
 <div>
-<p class="text-sm font-bold leading-none">Julian Thorne</p>
-<p class="mt-1 text-[10px] uppercase tracking-wider text-on-surface-variant font-label">Student Explorer</p>
+<p class="text-sm font-bold leading-none" id="student-profile-name">Novo Explorador</p>
+<p class="mt-1 text-[10px] uppercase tracking-wider text-on-surface-variant font-label" id="student-profile-level">Ovo de Trilobita</p>
 </div>
 </div>
 </div>
@@ -168,22 +216,22 @@
 <!-- Welcome Section -->
 <header class="mb-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
 <div class="md:col-span-7">
-<p class="text-[11px] text-tertiary uppercase tracking-[0.24em] mb-4 font-semibold">Welcome back, Archivist</p>
-<h1 class="font-headline text-5xl md:text-6xl text-on-background leading-tight mb-6">Julian Thorne</h1>
-<p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
-                    You've uncovered <span class="text-primary font-bold">14 new specimens</span> this week. Your current research into the Devonian Period is 68% complete.
+<p class="text-label text-tertiary uppercase tracking-[0.2em] mb-3 font-semibold">Welcome back, Archivist</p>
+<h1 class="font-headline text-5xl md:text-6xl text-on-background leading-tight mb-6" id="student-welcome-name">Novo Explorador</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed" id="student-welcome-summary">
+                    You have not accumulated study data yet. Explore the archive and the educational wiki to begin building your learning history.
                 </p>
 </div>
 <div class="md:col-span-5 flex justify-start md:justify-end">
 <div class="bg-surface-container-highest p-6 rounded-xl flex items-center gap-6 shadow-sm">
 <div class="text-center">
 <p class="text-[11px] uppercase font-label tracking-widest text-on-surface-variant">Daily Streak</p>
-<p class="font-headline text-3xl text-primary">12 Days</p>
+<p class="font-headline text-3xl text-primary" id="student-streak">0 Days</p>
 </div>
 <div class="w-[1px] h-10 bg-outline-variant/30"></div>
 <div class="text-center">
 <p class="text-[11px] uppercase font-label tracking-widest text-on-surface-variant">Rank</p>
-<p class="font-headline text-3xl text-primary">Explorer II</p>
+<p class="font-headline text-3xl text-primary" id="student-rank">Ovo de Trilobita</p>
 </div>
 </div>
 </div>
@@ -200,38 +248,38 @@
 </div>
 </div>
 <!-- Mock Line Chart -->
-<div class="h-48 flex items-end justify-between gap-4 px-2">
-<div class="w-full bg-surface-container-highest relative group">
-<div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[20%] transition-all"></div>
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold">1.2h</div>
+<div class="h-48 px-2 hours-chart-grid">
+<div class="w-full bg-surface-container-highest relative group hours-chart-column">
+<div class="hours-chart-track"><div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[0%] hours-chart-fill" data-day-index="0"></div></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold hours-chart-value" data-day-index="0">0.0h</div>
 </div>
-<div class="w-full bg-surface-container-highest relative group">
-<div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[45%] transition-all"></div>
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold">2.8h</div>
+<div class="w-full bg-surface-container-highest relative group hours-chart-column">
+<div class="hours-chart-track"><div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[0%] hours-chart-fill" data-day-index="1"></div></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold hours-chart-value" data-day-index="1">0.0h</div>
 </div>
-<div class="w-full bg-surface-container-highest relative group">
-<div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[30%] transition-all"></div>
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold">2.1h</div>
+<div class="w-full bg-surface-container-highest relative group hours-chart-column">
+<div class="hours-chart-track"><div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[0%] hours-chart-fill" data-day-index="2"></div></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold hours-chart-value" data-day-index="2">0.0h</div>
 </div>
-<div class="w-full bg-surface-container-highest relative group">
-<div class="absolute bottom-0 left-0 right-0 bg-primary h-[85%] transition-all"></div>
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold">5.4h</div>
+<div class="w-full bg-surface-container-highest relative group hours-chart-column">
+<div class="hours-chart-track"><div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[0%] hours-chart-fill" data-day-index="3"></div></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold hours-chart-value" data-day-index="3">0.0h</div>
 </div>
-<div class="w-full bg-surface-container-highest relative group">
-<div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[55%] transition-all"></div>
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold">3.2h</div>
+<div class="w-full bg-surface-container-highest relative group hours-chart-column">
+<div class="hours-chart-track"><div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[0%] hours-chart-fill" data-day-index="4"></div></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold hours-chart-value" data-day-index="4">0.0h</div>
 </div>
-<div class="w-full bg-surface-container-highest relative group">
-<div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[40%] transition-all"></div>
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold">2.4h</div>
+<div class="w-full bg-surface-container-highest relative group hours-chart-column">
+<div class="hours-chart-track"><div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[0%] hours-chart-fill" data-day-index="5"></div></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold hours-chart-value" data-day-index="5">0.0h</div>
 </div>
-<div class="w-full bg-surface-container-highest relative group">
-<div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[15%] transition-all"></div>
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold">0.8h</div>
+<div class="w-full bg-surface-container-highest relative group hours-chart-column">
+<div class="hours-chart-track"><div class="absolute bottom-0 left-0 right-0 bg-primary-container/40 h-[0%] hours-chart-fill" data-day-index="6"></div></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 text-[10px] font-bold hours-chart-value" data-day-index="6">0.0h</div>
 </div>
 </div>
-<div class="flex justify-between mt-4 px-2 text-[11px] font-label uppercase tracking-widest text-on-surface-variant/60">
-<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+<div class="mt-4 px-2 hours-chart-grid text-[11px] font-label uppercase tracking-widest text-on-surface-variant/60">
+<span class="hours-chart-label" data-day-label="0">Mon</span><span class="hours-chart-label" data-day-label="1">Tue</span><span class="hours-chart-label" data-day-label="2">Wed</span><span class="hours-chart-label" data-day-label="3">Thu</span><span class="hours-chart-label" data-day-label="4">Fri</span><span class="hours-chart-label" data-day-label="5">Sat</span><span class="hours-chart-label" data-day-label="6">Sun</span>
 </div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -239,38 +287,38 @@
 <div class="bg-surface-container-low p-8 rounded-xl">
 <h3 class="font-headline text-xl mb-6">Topic Completion</h3>
 <div class="space-y-6">
-<div>
+<div data-topic-index="0">
 <div class="flex justify-between mb-2">
-<span class="text-sm font-label">Phylogeny</span>
-<span class="text-sm font-label text-primary">82%</span>
+<span class="text-sm font-label" data-topic-title="0">Phylogeny</span>
+<span class="text-sm font-label text-primary" data-topic-percent="0">0%</span>
 </div>
 <div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[82%]"></div>
+<div class="h-full bg-primary" data-topic-bar="0" style="width: 0%;"></div>
 </div>
 </div>
-<div>
+<div data-topic-index="1">
 <div class="flex justify-between mb-2">
-<span class="text-sm font-label">Taxonomy</span>
-<span class="text-sm font-label text-primary">45%</span>
+<span class="text-sm font-label" data-topic-title="1">Taxonomy</span>
+<span class="text-sm font-label text-primary" data-topic-percent="1">0%</span>
 </div>
 <div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[45%]"></div>
+<div class="h-full bg-primary" data-topic-bar="1" style="width: 0%;"></div>
 </div>
 </div>
-<div>
+<div data-topic-index="2">
 <div class="flex justify-between mb-2">
-<span class="text-sm font-label">Excavation Ethics</span>
-<span class="text-sm font-label text-primary">94%</span>
+<span class="text-sm font-label" data-topic-title="2">Excavation Ethics</span>
+<span class="text-sm font-label text-primary" data-topic-percent="2">0%</span>
 </div>
 <div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[94%]"></div>
+<div class="h-full bg-primary" data-topic-bar="2" style="width: 0%;"></div>
 </div>
 </div>
 </div>
 </div>
 <!-- Quick Access Bento Segment -->
 <div class="bg-surface-container-low p-1 rounded-xl grid grid-rows-2 gap-1 overflow-hidden">
-<a class="bg-surface-container hover:bg-surface-container-high p-6 flex flex-col justify-between transition-colors" href="#">
+<a class="bg-surface-container hover:bg-surface-container-high p-6 flex flex-col justify-between transition-colors" data-track-category="Archive" data-track-key="digital-fossil-archive-card" data-track-title="Digital Fossil Archive" href="/acervo-digital-de-fosseis">
 <span class="material-symbols-outlined text-primary">database</span>
 <span class="font-headline text-lg">Digital Fossil Archive</span>
 </a>
@@ -286,7 +334,7 @@
 <!-- Leaderboard -->
 <div class="bg-surface-container p-8 rounded-xl">
 <h3 class="font-headline text-2xl mb-6">Knowledge Ranking</h3>
-<div class="space-y-4">
+<div class="space-y-4" id="student-leaderboard">
 <div class="flex items-center gap-4">
 <span class="font-headline text-lg text-on-surface-variant w-4">1</span>
 <div class="w-8 h-8 rounded-full bg-primary-container/20 overflow-hidden flex-shrink-0">
@@ -328,7 +376,7 @@
 <!-- Texture Overlay -->
 <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxkvqg3ZR50GhhL4YdA1rxRo3Cqrca9uaCc_kGja_MVMFpFep1TB0NR9nBCPtr7ONACwUSBWG7z0bHiAif7t-h9yyqZi7frhhJrMHvJp6h6whcH9uAKXBq9oGaKaGhBNO8rmc2DPcSN728xr3IBr8l8Jb2Ld8eEXCyvoA7_ZZ2pDJFgiSgr5AR-HA9SU1DqUb-XCrjaqcYlicsXPQSH7SB3CKCSgRQO_zuOsxOwCXvzgZ4Jn98QunsDH9dvnClFoUVBgczaVDY0-4');"></div>
 <h3 class="font-headline text-2xl mb-8 relative">Recent Achievements</h3>
-<div class="grid grid-cols-2 gap-4 relative">
+<div class="grid grid-cols-2 gap-4 relative" id="student-recent-achievements">
 <div class="flex flex-col items-center text-center p-4 bg-surface/50 rounded-lg">
 <div class="w-12 h-12 mb-3 flex items-center justify-center text-primary">
 <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">landscape</span>
@@ -361,17 +409,17 @@
 <section class="mt-16 bg-surface-container rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-sm border border-outline-variant/10">
 <div class="md:w-1/2 p-12 flex flex-col justify-center">
 <span class="text-[11px] font-label uppercase tracking-[0.3em] text-tertiary mb-4 block">Recommended Study</span>
-<h2 class="font-headline text-4xl mb-6">The Permian-Triassic Extinction Event</h2>
-<p class="text-lg text-on-surface-variant leading-relaxed mb-8">
+<h2 class="font-headline text-4xl mb-6" id="student-recommendation-title">The Permian-Triassic Extinction Event</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed mb-8" id="student-recommendation-summary">
                     Deep dive into the 'Great Dying'—the Earth's most severe known extinction event. This module includes newly uploaded high-resolution scans from the Siberian Traps.
                 </p>
 <div class="flex items-center gap-6">
-<button class="bg-primary text-on-primary px-8 py-3 rounded-sm font-label text-sm uppercase tracking-widest hover:brightness-110 transition-all">Resume Session</button>
-<span class="text-sm font-label text-on-surface-variant">Estimated: 45 min</span>
+<a class="bg-primary text-on-primary px-8 py-3 rounded-sm font-label text-sm uppercase tracking-widest hover:brightness-110 transition-all" data-track-category="Recommendation" data-track-key="recommended-study" data-track-title="Recommended Study" href="/wiki-de-estudos-paleontologicos" id="student-recommendation-link">Resume Session</a>
+<span class="text-sm font-label text-on-surface-variant" id="student-recommendation-time">Estimated: 45 min</span>
 </div>
 </div>
 <div class="md:w-1/2 min-h-[300px] relative">
-<img alt="Fossil detail" class="absolute inset-0 w-full h-full object-cover" data-alt="Close up high-resolution macro shot of a fossilized ammonite" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJFvrlWnF37AgdURVcDELpfWZYrVCri4I5TVUAjjtHNHUKWKNtlzUmOULEHSavIkKA75qRZXHBFyWFplQT8OMJiz2SIbKg-viDmHJou-AKNveA2iRz3Z3cEfGnZ8gebQqoVmg3iy1JtJksYKjc1EnY2PVx1uPod11nbFBArMCc9ZeM6DakTV9kwL-wLcB16gKs-Y3eNma6D0IldFkKRkntO3AEl1MH0tlEJ1VDYxrK71OOSPK3ftFSHqDDruu0k5Mtp0F46MWt_FM"/>
+<img alt="Fossil detail" class="absolute inset-0 w-full h-full object-cover" data-alt="Close up high-resolution macro shot of a fossilized ammonite" id="student-recommendation-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJFvrlWnF37AgdURVcDELpfWZYrVCri4I5TVUAjjtHNHUKWKNtlzUmOULEHSavIkKA75qRZXHBFyWFplQT8OMJiz2SIbKg-viDmHJou-AKNveA2iRz3Z3cEfGnZ8gebQqoVmg3iy1JtJksYKjc1EnY2PVx1uPod11nbFBArMCc9ZeM6DakTV9kwL-wLcB16gKs-Y3eNma6D0IldFkKRkntO3AEl1MH0tlEJ1VDYxrK71OOSPK3ftFSHqDDruu0k5Mtp0F46MWt_FM"/>
 <div class="absolute inset-0 lithic-gradient mix-blend-multiply opacity-20"></div>
 </div>
 </section>
@@ -386,4 +434,262 @@
 </footer>
 </div>
 </main>
+<script>
+  (function () {
+    const sessionState = {
+      startedAt: Date.now(),
+      lastFlushedAt: Date.now(),
+      intervalId: null,
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function avatarDataUrl(label) {
+      const safeLabel = String(label || 'U').slice(0, 2).toUpperCase();
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+          <rect width="160" height="160" rx="80" fill="#2f2418" />
+          <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+            font-family="Manrope, Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="4" fill="#f8f0e3">${safeLabel}</text>
+        </svg>
+      `;
+
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    function sendJson(url, payload) {
+      const body = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: 'application/json' });
+        navigator.sendBeacon(url, blob);
+        return;
+      }
+
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+        keepalive: true,
+      }).catch(() => {});
+    }
+
+    function formatPoints(points) {
+      return new Intl.NumberFormat('en-US').format(points) + ' pts';
+    }
+
+    function populateHoursChart(weeklyHours) {
+      weeklyHours.forEach((item, index) => {
+        const column = document.querySelectorAll('.hours-chart-column')[index];
+        const fill = document.querySelector('[data-day-index="' + index + '"].hours-chart-fill');
+        const value = document.querySelector('[data-day-index="' + index + '"].hours-chart-value');
+        const label = document.querySelector('[data-day-label="' + index + '"]');
+        const height = item.minutes > 0 ? Math.max(4, item.percentOfDay) : 0;
+        const isToday = !!item.isToday;
+        if (column) {
+          column.classList.toggle('is-today', isToday);
+        }
+        if (fill) {
+          fill.style.height = '0%';
+          fill.classList.toggle('bg-primary', isToday || item.minutes > 0);
+          fill.classList.toggle('bg-primary-container/40', !isToday);
+          requestAnimationFrame(() => {
+            fill.style.height = height + '%';
+          });
+        }
+        if (value) {
+          value.textContent = item.hours.toFixed(1) + 'h';
+          value.classList.toggle('group-hover:opacity-100', !isToday);
+          value.style.opacity = isToday || item.minutes > 0 ? '1' : '';
+        }
+        if (label) label.textContent = item.label.slice(0, 3);
+      });
+    }
+
+    function populateTopicProgress(topics) {
+      const fallbackTopics = [
+        { title: 'Phylogeny', percentComplete: 0 },
+        { title: 'Taxonomy', percentComplete: 0 },
+        { title: 'Excavation Ethics', percentComplete: 0 },
+      ];
+
+      fallbackTopics.map((fallback, index) => topics[index] || fallback).forEach((topic, index) => {
+        const title = document.querySelector('[data-topic-title="' + index + '"]');
+        const percent = document.querySelector('[data-topic-percent="' + index + '"]');
+        const bar = document.querySelector('[data-topic-bar="' + index + '"]');
+        if (title) title.textContent = topic.title;
+        if (percent) percent.textContent = topic.percentComplete + '%';
+        if (bar) bar.style.width = topic.percentComplete + '%';
+      });
+    }
+
+    function populateLeaderboard(rows) {
+      const target = document.getElementById('student-leaderboard');
+      if (!target || !rows?.length) return;
+
+      target.innerHTML = rows.slice(0, 5).map((row) => {
+        const baseClasses = row.isCurrentUser
+          ? 'flex items-center gap-4 p-3 bg-surface-container-highest rounded-lg border-l-4 border-primary'
+          : 'flex items-center gap-4';
+        const nameClasses = row.isCurrentUser ? 'text-base font-bold flex-grow' : 'text-base font-medium flex-grow';
+        const positionClasses = row.isCurrentUser ? 'font-headline text-lg text-primary w-4' : 'font-headline text-lg text-on-surface-variant w-4';
+        return `
+          <div class="${baseClasses}">
+            <span class="${positionClasses}">${row.position}</span>
+            <div class="w-8 h-8 rounded-full bg-primary-container/20 overflow-hidden flex-shrink-0"></div>
+            <span class="${nameClasses}">${escapeHtml(row.name)}</span>
+            <span class="text-sm font-bold text-primary">${formatPoints(row.points)}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function iconForAccess(category) {
+      const value = String(category || '').toLowerCase();
+      if (value.includes('wiki')) return 'menu_book';
+      if (value.includes('archive')) return 'database';
+      if (value.includes('study')) return 'travel_explore';
+      return 'workspace_premium';
+    }
+
+    function populateRecentAchievements(items) {
+      const target = document.getElementById('student-recent-achievements');
+      if (!target) return;
+
+      if (!items?.length) {
+        target.innerHTML = `
+          <div class="col-span-2 rounded-lg bg-surface/40 px-5 py-8 text-center">
+            <p class="text-sm font-label uppercase tracking-[0.2em] text-on-surface-variant">No recent activity yet</p>
+            <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">Explore the archive and the wiki to start building your recent learning trail.</p>
+          </div>
+        `;
+        return;
+      }
+
+      target.innerHTML = items.slice(0, 4).map((item) => `
+        <div class="flex flex-col items-center text-center p-4 bg-surface/50 rounded-lg">
+          <div class="w-12 h-12 mb-3 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">${iconForAccess(item.category)}</span>
+          </div>
+          <p class="text-[11px] font-label font-bold leading-tight">${escapeHtml(item.title)}</p>
+          <p class="mt-1 text-[10px] uppercase tracking-widest text-on-surface-variant">${escapeHtml(item.category)}</p>
+        </div>
+      `).join('');
+    }
+
+    function populateRecommendation(recommendation) {
+      if (!recommendation) return;
+      const title = document.getElementById('student-recommendation-title');
+      const summary = document.getElementById('student-recommendation-summary');
+      const link = document.getElementById('student-recommendation-link');
+      const time = document.getElementById('student-recommendation-time');
+      const image = document.getElementById('student-recommendation-image');
+
+      if (title) title.textContent = recommendation.title;
+      if (summary) summary.textContent = recommendation.summary;
+      if (link && recommendation.href) link.setAttribute('href', recommendation.href);
+      if (time) time.textContent = 'Estimated: ' + (recommendation.estimatedMinutes || 45) + ' min';
+      if (image && recommendation.imageUrl) image.setAttribute('src', recommendation.imageUrl);
+    }
+
+    async function loadDashboard() {
+      const response = await fetch('/api/dashboard/aluno', { cache: 'no-store' });
+      const data = await response.json();
+      if (!response.ok || !data.dashboard) return;
+
+      const dashboard = data.dashboard;
+      const profile = dashboard.profile;
+      const welcomeName = document.getElementById('student-welcome-name');
+      const profileName = document.getElementById('student-profile-name');
+      const profileLevel = document.getElementById('student-profile-level');
+      const topAvatar = document.getElementById('student-top-avatar');
+      const sidebarAvatar = document.getElementById('student-sidebar-avatar');
+      const summary = document.getElementById('student-welcome-summary');
+      const streak = document.getElementById('student-streak');
+      const rank = document.getElementById('student-rank');
+      const avatarSrc = avatarDataUrl((profile.name || 'U').slice(0, 2));
+
+      if (welcomeName) welcomeName.textContent = profile.name;
+      if (profileName) profileName.textContent = profile.name;
+      if (profileLevel) profileLevel.textContent = profile.levelTitle;
+      if (topAvatar) topAvatar.setAttribute('src', avatarSrc);
+      if (sidebarAvatar) sidebarAvatar.setAttribute('src', avatarSrc);
+      if (summary) {
+        summary.innerHTML = `You've studied <span class="text-primary font-bold">${(profile.totalWeeklyMinutes / 60).toFixed(1)} hours</span> this week, accumulated <span class="text-primary font-bold">${profile.activeDaysCount} active day(s)</span> in the portal, and your current standing in the community is <span class="text-primary font-bold">#${profile.currentRank}</span>.`;
+      }
+      if (streak) streak.textContent = profile.streakDays + ' Days';
+      if (rank) rank.textContent = profile.levelTitle;
+
+      populateHoursChart(profile.weeklyHours || []);
+      populateTopicProgress(dashboard.topicProgress || []);
+      populateLeaderboard(dashboard.leaderboard || []);
+      populateRecentAchievements(dashboard.recentAccesses || []);
+      populateRecommendation(dashboard.recommendation);
+    }
+
+    function registerTrackedLinks() {
+      document.querySelectorAll('[data-track-key]').forEach((link) => {
+        link.addEventListener('click', function () {
+          sendJson('/api/dashboard/aluno/content-access', {
+            contentKey: this.getAttribute('data-track-key'),
+            contentType: 'navigation',
+            title: this.getAttribute('data-track-title'),
+            category: this.getAttribute('data-track-category'),
+            sourcePath: this.getAttribute('href'),
+          });
+        });
+      });
+    }
+
+    function flushTrackedMinutes(force) {
+      const elapsedMinutes = Math.floor((Date.now() - sessionState.lastFlushedAt) / 60000);
+      const durationMinutes = force && elapsedMinutes < 1
+        ? Math.round((Date.now() - sessionState.startedAt) / 60000)
+        : elapsedMinutes;
+      if (durationMinutes <= 0) return;
+      sendJson('/api/dashboard/aluno/session', {
+        durationMinutes,
+        source: 'dashboard-aluno',
+      });
+      sessionState.lastFlushedAt = Date.now();
+    }
+
+    function startSessionTracking() {
+      sessionState.intervalId = window.setInterval(function () {
+        if (document.visibilityState === 'visible') {
+          flushTrackedMinutes(false);
+        }
+      }, 60000);
+    }
+
+    function stopSessionTracking() {
+      if (sessionState.intervalId) {
+        window.clearInterval(sessionState.intervalId);
+        sessionState.intervalId = null;
+      }
+    }
+
+    registerTrackedLinks();
+    loadDashboard().catch(() => {});
+    startSessionTracking();
+
+    window.addEventListener('pagehide', function () {
+      flushTrackedMinutes(true);
+      stopSessionTracking();
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') {
+        flushTrackedMinutes(true);
+      } else {
+        sessionState.lastFlushedAt = Date.now();
+      }
+    });
+  })();
+</script>
 </body></html>

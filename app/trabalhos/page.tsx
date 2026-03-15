@@ -29,6 +29,8 @@ export default async function WorksPage() {
       description="Area dedicada aos trabalhos submetidos. Pesquisadores acompanham o proprio material e professores revisam o conjunto de itens pendentes."
       roleCodes={context.roleCodes}
       currentPath="/trabalhos"
+      userName={context.profile?.name || context.supabaseUser.email || 'Usuario'}
+      userRoleLabel={context.roleCodes.includes('professor') ? 'Professor' : 'Pesquisador'}
     >
       <SubmissionWorkspace
         roleCodes={context.roleCodes}
