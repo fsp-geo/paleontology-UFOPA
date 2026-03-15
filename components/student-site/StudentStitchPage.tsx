@@ -1,6 +1,7 @@
 import { StudentPortalShell } from '@/components/student-site/StudentPortalShell';
 import { StudentContentAccessTracker } from '@/components/student-site/StudentContentAccessTracker';
 import { getStudentStitchPage } from '@/lib/student-stitch-page';
+import { getSiteLocale } from '@/lib/site-locale-server';
 
 type StudentStitchPageProps = {
   fileName: string;
@@ -27,7 +28,8 @@ export async function StudentStitchPage({
   avatarInitials,
   accessLog,
 }: StudentStitchPageProps) {
-  const page = await getStudentStitchPage(fileName);
+  const locale = await getSiteLocale();
+  const page = await getStudentStitchPage(fileName, locale);
 
   return (
     <StudentPortalShell
@@ -36,6 +38,7 @@ export async function StudentStitchPage({
       displayName={displayName}
       profileLabel={profileLabel}
       avatarInitials={avatarInitials}
+      locale={locale}
     >
       {page.styles ? <style dangerouslySetInnerHTML={{ __html: page.styles }} /> : null}
       {accessLog ? <StudentContentAccessTracker {...accessLog} /> : null}

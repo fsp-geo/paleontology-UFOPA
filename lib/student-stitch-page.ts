@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { cache } from 'react';
+import type { SiteLocale } from '@/lib/site-locale';
+import { translateStitchContent } from '@/lib/stitch-content-translations';
 
 const STITCH_DIR = path.join(process.cwd(), 'public', 'stitch');
 
@@ -31,9 +33,9 @@ function normalizeStyles(styles: string[]) {
     .join('\n');
 }
 
-export const getStudentStitchPage = cache(async (fileName: string) => {
+export const getStudentStitchPage = cache(async (fileName: string, locale: SiteLocale) => {
   const fullPath = path.join(STITCH_DIR, fileName);
-  const source = await readFile(fullPath, 'utf8');
+  const source = translateStitchContent(fileName, await readFile(fullPath, 'utf8'), locale);
 
   return {
     content: stripFirstHeader(extractMainContent(source)),

@@ -8,6 +8,21 @@ import { ArrowRight, FlaskConical, Globe, Landmark, LibraryBig, Lock, Mail, Moun
 import { supabase } from '@/lib/supabase';
 import { sanitizeNextPath } from '@/lib/access-control';
 import { useAuth } from '@/components/AuthProvider';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher';
+import { normalizeSiteLocale, type SiteLocale } from '@/lib/site-locale';
+
+function getLocaleFromCookie(): SiteLocale {
+  if (typeof document === 'undefined') {
+    return 'pt-BR';
+  }
+
+  const cookie = document.cookie
+    .split(';')
+    .map((item) => item.trim())
+    .find((item) => item.startsWith('site-locale='));
+
+  return normalizeSiteLocale(cookie?.split('=')[1]);
+}
 
 export default function AccessPortalPage() {
   const router = useRouter();
@@ -34,6 +49,8 @@ export default function AccessPortalPage() {
 
     return new URLSearchParams(window.location.search).get('origin') === 'public';
   });
+  const locale: SiteLocale = typeof document === 'undefined' ? 'pt-BR' : getLocaleFromCookie();
+  const pt = locale !== 'en';
 
   useEffect(() => {
     if (loading || !user || allowPublicLoginScreen) {
@@ -219,18 +236,20 @@ export default function AccessPortalPage() {
 
       <main className="grid w-full max-w-5xl grid-cols-1 overflow-hidden rounded-xl bg-surface-container-lowest shadow-[0px_24px_48px_-12px_rgba(30,27,20,0.08)] lg:grid-cols-12">
         <div className="relative overflow-hidden bg-surface-container p-12 lg:col-span-5 lg:p-16">
-          <div className="relative z-10">
-            <div className="mb-12 flex items-center gap-3">
-              <div className="lithic-gradient flex h-10 w-10 items-center justify-center rounded-sm text-on-primary">
-                <Mountain aria-hidden="true" className="h-6 w-6" fill="currentColor" strokeWidth={1.8} />
-              </div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant">Internal Portal</span>
+        <div className="relative z-10">
+          <div className="mb-12 flex items-center gap-3">
+            <div className="lithic-gradient flex h-10 w-10 items-center justify-center rounded-sm text-on-primary">
+              <Mountain aria-hidden="true" className="h-6 w-6" fill="currentColor" strokeWidth={1.8} />
             </div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant">{pt ? 'Area Interna' : 'Internal Portal'}</span>
+          </div>
             <h1 className="font-headline mb-6 text-5xl leading-tight text-primary lg:text-6xl">PaleoPortal</h1>
             <p className="font-headline mb-8 text-2xl italic text-on-surface-variant">Strata Archive</p>
             <div className="mb-8 h-px w-12 bg-outline-variant/30" />
             <p className="max-w-xs leading-relaxed text-on-surface-variant opacity-80">
-              Access the world&apos;s most comprehensive digital stratigraphy and fossilized record database.
+              {pt
+                ? 'Acesse uma base digital abrangente de estratigrafia e registros fossilizados para estudo, pesquisa e colaboracao academica.'
+                : "Access the world's most comprehensive digital stratigraphy and fossilized record database."}
             </p>
           </div>
 
@@ -256,7 +275,9 @@ export default function AccessPortalPage() {
                 +2k
               </div>
             </div>
-            <p className="text-xs font-label tracking-wider text-on-surface-variant">JOINING 2,400+ ACTIVE RESEARCHERS</p>
+            <p className="text-xs font-label tracking-wider text-on-surface-variant">
+              {pt ? 'JUNTE-SE A 2.400+ PESQUISADORES ATIVOS' : 'JOINING 2,400+ ACTIVE RESEARCHERS'}
+            </p>
           </div>
 
           <Orbit aria-hidden="true" className="pointer-events-none absolute -bottom-10 -right-10 h-[240px] w-[240px] rotate-12 text-surface-variant/40" strokeWidth={1.2} />
@@ -266,19 +287,27 @@ export default function AccessPortalPage() {
           <div className="mx-auto w-full max-w-md">
             <div className="mb-10">
               <h2 className="font-headline mb-2 text-3xl text-on-surface">
-                {mode === 'login' ? 'Welcome Back' : 'Create Your Account'}
+                {mode === 'login' ? (pt ? 'Bem-vindo de Volta' : 'Welcome Back') : pt ? 'Crie Sua Conta' : 'Create Your Account'}
               </h2>
               <p className="text-sm text-on-surface-variant">
                 {mode === 'login'
-                  ? 'Use seu acesso existente ou uma conta Google para entrar no portal.'
-                  : 'Crie sua conta de aluno para acessar o acervo, a wiki e acompanhar seu progresso no portal.'}
+                  ? pt
+                    ? 'Use seu acesso existente ou uma conta Google para entrar no portal.'
+                    : 'Use your existing credentials or a Google account to enter the portal.'
+                  : pt
+                    ? 'Crie sua conta de aluno para acessar o acervo, a wiki e acompanhar seu progresso no portal.'
+                    : 'Create your student account to access the archive, the wiki, and track your progress in the portal.'}
               </p>
+            </div>
+
+            <div className="mb-6 flex justify-end">
+              <LocaleSwitcher locale={locale} />
             </div>
 
             <form className="space-y-6" onSubmit={handleSubmit}>
               {mode === 'signup' ? (
                 <div className="space-y-1.5">
-                  <label className="ml-1 text-[10px] font-bold uppercase tracking-widest text-outline">Full Name</label>
+                  <label className="ml-1 text-[10px] font-bold uppercase tracking-widest text-outline">{pt ? 'Nome Completo' : 'Full Name'}</label>
                   <div className="relative">
                     <input
                       className="w-full rounded-lg bg-surface-container-highest px-4 py-4 pr-12 text-on-surface placeholder:text-outline/50 transition-all duration-200"
@@ -295,12 +324,12 @@ export default function AccessPortalPage() {
 
               <div className="space-y-1.5">
                 <label className="ml-1 text-[10px] font-bold uppercase tracking-widest text-outline">
-                  {mode === 'login' ? 'Institutional Email or ID' : 'Email'}
+                  {mode === 'login' ? (pt ? 'Email Institucional ou ID' : 'Institutional Email or ID') : 'Email'}
                 </label>
                 <div className="relative">
                   <input
                     className="w-full rounded-lg bg-surface-container-highest px-4 py-4 pr-12 text-on-surface placeholder:text-outline/50 transition-all duration-200"
-                    placeholder="researcher@university.edu"
+                    placeholder={pt ? 'pesquisador@universidade.edu' : 'researcher@university.edu'}
                     type="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
@@ -312,10 +341,10 @@ export default function AccessPortalPage() {
 
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="ml-1 text-[10px] font-bold uppercase tracking-widest text-outline">Password</label>
+                  <label className="ml-1 text-[10px] font-bold uppercase tracking-widest text-outline">{pt ? 'Senha' : 'Password'}</label>
                   {mode === 'login' ? (
                     <button type="button" className="text-[10px] font-bold uppercase tracking-widest text-tertiary hover:underline">
-                      Forgot?
+                      {pt ? 'Esqueceu?' : 'Forgot?'}
                     </button>
                   ) : null}
                 </div>
@@ -334,7 +363,7 @@ export default function AccessPortalPage() {
 
               {mode === 'signup' ? (
                 <div className="space-y-1.5">
-                  <label className="ml-1 text-[10px] font-bold uppercase tracking-widest text-outline">Confirm Password</label>
+                  <label className="ml-1 text-[10px] font-bold uppercase tracking-widest text-outline">{pt ? 'Confirmar Senha' : 'Confirm Password'}</label>
                   <div className="relative">
                     <input
                       className="w-full rounded-lg bg-surface-container-highest px-4 py-4 pr-12 text-on-surface placeholder:text-outline/50 transition-all duration-200"
@@ -352,7 +381,13 @@ export default function AccessPortalPage() {
               <div className="flex items-center gap-3 py-2">
                 <input id="remember" className="h-4 w-4 rounded-sm border-outline-variant text-primary" type="checkbox" />
                 <label htmlFor="remember" className="text-xs text-on-surface-variant">
-                  {mode === 'login' ? 'Keep me signed in for 30 days' : 'Concordo com os termos de uso do portal'}
+                  {mode === 'login'
+                    ? pt
+                      ? 'Manter minha sessao ativa por 30 dias'
+                      : 'Keep me signed in for 30 days'
+                    : pt
+                      ? 'Concordo com os termos de uso do portal'
+                      : 'I agree with the portal terms of use'}
                 </label>
               </div>
 
@@ -376,25 +411,33 @@ export default function AccessPortalPage() {
                 >
                   {submitting
                     ? mode === 'login'
-                      ? 'AUTHENTICATING...'
-                      : 'CREATING ACCOUNT...'
+                      ? pt
+                        ? 'AUTENTICANDO...'
+                        : 'AUTHENTICATING...'
+                      : pt
+                        ? 'CRIANDO CONTA...'
+                        : 'CREATING ACCOUNT...'
                     : mode === 'login'
-                      ? 'AUTHENTICATE ARCHIVE'
-                      : 'CREATE ACCOUNT'}
+                      ? pt
+                        ? 'ENTRAR NO PORTAL'
+                        : 'AUTHENTICATE ARCHIVE'
+                      : pt
+                        ? 'CRIAR CONTA'
+                        : 'CREATE ACCOUNT'}
                   <ArrowRight aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
                 </button>
               </div>
             </form>
 
             <div className="mt-12 border-t border-outline-variant/15 pt-8">
-              <p className="mb-6 text-center text-xs text-on-surface-variant">Or continue with institutional SSO</p>
+              <p className="mb-6 text-center text-xs text-on-surface-variant">{pt ? 'Ou continue com SSO institucional' : 'Or continue with institutional SSO'}</p>
               <div className="grid grid-cols-3 gap-4">
                 <button
                   type="button"
                   className="flex items-center justify-center gap-3 rounded-sm bg-surface-container-high px-4 py-3 text-xs font-bold tracking-tight text-on-surface transition-colors hover:bg-surface-variant"
                 >
                   <Landmark aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} />
-                  UNIVERSITY
+                  {pt ? 'UNIVERSIDADE' : 'UNIVERSITY'}
                 </button>
                 <button
                   type="button"
@@ -409,7 +452,7 @@ export default function AccessPortalPage() {
                   className="flex items-center justify-center gap-3 rounded-sm bg-surface-container-high px-4 py-3 text-xs font-bold tracking-tight text-on-surface transition-colors hover:bg-surface-variant"
                 >
                   <FlaskConical aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} />
-                  RESEARCH LAB
+                  {pt ? 'LABORATORIO' : 'RESEARCH LAB'}
                 </button>
               </div>
             </div>
@@ -417,7 +460,7 @@ export default function AccessPortalPage() {
             <div className="mt-8">
               <div className="flex items-center gap-4">
                 <Link href="/" className="text-sm font-bold text-primary underline underline-offset-4">
-                  Back to public portal
+                  {pt ? 'Voltar ao portal publico' : 'Back to public portal'}
                 </Link>
                 <button
                   type="button"
@@ -430,7 +473,7 @@ export default function AccessPortalPage() {
                   }}
                   className="text-sm font-bold text-primary underline underline-offset-4"
                 >
-                  {mode === 'login' ? 'Create account' : 'I already have access'}
+                  {mode === 'login' ? (pt ? 'Criar conta' : 'Create account') : pt ? 'Ja tenho acesso' : 'I already have access'}
                 </button>
               </div>
             </div>
@@ -442,11 +485,11 @@ export default function AccessPortalPage() {
         <div className="flex gap-8 opacity-40 grayscale">
           <div className="flex items-center gap-2">
             <LibraryBig aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
-            <span className="text-[10px] font-bold tracking-widest">NATURAL HISTORY FOUNDATION</span>
+            <span className="text-[10px] font-bold tracking-widest">{pt ? 'FUNDACAO DE HISTORIA NATURAL' : 'NATURAL HISTORY FOUNDATION'}</span>
           </div>
           <div className="flex items-center gap-2">
             <Globe aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
-            <span className="text-[10px] font-bold tracking-widest">GLOBAL STRATA NETWORK</span>
+            <span className="text-[10px] font-bold tracking-widest">{pt ? 'REDE GLOBAL DE ESTRATOS' : 'GLOBAL STRATA NETWORK'}</span>
           </div>
         </div>
         <div className="flex gap-6">
@@ -454,19 +497,19 @@ export default function AccessPortalPage() {
             className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary"
             href="/privacy-policy"
           >
-            Privacy Policy
+            {pt ? 'Politica de Privacidade' : 'Privacy Policy'}
           </Link>
           <Link
             className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary"
             href="/terms-of-use"
           >
-            Terms of Use
+            {pt ? 'Termos de Uso' : 'Terms of Use'}
           </Link>
           <Link
             className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary"
             href="/legal-notices"
           >
-            Accessibility
+            {pt ? 'Acessibilidade' : 'Accessibility'}
           </Link>
         </div>
       </footer>

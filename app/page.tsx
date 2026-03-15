@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Mountain } from 'lucide-react';
 import { PublicSiteShell } from '@/components/public-site/PublicSiteShell';
+import { isPortuguese, type SiteLocale } from '@/lib/site-locale';
+import { getSiteLocale } from '@/lib/site-locale-server';
 
 const featuredArticles = [
   {
@@ -36,35 +38,76 @@ const featuredArticles = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const locale: SiteLocale = await getSiteLocale();
+  const pt = isPortuguese(locale);
+  const localizedFeaturedArticles = pt
+    ? [
+        {
+          ...featuredArticles[0],
+          category: 'Geologia',
+          publishedAt: '2 dias atras',
+          title: 'Descobertas cretaceas na Bacia do Araripe',
+          summary:
+            'Trabalhos de campo recentes revelaram peixes fossilizados perfeitamente preservados na Formacao Santana, trazendo novos dados evolutivos.',
+        },
+        {
+          ...featuredArticles[1],
+          category: 'Analise',
+          publishedAt: '1 semana atras',
+          title: 'A evolucao dos sistemas de fauna marinha',
+          summary:
+            'Mapeando como os niveis pre-historicos do mar influenciaram a distribuicao de organismos bentonicos no Atlantico Sul.',
+        },
+        {
+          ...featuredArticles[2],
+          category: 'Tecnologia',
+          publishedAt: '2 semanas atras',
+          title: 'Preservacao digital: escaneando liticos em 3D',
+          summary:
+            'Como o LiDAR em alta resolucao ajuda pesquisadores a preservar virtualmente especimes frageis antes da extracao fisica.',
+        },
+      ]
+    : featuredArticles;
+
   return (
-    <PublicSiteShell>
+    <PublicSiteShell locale={locale}>
       <section className="relative overflow-hidden px-6 pb-24 pt-16 lg:px-20">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-12">
           <div className="z-10 lg:col-span-7">
             <span className="mb-6 inline-block rounded-full bg-secondary-container px-3 py-1 text-[10px] font-label font-bold uppercase tracking-widest text-on-secondary-container">
-              Institutional Initiative • Petrobras
+              {pt ? 'Iniciativa Institucional • Petrobras' : 'Institutional Initiative • Petrobras'}
             </span>
             <h1 className="font-headline mb-8 text-5xl leading-[1.1] font-bold text-on-surface lg:text-7xl">
-              Unveiling Regional <br />
-              <span className="text-primary italic">Paleontological</span> Heritage
+              {pt ? (
+                <>
+                  Revelando o Patrimônio <br />
+                  <span className="text-primary italic">Paleontológico</span> Regional
+                </>
+              ) : (
+                <>
+                  Unveiling Regional <br />
+                  <span className="text-primary italic">Paleontological</span> Heritage
+                </>
+              )}
             </h1>
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-on-surface-variant lg:text-xl">
-              Discover the importance of our fossil records and their role in understanding Earth&apos;s history through
-              layers of time and sediment.
+              {pt
+                ? 'Descubra a importância dos nossos registros fósseis e o papel deles na compreensão da história da Terra através das camadas do tempo e do sedimento.'
+                : "Discover the importance of our fossil records and their role in understanding Earth's history through layers of time and sediment."}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 className="inline-flex items-center justify-center rounded bg-primary px-8 py-4 font-bold text-on-primary shadow-lg hover:-translate-y-0.5"
                 href="/acesso-ao-portal-interno?origin=public"
               >
-                Explore The Portal
+                {pt ? 'Explorar o Portal' : 'Explore The Portal'}
               </Link>
               <a
                 className="inline-flex items-center justify-center rounded bg-surface-container-high px-8 py-4 font-bold text-on-surface hover:bg-surface-container-highest"
                 href="#recent-discoveries"
               >
-                Learn More
+                {pt ? 'Saiba Mais' : 'Learn More'}
               </a>
             </div>
           </div>
@@ -91,22 +134,22 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-2xl">
-              <h2 className="font-headline mb-4 text-4xl font-bold text-on-surface">Recent Discoveries &amp; Research</h2>
-              <p className="text-lg text-on-surface-variant">
-                Detailed insights from the field, geological surveys, and fossil preservation techniques.
-              </p>
+              <h2 className="font-headline mb-4 text-4xl font-bold text-on-surface">
+                {pt ? 'Descobertas Recentes e Pesquisa' : 'Recent Discoveries & Research'}
+              </h2>
+              <p className="text-lg text-on-surface-variant">{pt ? 'Descobertas, pesquisas de campo e técnicas de preservação fóssil em destaque.' : 'Detailed insights from the field, geological surveys, and fossil preservation techniques.'}</p>
             </div>
             <Link
               className="group flex items-center gap-2 font-bold text-tertiary hover:underline"
               href="/acesso-ao-portal-interno?origin=public"
             >
-              View All Archives
+              {pt ? 'Ver Todo o Acervo' : 'View All Archives'}
               <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-            {featuredArticles.map((article) => (
+            {localizedFeaturedArticles.map((article) => (
               <article key={article.title} className="group">
                 <Link className="block cursor-pointer" href="/acesso-ao-portal-interno?origin=public">
                   <div className="relative mb-6 aspect-video overflow-hidden rounded-lg bg-surface-container">
@@ -142,19 +185,29 @@ export default function HomePage() {
           <div className="relative z-10 flex flex-col items-center gap-12 md:flex-row">
             <div className="flex-1 space-y-6">
               <h2 className="font-headline text-4xl leading-tight font-bold text-on-surface lg:text-5xl">
-                Access the <br />
-                <span className="text-primary italic">Researcher Portal</span>
+                {pt ? (
+                  <>
+                    Acesse o <br />
+                    <span className="text-primary italic">Portal do Pesquisador</span>
+                  </>
+                ) : (
+                  <>
+                    Access the <br />
+                    <span className="text-primary italic">Researcher Portal</span>
+                  </>
+                )}
               </h2>
               <p className="text-lg leading-relaxed text-on-surface-variant">
-                Are you a contributor or researcher? Access our internal network to submit findings, collaborate on active
-                excavations, and access exclusive geological datasets.
+                {pt
+                  ? 'Você é colaborador ou pesquisador? Acesse nossa rede interna para enviar descobertas, colaborar em escavações ativas e consultar conjuntos de dados geológicos exclusivos.'
+                  : 'Are you a contributor or researcher? Access our internal network to submit findings, collaborate on active excavations, and access exclusive geological datasets.'}
               </p>
               <Link
                 className="inline-flex items-center gap-3 rounded bg-primary px-10 py-4 font-bold text-on-primary shadow-xl hover:bg-on-primary-fixed-variant"
                 href="/acesso-ao-portal-interno?origin=public"
               >
                 <ArrowRight aria-hidden="true" className="h-5 w-5" />
-                Sign In to Portal
+                {pt ? 'Acessar o Portal' : 'Sign In to Portal'}
               </Link>
             </div>
 

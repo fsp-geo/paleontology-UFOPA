@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation';
 import { hasAnyAllowedRole, getCurrentUserContext } from '@/lib/current-user';
 import { StudentStitchPage } from '@/components/student-site/StudentStitchPage';
+import { getSiteLocale } from '@/lib/site-locale-server';
+import { isPortuguese } from '@/lib/site-locale';
 
 const ALLOWED_ROLES = ['admin', 'gestor', 'professor', 'pesquisador', 'aluno'];
 
@@ -26,9 +28,9 @@ function getAvatarInitials(displayName: string) {
   return parts.map((part) => part[0]?.toUpperCase() || '').join('');
 }
 
-function getProfileLabel(primaryRole: string) {
+function getProfileLabel(primaryRole: string, pt: boolean) {
   if (primaryRole === 'aluno') {
-    return 'Student Explorer';
+    return pt ? 'Explorador Estudante' : 'Student Explorer';
   }
 
   const labels: Record<string, string> = {
@@ -42,6 +44,8 @@ function getProfileLabel(primaryRole: string) {
 }
 
 export default async function ArchivePage() {
+  const locale = await getSiteLocale();
+  const pt = isPortuguese(locale);
   const context = await getCurrentUserContext();
 
   if (!context) {
@@ -59,13 +63,13 @@ export default async function ArchivePage() {
     <StudentStitchPage
       fileName="acervo-digital-de-fosseis.html"
       activeNav="archive"
-      pageTitle="Digital Fossil Archive"
+      pageTitle={pt ? 'Acervo Digital de Fosseis' : 'Digital Fossil Archive'}
       displayName={displayName}
-      profileLabel={getProfileLabel(context.primaryRole)}
+      profileLabel={getProfileLabel(context.primaryRole, pt)}
       avatarInitials={avatarInitials}
       accessLog={{
-        title: 'Digital Fossil Archive',
-        category: 'Archive',
+        title: pt ? 'Acervo Digital de Fosseis' : 'Digital Fossil Archive',
+        category: pt ? 'Acervo' : 'Archive',
         contentType: 'page',
         contentKey: 'digital-fossil-archive',
         sourcePath: '/acervo-digital-de-fosseis',

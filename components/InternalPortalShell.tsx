@@ -36,7 +36,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     href: '/dashboard/aluno',
-    label: 'My Learning',
+    label: 'Minha Jornada',
     icon: FolderKanban,
     visible: (roles) => roles.includes('aluno'),
   },
@@ -161,7 +161,7 @@ export function InternalPortalShell({
               aria-disabled="true"
             >
               <Settings className="h-4 w-4" />
-              Settings
+              Configuracoes
             </button>
             <Link
               href="/sair"

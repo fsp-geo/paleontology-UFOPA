@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import type { SiteLocale } from '@/lib/site-locale';
+import { isPortuguese } from '@/lib/site-locale';
 
 type WeeklyHour = {
   dateKey: string;
@@ -48,6 +50,7 @@ type Recommendation = {
 } | null;
 
 type MyLearningClientProps = {
+  locale: SiteLocale;
   profile: {
     name: string;
     levelTitle: string;
@@ -67,8 +70,8 @@ function formatHours(totalMinutes: number) {
   return (totalMinutes / 60).toFixed(1);
 }
 
-function formatPoints(points: number) {
-  return new Intl.NumberFormat('en-US').format(points);
+function formatPoints(points: number, locale: SiteLocale) {
+  return new Intl.NumberFormat(isPortuguese(locale) ? 'pt-BR' : 'en-US').format(points);
 }
 
 function getRecentAccessIcon(category: string) {
@@ -87,6 +90,7 @@ function getAchievementLabel(access: RecentAccess) {
 }
 
 export function MyLearningClient({
+  locale,
   profile,
   topicProgress,
   recentAccesses,
@@ -94,6 +98,7 @@ export function MyLearningClient({
   recommendation,
 }: MyLearningClientProps) {
   const [animateChart, setAnimateChart] = useState(false);
+  const pt = isPortuguese(locale);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => setAnimateChart(true));
@@ -101,30 +106,44 @@ export function MyLearningClient({
   }, []);
 
   const weeklyHoursText = formatHours(profile.totalWeeklyMinutes);
-  const currentRankText = profile.currentRank > 0 ? `#${profile.currentRank}` : 'Unranked';
+  const currentRankText = profile.currentRank > 0 ? `#${profile.currentRank}` : pt ? 'Sem rankeamento' : 'Unranked';
 
   return (
     <div className="mx-auto w-full max-w-[1500px]">
       <header className="mb-16 grid grid-cols-1 items-end gap-8 md:grid-cols-12">
         <div className="md:col-span-7">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-tertiary">Welcome back, Archivist</p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-tertiary">
+            {pt ? 'Bem-vindo de volta, arquivista' : 'Welcome back, Archivist'}
+          </p>
           <h1 className="mb-6 font-headline text-5xl leading-tight text-on-background md:text-6xl">{profile.name}</h1>
           <p className="max-w-2xl text-lg leading-relaxed text-on-surface-variant">
-            You&apos;ve studied <strong>{weeklyHoursText} hours</strong> this week, accumulated{' '}
-            <strong>{profile.activeDaysCount} active day(s)</strong> in the portal, and your current standing in the community is{' '}
-            <strong>{currentRankText}</strong>.
+            {pt ? (
+              <>
+                Voce estudou <strong>{weeklyHoursText} horas</strong> nesta semana, acumulou{' '}
+                <strong>{profile.activeDaysCount} dia(s) ativo(s)</strong> no portal, e sua posicao atual na comunidade e{' '}
+                <strong>{currentRankText}</strong>.
+              </>
+            ) : (
+              <>
+                You&apos;ve studied <strong>{weeklyHoursText} hours</strong> this week, accumulated{' '}
+                <strong>{profile.activeDaysCount} active day(s)</strong> in the portal, and your current standing in the community is{' '}
+                <strong>{currentRankText}</strong>.
+              </>
+            )}
           </p>
         </div>
 
         <div className="flex justify-start md:col-span-5 md:justify-end">
           <div className="flex items-center gap-6 rounded-xl bg-surface-container-highest p-6 shadow-sm">
             <div className="text-center">
-              <p className="text-[11px] font-label uppercase tracking-widest text-on-surface-variant">Daily Streak</p>
-              <p className="font-headline text-3xl text-primary">{profile.streakDays} Days</p>
+              <p className="text-[11px] font-label uppercase tracking-widest text-on-surface-variant">{pt ? 'Sequencia Diaria' : 'Daily Streak'}</p>
+              <p className="font-headline text-3xl text-primary">
+                {profile.streakDays} {pt ? 'Dias' : 'Days'}
+              </p>
             </div>
             <div className="h-10 w-px bg-outline-variant/30"></div>
             <div className="text-center">
-              <p className="text-[11px] font-label uppercase tracking-widest text-on-surface-variant">Rank</p>
+              <p className="text-[11px] font-label uppercase tracking-widest text-on-surface-variant">{pt ? 'Nivel' : 'Rank'}</p>
               <p className="font-headline text-3xl text-primary">{profile.levelTitle}</p>
             </div>
           </div>
@@ -135,9 +154,9 @@ export function MyLearningClient({
         <section className="space-y-8 md:col-span-8">
           <div className="rounded-xl bg-surface-container-low p-8">
             <div className="mb-10 flex items-center justify-between">
-              <h3 className="font-headline text-2xl">Hours Studied</h3>
+              <h3 className="font-headline text-2xl">{pt ? 'Horas Estudadas' : 'Hours Studied'}</h3>
               <span className="rounded bg-surface-container-highest px-3 py-1 text-[11px] font-label uppercase tracking-wider">
-                This Week
+                {pt ? 'Esta Semana' : 'This Week'}
               </span>
             </div>
 
@@ -180,7 +199,7 @@ export function MyLearningClient({
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div className="rounded-xl bg-surface-container-low p-8">
-              <h3 className="mb-6 font-headline text-xl">Topic Completion</h3>
+              <h3 className="mb-6 font-headline text-xl">{pt ? 'Topicos Concluidos' : 'Topic Completion'}</h3>
               <div className="space-y-6">
                 {topicProgress.map((topic) => (
                   <div key={topic.id}>
@@ -202,7 +221,7 @@ export function MyLearningClient({
                 href="/acervo-digital-de-fosseis"
               >
                 <span className="material-symbols-outlined text-primary">database</span>
-                <span className="font-headline text-lg">Digital Fossil Archive</span>
+                <span className="font-headline text-lg">{pt ? 'Acervo Digital de Fosseis' : 'Digital Fossil Archive'}</span>
               </Link>
               <button
                 className="flex cursor-not-allowed flex-col justify-between bg-surface-container p-6 text-left opacity-70"
@@ -210,7 +229,7 @@ export function MyLearningClient({
                 type="button"
               >
                 <span className="material-symbols-outlined text-primary">construction</span>
-                <span className="font-headline text-lg">Advanced Study Tools</span>
+                <span className="font-headline text-lg">{pt ? 'Ferramentas Avancadas de Estudo' : 'Advanced Study Tools'}</span>
               </button>
             </div>
           </div>
@@ -218,7 +237,7 @@ export function MyLearningClient({
 
         <aside className="space-y-8 md:col-span-4">
           <div className="rounded-xl bg-surface-container p-8">
-            <h3 className="mb-6 font-headline text-2xl">Knowledge Ranking</h3>
+            <h3 className="mb-6 font-headline text-2xl">{pt ? 'Ranking de Conhecimento' : 'Knowledge Ranking'}</h3>
             <div className="space-y-4">
               {leaderboard.slice(0, 6).map((row) => (
                 <div
@@ -232,17 +251,17 @@ export function MyLearningClient({
                     <span className="text-xs font-bold uppercase">{row.name.slice(0, 1)}</span>
                   </div>
                   <span className={`flex-grow text-base ${row.isCurrentUser ? 'font-bold' : 'font-medium'}`}>{row.name}</span>
-                  <span className="text-sm font-bold text-primary">{formatPoints(row.points)} pts</span>
+                  <span className="text-sm font-bold text-primary">{formatPoints(row.points, locale)} pts</span>
                 </div>
               ))}
             </div>
             <button className="mt-8 w-full border-t border-outline-variant/30 py-3 text-xs font-label uppercase tracking-widest text-tertiary transition-colors hover:text-on-surface">
-              View Full Leaderboard
+              {pt ? 'Ver Ranking Completo' : 'View Full Leaderboard'}
             </button>
           </div>
 
           <div className="relative overflow-hidden rounded-xl bg-surface-container-high p-8">
-            <h3 className="relative mb-8 font-headline text-2xl">Recent Achievements</h3>
+            <h3 className="relative mb-8 font-headline text-2xl">{pt ? 'Atividades Recentes' : 'Recent Achievements'}</h3>
             <div className="relative grid grid-cols-2 gap-4">
               {recentAccesses.length > 0 ? (
                 recentAccesses.slice(0, 4).map((access) => (
@@ -258,7 +277,7 @@ export function MyLearningClient({
                 ))
               ) : (
                 <div className="col-span-2 rounded-lg bg-surface/40 p-6 text-center text-sm text-on-surface-variant">
-                  Your latest archive and wiki visits will appear here.
+                  {pt ? 'Suas visitas mais recentes ao acervo e a wiki aparecerao aqui.' : 'Your latest archive and wiki visits will appear here.'}
                 </div>
               )}
             </div>
@@ -268,22 +287,33 @@ export function MyLearningClient({
 
       <section className="mt-16 flex flex-col overflow-hidden rounded-2xl border border-outline-variant/10 bg-surface-container shadow-sm md:flex-row">
         <div className="flex flex-col justify-center p-12 md:w-1/2">
-          <span className="mb-4 block text-[11px] font-label uppercase tracking-[0.3em] text-tertiary">Recommended Study</span>
+          <span className="mb-4 block text-[11px] font-label uppercase tracking-[0.3em] text-tertiary">
+            {pt ? 'Estudo Recomendado' : 'Recommended Study'}
+          </span>
           <h2 className="mb-6 font-headline text-4xl">
-            {recommendation?.title ?? 'Your next recommended study path will appear here.'}
+            {recommendation?.title ?? (pt ? 'Seu proximo percurso de estudo recomendado aparecera aqui.' : 'Your next recommended study path will appear here.')}
           </h2>
           <p className="mb-8 text-lg leading-relaxed text-on-surface-variant">
-            {recommendation?.summary ?? 'As your profile evolves, the portal will suggest materials aligned to your learning interests.'}
+            {recommendation?.summary ??
+              (pt
+                ? 'Conforme seu perfil evoluir, o portal sugerira materiais alinhados aos seus interesses de aprendizado.'
+                : 'As your profile evolves, the portal will suggest materials aligned to your learning interests.')}
           </p>
           <div className="flex items-center gap-6">
             <Link
               className="rounded-sm bg-primary px-8 py-3 text-sm font-label uppercase tracking-widest text-on-primary transition-all hover:brightness-110"
               href={recommendation?.href ?? '/wiki-de-estudos-paleontologicos'}
             >
-              Resume Session
+              {pt ? 'Retomar Estudo' : 'Resume Session'}
             </Link>
             <span className="text-sm font-label text-on-surface-variant">
-              {recommendation?.estimatedMinutes ? `Estimated: ${recommendation.estimatedMinutes} min` : 'Estimated: --'}
+              {recommendation?.estimatedMinutes
+                ? pt
+                  ? `Estimado: ${recommendation.estimatedMinutes} min`
+                  : `Estimated: ${recommendation.estimatedMinutes} min`
+                : pt
+                  ? 'Estimado: --'
+                  : 'Estimated: --'}
             </span>
           </div>
         </div>
@@ -309,7 +339,7 @@ export function MyLearningClient({
           <span className="font-headline text-lg italic text-on-surface">Cambridge University</span>
         </div>
         <p className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">
-          © 2024 PaleoPortal • Stratigraphy of Human Knowledge
+          {pt ? '© 2024 PaleoPortal • Estratigrafia do Conhecimento Humano' : '© 2024 PaleoPortal • Stratigraphy of Human Knowledge'}
         </p>
       </footer>
     </div>

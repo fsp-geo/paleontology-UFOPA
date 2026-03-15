@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation';
 import { hasAnyAllowedRole, getCurrentUserContext } from '@/lib/current-user';
 import { StudentStitchPage } from '@/components/student-site/StudentStitchPage';
+import { getSiteLocale } from '@/lib/site-locale-server';
+import { isPortuguese } from '@/lib/site-locale';
 
 const ALLOWED_ROLES = ['admin', 'gestor', 'professor', 'pesquisador', 'aluno', 'visitante'];
 
@@ -26,9 +28,9 @@ function getAvatarInitials(displayName: string) {
   return parts.map((part) => part[0]?.toUpperCase() || '').join('');
 }
 
-function getProfileLabel(primaryRole: string) {
+function getProfileLabel(primaryRole: string, pt: boolean) {
   if (primaryRole === 'aluno') {
-    return 'Student Explorer';
+    return pt ? 'Explorador Estudante' : 'Student Explorer';
   }
 
   const labels: Record<string, string> = {
@@ -43,6 +45,8 @@ function getProfileLabel(primaryRole: string) {
 }
 
 export default async function WikiPage() {
+  const locale = await getSiteLocale();
+  const pt = isPortuguese(locale);
   const context = await getCurrentUserContext();
 
   if (!context) {
@@ -60,13 +64,13 @@ export default async function WikiPage() {
     <StudentStitchPage
       fileName="wiki-de-estudos-paleontologicos.html"
       activeNav="wiki"
-      pageTitle="Educational Wiki"
+      pageTitle={pt ? 'Wiki Educacional' : 'Educational Wiki'}
       displayName={displayName}
-      profileLabel={getProfileLabel(context.primaryRole)}
+      profileLabel={getProfileLabel(context.primaryRole, pt)}
       avatarInitials={avatarInitials}
       accessLog={{
-        title: 'Educational Wiki',
-        category: 'Wiki',
+        title: pt ? 'Wiki Educacional' : 'Educational Wiki',
+        category: pt ? 'Wiki' : 'Wiki',
         contentType: 'page',
         contentKey: 'educational-wiki',
         sourcePath: '/wiki-de-estudos-paleontologicos',

@@ -3,6 +3,8 @@ import { hasAnyAllowedRole, getCurrentUserContext } from '@/lib/current-user';
 import { getStudentDashboardData } from '@/lib/student-dashboard';
 import { StudentPortalShell } from '@/components/student-site/StudentPortalShell';
 import { MyLearningClient } from '@/components/student-site/MyLearningClient';
+import { isPortuguese } from '@/lib/site-locale';
+import { getSiteLocale } from '@/lib/site-locale-server';
 
 const ALLOWED_ROLES = ['admin', 'gestor', 'professor', 'aluno'];
 
@@ -29,6 +31,8 @@ function getAvatarInitials(displayName: string) {
 }
 
 export default async function StudentDashboardPage() {
+  const locale = await getSiteLocale();
+  const pt = isPortuguese(locale);
   const context = await getCurrentUserContext();
 
   if (!context) {
@@ -46,12 +50,14 @@ export default async function StudentDashboardPage() {
   return (
     <StudentPortalShell
       activeNav="learning"
-      pageTitle="My Learning"
+      pageTitle={pt ? 'Minha Jornada' : 'My Learning'}
       displayName={displayName}
       profileLabel={dashboard.profile.levelTitle}
       avatarInitials={avatarInitials}
+      locale={locale}
     >
       <MyLearningClient
+        locale={locale}
         profile={dashboard.profile}
         topicProgress={dashboard.topicProgress}
         recentAccesses={dashboard.recentAccesses}

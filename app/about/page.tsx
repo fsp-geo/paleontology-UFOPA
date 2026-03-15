@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Database, Fingerprint, History, Microscope } from 'lucide-react';
 import { PublicSiteShell } from '@/components/public-site/PublicSiteShell';
+import { isPortuguese } from '@/lib/site-locale';
+import { getSiteLocale } from '@/lib/site-locale-server';
 
 const impactCards = [
   {
@@ -30,19 +32,41 @@ const impactCards = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const locale = await getSiteLocale();
+  const pt = isPortuguese(locale);
+  const localizedImpactCards = pt
+    ? [
+        { ...impactCards[0], title: '1,2M+ Especimes', subtitle: 'Registros Digitais Indexados' },
+        { ...impactCards[1], title: 'Acesso Global', subtitle: 'Protocolo Aberto de Pesquisa' },
+        { ...impactCards[2], title: 'Preservacao', subtitle: 'Padroes Eticos de Acervo' },
+      ]
+    : impactCards;
+
   return (
-    <PublicSiteShell>
+    <PublicSiteShell locale={locale}>
       <div className="mx-auto max-w-4xl px-6 py-24">
         <section className="mb-20">
-          <span className="mb-4 block text-xs font-label uppercase tracking-[0.2em] text-tertiary">Our Institutional Purpose</span>
+          <span className="mb-4 block text-xs font-label uppercase tracking-[0.2em] text-tertiary">
+            {pt ? 'Nosso Propósito Institucional' : 'Our Institutional Purpose'}
+          </span>
           <h1 className="font-headline mb-8 text-5xl leading-[1.1] text-on-surface lg:text-7xl">
-            The Digital Custodian of <br />
-            <span className="text-primary italic">Prehistoric History.</span>
+            {pt ? (
+              <>
+                O Guardião Digital da <br />
+                <span className="text-primary italic">História Pré-Histórica.</span>
+              </>
+            ) : (
+              <>
+                The Digital Custodian of <br />
+                <span className="text-primary italic">Prehistoric History.</span>
+              </>
+            )}
           </h1>
           <p className="font-headline mb-12 max-w-2xl text-2xl leading-relaxed text-on-surface-variant">
-            Strata Archive serves as the primary scientific repository for the Petrobras Paleontology Division, bridging the gap
-            between industrial discovery and academic preservation.
+            {pt
+              ? 'O Strata Archive atua como o repositório científico central da Divisão de Paleontologia da Petrobras, conectando a descoberta industrial à preservação acadêmica.'
+              : 'Strata Archive serves as the primary scientific repository for the Petrobras Paleontology Division, bridging the gap between industrial discovery and academic preservation.'}
           </p>
           <div className="group relative h-[400px] w-full overflow-hidden rounded-xl bg-surface-container-high">
             <Image
@@ -60,23 +84,24 @@ export default function AboutPage() {
         <div className="space-y-24">
           <section className="grid grid-cols-1 items-start gap-12 md:grid-cols-12">
             <div className="md:col-span-4">
-              <h2 className="font-headline text-3xl text-primary">A Legacy of Discovery</h2>
+              <h2 className="font-headline text-3xl text-primary">{pt ? 'Um Legado de Descobertas' : 'A Legacy of Discovery'}</h2>
             </div>
             <div className="space-y-6 md:col-span-8">
               <p className="text-lg leading-relaxed text-on-surface-variant">
-                Founded to safeguard the immense paleontological wealth uncovered during exploratory operations, Strata Archive has
-                evolved into a global lighthouse for sedimentary research. We believe that every fossil recovered is a piece of a
-                planetary puzzle that belongs to the scientific community.
+                {pt
+                  ? 'Fundado para salvaguardar a imensa riqueza paleontológica revelada em operações exploratórias, o Strata Archive evoluiu para um farol global da pesquisa sedimentar. Acreditamos que cada fóssil recuperado é uma peça de um quebra-cabeça planetário que pertence à comunidade científica.'
+                  : 'Founded to safeguard the immense paleontological wealth uncovered during exploratory operations, Strata Archive has evolved into a global lighthouse for sedimentary research. We believe that every fossil recovered is a piece of a planetary puzzle that belongs to the scientific community.'}
               </p>
               <p className="text-lg leading-relaxed text-on-surface-variant">
-                Our role extends beyond storage. We provide high-resolution digital stratigraphy, 3D fossil reconstructions, and a
-                peer-reviewed database that supports researchers from over 140 international universities.
+                {pt
+                  ? 'Nosso papel vai além do armazenamento. Oferecemos estratigrafia digital em alta resolução, reconstruções 3D de fósseis e uma base revisada por pares que apoia pesquisadores de mais de 140 universidades internacionais.'
+                  : 'Our role extends beyond storage. We provide high-resolution digital stratigraphy, 3D fossil reconstructions, and a peer-reviewed database that supports researchers from over 140 international universities.'}
               </p>
             </div>
           </section>
 
           <section className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {impactCards.map((card) => {
+            {localizedImpactCards.map((card) => {
               const Icon = card.icon;
 
               return (
@@ -91,14 +116,16 @@ export default function AboutPage() {
 
           <section className="relative overflow-hidden rounded-2xl bg-surface-container p-12">
             <div className="relative z-10 max-w-xl">
-              <h2 className="font-headline mb-6 text-3xl text-on-surface">Scientific Ethics &amp; Standards</h2>
+              <h2 className="font-headline mb-6 text-3xl text-on-surface">
+                {pt ? 'Ética Científica e Padrões' : 'Scientific Ethics & Standards'}
+              </h2>
               <p className="mb-8 text-lg leading-relaxed text-on-surface-variant">
-                The Strata Archive operates under the strictest international guidelines for paleontological heritage. We ensure
-                that all materials are handled with professional care and that their geological context is meticulously documented
-                for future generations.
+                {pt
+                  ? 'O Strata Archive opera sob as mais rigorosas diretrizes internacionais para o patrimônio paleontológico. Garantimos que todos os materiais sejam tratados com cuidado profissional e que seu contexto geológico seja documentado de forma meticulosa para as futuras gerações.'
+                  : 'The Strata Archive operates under the strictest international guidelines for paleontological heritage. We ensure that all materials are handled with professional care and that their geological context is meticulously documented for future generations.'}
               </p>
               <Link className="group inline-flex items-center font-bold text-tertiary" href="/legal-notices">
-                Review our Ethics Charter
+                {pt ? 'Revisar nossa Carta de Ética' : 'Review our Ethics Charter'}
                 <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -110,16 +137,18 @@ export default function AboutPage() {
           </section>
 
           <section className="py-12 text-center">
-            <h3 className="font-headline mb-8 text-3xl text-on-surface">Ready to explore the strata?</h3>
+            <h3 className="font-headline mb-8 text-3xl text-on-surface">
+              {pt ? 'Pronto para explorar os estratos?' : 'Ready to explore the strata?'}
+            </h3>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link className="rounded-sm bg-primary px-8 py-3 font-bold tracking-wide text-on-primary" href="/acesso-ao-portal-interno?origin=public">
-                View Collections
+                {pt ? 'Ver Coleções' : 'View Collections'}
               </Link>
               <Link
                 className="rounded-sm bg-surface-container-high px-8 py-3 font-bold tracking-wide text-on-surface hover:bg-surface-container-highest"
                 href="/contact"
               >
-                Contact Curator
+                {pt ? 'Falar com a Curadoria' : 'Contact Curator'}
               </Link>
             </div>
           </section>

@@ -1,6 +1,9 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { FileText, Globe, Mail, Search } from 'lucide-react';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher';
+import type { SiteLocale } from '@/lib/site-locale';
+import { isPortuguese } from '@/lib/site-locale';
 
 const footerGroups = [
   {
@@ -23,6 +26,22 @@ const footerGroups = [
   },
 ] as const;
 
+function translateFooterGroupTitle(title: string, pt: boolean) {
+  if (!pt) {
+    return title;
+  }
+
+  if (title === 'Resources') {
+    return 'Recursos';
+  }
+
+  if (title === 'Institution') {
+    return 'Instituição';
+  }
+
+  return title;
+}
+
 function BrandMark({ small = false }: { small?: boolean }) {
   return (
     <div className={small ? 'size-5 text-primary' : 'size-6 text-primary'}>
@@ -35,9 +54,12 @@ function BrandMark({ small = false }: { small?: boolean }) {
 
 type PublicSiteShellProps = {
   children: ReactNode;
+  locale: SiteLocale;
 };
 
-export function PublicSiteShell({ children }: PublicSiteShellProps) {
+export function PublicSiteShell({ children, locale }: PublicSiteShellProps) {
+  const pt = isPortuguese(locale);
+
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background selection:bg-primary-container selection:text-on-primary-container">
       <header className="glass-nav sticky top-0 z-50 flex items-center justify-between border-b border-outline-variant/15 px-6 py-4 lg:px-20">
@@ -51,26 +73,27 @@ export function PublicSiteShell({ children }: PublicSiteShellProps) {
 
           <nav className="hidden items-center gap-8 md:flex">
             <Link className="text-sm font-medium text-on-surface-variant hover:text-primary" href="/acesso-ao-portal-interno?origin=public">
-              Articles
+              {pt ? 'Artigos' : 'Articles'}
             </Link>
             <Link className="text-sm font-medium text-on-surface-variant hover:text-primary" href="/about">
-              About
+              {pt ? 'Sobre' : 'About'}
             </Link>
             <Link className="text-sm font-medium text-on-surface-variant hover:text-primary" href="/region">
-              Region
+              {pt ? 'Região' : 'Region'}
             </Link>
             <Link className="text-sm font-medium text-on-surface-variant hover:text-primary" href="/contact">
-              Contact
+              {pt ? 'Contato' : 'Contact'}
             </Link>
           </nav>
         </div>
 
         <div className="flex items-center gap-4 lg:gap-6">
+          <LocaleSwitcher locale={locale} className="hidden items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant md:flex" />
           <label className="hidden items-center gap-2 rounded-lg border border-transparent bg-surface-container-highest px-3 py-1.5 focus-within:border-primary/30 lg:flex">
             <Search aria-hidden="true" className="h-5 w-5 text-outline" />
             <input
               className="w-48 border-none bg-transparent p-0 text-sm text-on-surface placeholder:text-outline focus:outline-none"
-              placeholder="Search archives..."
+              placeholder={pt ? 'Pesquisar arquivos...' : 'Search archives...'}
               type="text"
             />
           </label>
@@ -79,7 +102,7 @@ export function PublicSiteShell({ children }: PublicSiteShellProps) {
             className="inline-flex h-10 items-center justify-center rounded-lg bg-primary px-5 text-sm font-bold tracking-wide text-on-primary shadow-sm hover:bg-on-primary-fixed-variant lg:px-6"
             href="/acesso-ao-portal-interno?origin=public"
           >
-            Internal Area
+            {pt ? 'Área Interna' : 'Internal Area'}
           </Link>
         </div>
       </header>
@@ -97,17 +120,18 @@ export function PublicSiteShell({ children }: PublicSiteShellProps) {
                 </Link>
               </div>
               <p className="text-sm leading-relaxed text-on-surface-variant">
-                A collaborative initiative supported by Petrobras, dedicated to the preservation, documentation, and study
-                of regional paleontological treasures.
+                {pt
+                  ? 'Uma iniciativa colaborativa apoiada pela Petrobras, dedicada à preservação, documentação e estudo de tesouros paleontológicos regionais.'
+                  : 'A collaborative initiative supported by Petrobras, dedicated to the preservation, documentation, and study of regional paleontological treasures.'}
               </p>
               <div className="flex gap-4 text-outline">
-                <Link aria-label="Public portal" className="hover:text-primary" href="/">
+                <Link aria-label={pt ? 'Portal público' : 'Public portal'} className="hover:text-primary" href="/">
                   <Globe className="h-5 w-5" />
                 </Link>
-                <Link aria-label="Contact" className="hover:text-primary" href="/contact">
+                <Link aria-label={pt ? 'Contato' : 'Contact'} className="hover:text-primary" href="/contact">
                   <Mail className="h-5 w-5" />
                 </Link>
-                <Link aria-label="Legal notices" className="hover:text-primary" href="/legal-notices">
+                <Link aria-label={pt ? 'Avisos legais' : 'Legal notices'} className="hover:text-primary" href="/legal-notices">
                   <FileText className="h-5 w-5" />
                 </Link>
               </div>
@@ -116,12 +140,25 @@ export function PublicSiteShell({ children }: PublicSiteShellProps) {
             <div className="grid grid-cols-2 gap-12 lg:grid-cols-3">
               {footerGroups.map((group) => (
                 <div key={group.title} className="space-y-4">
-                  <h4 className="text-xs font-label font-bold uppercase tracking-widest text-on-surface">{group.title}</h4>
+                  <h4 className="text-xs font-label font-bold uppercase tracking-widest text-on-surface">
+                    {translateFooterGroupTitle(group.title, pt)}
+                  </h4>
                   <ul className="space-y-2 text-sm text-on-surface-variant">
                     {group.links.map((link) => (
                       <li key={link.href}>
                         <Link className="hover:text-primary" href={link.href}>
-                          {link.label}
+                          {pt
+                            ? {
+                                '/research-papers': 'Publicações Científicas',
+                                '/field-guides': 'Guias de Campo',
+                                '/dataset-access': 'Acesso a Dados',
+                                '/api-documentation': 'Documentação da API',
+                                '/about-us': 'Sobre Nós',
+                                '/partnerships': 'Parcerias',
+                                '/petrobras-esg': 'Petrobras ESG',
+                                '/legal-notices': 'Avisos Legais',
+                              }[link.href] || link.label
+                            : link.label}
                         </Link>
                       </li>
                     ))}
@@ -130,7 +167,9 @@ export function PublicSiteShell({ children }: PublicSiteShellProps) {
               ))}
 
               <div className="col-span-2 space-y-4 lg:col-span-1">
-                <h4 className="text-xs font-label font-bold uppercase tracking-widest text-on-surface">Institutional</h4>
+                <h4 className="text-xs font-label font-bold uppercase tracking-widest text-on-surface">
+                  {pt ? 'Institucional' : 'Institutional'}
+                </h4>
                 <Link className="flex cursor-pointer items-center opacity-60 grayscale transition-all hover:grayscale-0" href="/petrobras">
                   <div className="flex h-10 w-auto items-center rounded border border-outline-variant/30 bg-surface-container px-4">
                     <span className="text-[10px] font-bold tracking-tighter">PETROBRAS</span>
@@ -141,13 +180,13 @@ export function PublicSiteShell({ children }: PublicSiteShellProps) {
           </div>
 
           <div className="flex flex-col items-center justify-between gap-4 text-xs text-outline md:flex-row">
-            <p>© 2024 PaleoPortal Project. All rights reserved.</p>
+            <p>{pt ? '© 2024 Projeto PaleoPortal. Todos os direitos reservados.' : '© 2024 PaleoPortal Project. All rights reserved.'}</p>
             <div className="flex gap-6">
               <Link className="hover:text-on-surface-variant" href="/privacy-policy">
-                Privacy Policy
+                {pt ? 'Política de Privacidade' : 'Privacy Policy'}
               </Link>
               <Link className="hover:text-on-surface-variant" href="/terms-of-use">
-                Terms of Use
+                {pt ? 'Termos de Uso' : 'Terms of Use'}
               </Link>
             </div>
           </div>

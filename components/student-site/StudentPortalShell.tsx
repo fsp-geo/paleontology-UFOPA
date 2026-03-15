@@ -2,6 +2,9 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AuthenticatedSessionTracker } from '@/components/AuthenticatedSessionTracker';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher';
+import type { SiteLocale } from '@/lib/site-locale';
+import { isPortuguese } from '@/lib/site-locale';
 
 type StudentPortalShellProps = {
   activeNav: 'learning' | 'archive' | 'wiki';
@@ -9,14 +12,9 @@ type StudentPortalShellProps = {
   displayName: string;
   profileLabel: string;
   avatarInitials: string;
+  locale: SiteLocale;
   children: ReactNode;
 };
-
-const navItems = [
-  { key: 'learning', href: '/dashboard/aluno', label: 'My Learning', icon: 'dashboard' },
-  { key: 'archive', href: '/acervo-digital-de-fosseis', label: 'Fossil Archive', icon: 'database' },
-  { key: 'wiki', href: '/wiki-de-estudos-paleontologicos', label: 'Educational Wiki', icon: 'menu_book' },
-];
 
 function avatarDataUrl(label: string) {
   const safeLabel = String(label || 'U').slice(0, 2).toUpperCase();
@@ -37,9 +35,16 @@ export function StudentPortalShell({
   displayName,
   profileLabel,
   avatarInitials,
+  locale,
   children,
 }: StudentPortalShellProps) {
   const avatarSrc = avatarDataUrl(avatarInitials);
+  const pt = isPortuguese(locale);
+  const navItems = [
+    { key: 'learning', href: '/dashboard/aluno', label: pt ? 'Minha Jornada' : 'My Learning', icon: 'dashboard' },
+    { key: 'archive', href: '/acervo-digital-de-fosseis', label: pt ? 'Acervo de Fosseis' : 'Fossil Archive', icon: 'database' },
+    { key: 'wiki', href: '/wiki-de-estudos-paleontologicos', label: pt ? 'Wiki Educacional' : 'Educational Wiki', icon: 'menu_book' },
+  ] as const;
 
   return (
     <div className="min-h-screen bg-background text-on-surface">
@@ -61,13 +66,14 @@ export function StudentPortalShell({
         </div>
 
         <div className="flex items-center gap-4 lg:gap-6">
+          <LocaleSwitcher locale={locale} className="hidden items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant md:flex" />
           <label className="relative hidden md:block">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant">
               search
             </span>
             <input
               className="w-[16rem] rounded-full border-none bg-surface-container-highest py-2.5 pl-10 pr-4 text-base focus:ring-1 focus:ring-primary xl:w-[18rem]"
-              placeholder="Search archive..."
+              placeholder={pt ? 'Pesquisar acervo...' : 'Search archive...'}
               type="text"
             />
           </label>
@@ -108,11 +114,11 @@ export function StudentPortalShell({
                   }
                   href={item.href}
                 >
-                  <span className="material-symbols-outlined">{item.icon}</span>
-                  <span className="font-label text-base">{item.label}</span>
-                </Link>
-              );
-            })}
+                <span className="material-symbols-outlined">{item.icon}</span>
+                <span className="font-label text-base">{item.label}</span>
+              </Link>
+            );
+          })}
 
             <button
               className="flex w-full cursor-not-allowed items-center gap-3 rounded px-5 py-3.5 font-medium text-on-surface-variant/60"
@@ -120,13 +126,13 @@ export function StudentPortalShell({
               type="button"
             >
               <span className="material-symbols-outlined">construction</span>
-              <span className="font-label text-base">Study Tools</span>
+              <span className="font-label text-base">{pt ? 'Ferramentas de Estudo' : 'Study Tools'}</span>
             </button>
           </nav>
 
           <div className="mt-auto border-t border-outline-variant/30 pt-6">
             <div className="rounded-xl bg-secondary-container p-4 text-on-secondary-container">
-              <p className="mb-2 text-[11px] font-label uppercase tracking-wider">Curator Note</p>
+              <p className="mb-2 text-[11px] font-label uppercase tracking-wider">{pt ? 'Nota da Curadoria' : 'Curator Note'}</p>
               <p className="text-[15px] italic leading-relaxed">
                 &quot;Nature is an infinite sphere of which the center is everywhere.&quot;
               </p>
@@ -137,18 +143,18 @@ export function StudentPortalShell({
                 className="flex w-full cursor-not-allowed items-center gap-4 px-4 py-2.5 text-left text-sm text-on-surface-variant/60"
                 disabled
                 type="button"
-              >
-                <span className="material-symbols-outlined text-xl">settings</span>
-                <span className="font-body">Settings</span>
-              </button>
-              <Link
-                className="flex items-center gap-4 px-4 py-2.5 text-sm text-on-surface-variant transition-colors hover:text-error"
-                href="/sair"
-              >
-                <span className="material-symbols-outlined text-xl">logout</span>
-                <span className="font-body">Logout</span>
-              </Link>
-            </div>
+            >
+              <span className="material-symbols-outlined text-xl">settings</span>
+              <span className="font-body">{pt ? 'Configuracoes' : 'Settings'}</span>
+            </button>
+            <Link
+              className="flex items-center gap-4 px-4 py-2.5 text-sm text-on-surface-variant transition-colors hover:text-error"
+              href="/sair"
+            >
+              <span className="material-symbols-outlined text-xl">logout</span>
+              <span className="font-body">{pt ? 'Sair' : 'Logout'}</span>
+            </Link>
+          </div>
 
             <div className="mt-5 flex items-center gap-3 rounded-xl bg-surface-container-high px-4 py-3">
               <div className="h-10 w-10 overflow-hidden rounded-full">
@@ -169,7 +175,7 @@ export function StudentPortalShell({
               <h2 className="font-headline text-2xl text-on-surface">{pageTitle}</h2>
             </div>
             <Link className="text-sm font-semibold text-primary" href="/sair">
-              Logout
+              {pt ? 'Sair' : 'Logout'}
             </Link>
           </div>
 
