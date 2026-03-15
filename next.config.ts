@@ -61,7 +61,6 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      { source: '/', destination: '/stitch/home.html' },
       { source: '/about', destination: '/stitch/about.html' },
       { source: '/about-us', destination: '/stitch/about-us.html' },
       { source: '/api-documentation', destination: '/stitch/api-documentation.html' },
