@@ -38,18 +38,18 @@ const DEFAULT_RECOMMENDATION = {
 };
 
 const LEVELS = [
-  { minimumDays: 0, title: 'Ovo de Trilobita' },
-  { minimumDays: 5, title: 'Filhote Cambriano' },
-  { minimumDays: 12, title: 'Buscador de Fosseis' },
-  { minimumDays: 20, title: 'Explorador Junior' },
-  { minimumDays: 35, title: 'Aprendiz do Jurassico' },
-  { minimumDays: 50, title: 'Guardiao do Folhelho' },
-  { minimumDays: 75, title: 'Cartografo do Cretaceo' },
-  { minimumDays: 110, title: 'Curador das Camadas' },
-  { minimumDays: 150, title: 'Mestre da Formacao' },
-  { minimumDays: 210, title: 'Navegador do Tempo Profundo' },
-  { minimumDays: 280, title: 'Comandante dos Estratos' },
-  { minimumDays: 365, title: 'Lenda do Tempo Profundo' },
+  { minimumDays: 0, title: 'Explorer I' },
+  { minimumDays: 5, title: 'Explorer II' },
+  { minimumDays: 12, title: 'Explorer III' },
+  { minimumDays: 20, title: 'Advanced Explorer' },
+  { minimumDays: 35, title: 'Skilled Explorer' },
+  { minimumDays: 50, title: 'Senior Explorer' },
+  { minimumDays: 75, title: 'Expert Explorer' },
+  { minimumDays: 110, title: 'Lead Explorer' },
+  { minimumDays: 150, title: 'Principal Explorer' },
+  { minimumDays: 210, title: 'Master Explorer' },
+  { minimumDays: 280, title: 'Elite Explorer' },
+  { minimumDays: 365, title: 'Legend Explorer' },
 ] as const;
 
 function startOfDay(date: Date) {
