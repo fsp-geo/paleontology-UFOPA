@@ -92,7 +92,21 @@ export function sanitizeNextPath(nextPath: string | null | undefined) {
     return null;
   }
 
-  return nextPath;
+  if (nextPath.startsWith('//') || nextPath.includes('://')) {
+    return null;
+  }
+
+  try {
+    const parsed = new URL(nextPath, 'http://localhost');
+
+    if (parsed.origin !== 'http://localhost') {
+      return null;
+    }
+
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  } catch {
+    return null;
+  }
 }
 
 export function getAllowedRolesForPath(pathname: string) {

@@ -22,39 +22,44 @@ export async function getCurrentUserContext() {
     return null;
   }
 
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+  try {
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
 
-  if (error || !user) {
-    return null;
-  }
+    if (error || !user) {
+      return null;
+    }
 
-  let profile = await prisma.user.findUnique({
-    where: { id: user.id },
-    include: {
-      userRoles: {
-        include: {
-          role: true,
+    let profile = await prisma.user.findUnique({
+      where: { id: user.id },
+      include: {
+        userRoles: {
+          include: {
+            role: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  if (!profile || profile.userRoles.length === 0) {
-    profile = await syncUser(user);
+    if (!profile || profile.userRoles.length === 0) {
+      profile = await syncUser(user);
+    }
+
+    const roleCodes = getRoleCodesFromProfile(profile);
+
+    return {
+      supabaseUser: user,
+      profile,
+      roleCodes,
+      primaryRole: getPrimaryRoleFromCodes(roleCodes),
+      homePath: getHomePathForRoles(roleCodes),
+    };
+  } catch (error) {
+    console.error('Failed to resolve current user context', error);
+    return null;
   }
-
-  const roleCodes = getRoleCodesFromProfile(profile);
-
-  return {
-    supabaseUser: user,
-    profile,
-    roleCodes,
-    primaryRole: getPrimaryRoleFromCodes(roleCodes),
-    homePath: getHomePathForRoles(roleCodes),
-  };
 }
 
 export function hasAnyAllowedRole(roleCodes: string[], allowedRoles: string[]) {
