@@ -61,21 +61,8 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      { source: '/about-us', destination: '/stitch/about-us.html' },
-      { source: '/api-documentation', destination: '/stitch/api-documentation.html' },
       { source: '/prestacao-de-contas', destination: '/stitch/prestacao-de-contas.html' },
       { source: '/acervo-digital-de-fosseis', destination: '/stitch/acervo-digital-de-fosseis.html' },
-      { source: '/contact', destination: '/stitch/contact.html' },
-      { source: '/dataset-access', destination: '/stitch/dataset-access.html' },
-      { source: '/field-guides', destination: '/stitch/field-guides.html' },
-      { source: '/legal-notices', destination: '/stitch/legal-notices.html' },
-      { source: '/partnerships', destination: '/stitch/partnerships.html' },
-      { source: '/petrobras', destination: '/stitch/petrobras.html' },
-      { source: '/petrobras-esg', destination: '/stitch/petrobras-esg.html' },
-      { source: '/privacy-policy', destination: '/stitch/privacy-policy.html' },
-      { source: '/region', destination: '/stitch/region.html' },
-      { source: '/research-papers', destination: '/stitch/research-papers.html' },
-      { source: '/terms-of-use', destination: '/stitch/terms-of-use.html' },
       { source: '/wiki-de-estudos-paleontologicos', destination: '/stitch/wiki-de-estudos-paleontologicos.html' },
     ];
   },
