@@ -170,16 +170,101 @@ const ptByFile: Record<string, TranslationMap> = {
     'Dataset Access': 'Acesso a Dados',
     'Access curated geological, paleobiological, and metadata collections prepared for scientific review and computational analysis.':
       'Acesse coleções curadas de dados geológicos, paleobiológicos e metadados preparadas para revisão científica e análise computacional.',
+    'Institutional Access': 'Acesso Institucional',
+    'Geological Dataset <br/><span class="italic">Repository</span>': 'Repositório <br/><span class="italic">Geológico de Dados</span>',
+    'A high-fidelity digital stratigraphy portal providing peer-reviewed geological, paleontological, and seismic datasets for the global scientific community.':
+      'Um portal de estratigrafia digital de alta fidelidade que oferece conjuntos de dados geológicos, paleontológicos e sísmicos revisados por pares para a comunidade científica global.',
+    'Total Archive Size': 'Tamanho Total do Acervo',
+    'Santos Basin High-Res Seismic Cube': 'Cubo Sísmico de Alta Resolução da Bacia de Santos',
+    'Complete 3D seismic volume covering the pre-salt layers with high-resolution depth migration and stratigraphy mapping.':
+      'Volume sísmico 3D completo cobrindo as camadas do pré-sal com migração em profundidade de alta resolução e mapeamento estratigráfico.',
+    'Request Dataset': 'Solicitar Conjunto de Dados',
+    'Recent Scientific Releases': 'Lançamentos Científicos Recentes',
+    'Lagerstätte Data • 42GB': 'Dados de Lagerstätte • 42GB',
+    'Spatial Dataset • 8.2GB': 'Conjunto Espacial • 8.2GB',
+    'Time Series • 115GB': 'Séries Temporais • 115GB',
+    'Ethics &amp; Compliance': 'Ética e Conformidade',
+    'All research datasets comply with the 2024 Petrobras Paleontology Division ethics guidelines.':
+      'Todos os conjuntos de dados de pesquisa seguem as diretrizes éticas de 2024 da Divisão de Paleontologia da Petrobras.',
+    'HPC Integration': 'Integração com HPC',
+    'Direct stream available for authorized High-Performance Computing clusters at partner universities.':
+      'Fluxo direto disponível para clusters autorizados de Computação de Alto Desempenho nas universidades parceiras.',
+    'Institutional Access <span class="italic">Request</span>': 'Solicitação de <span class="italic">Acesso Institucional</span>',
+    'Submit your research proposal to the division board for full archive access. Approvals typically take 5-7 business days.':
+      'Envie sua proposta de pesquisa para o conselho da divisão para obter acesso completo ao acervo. As aprovações costumam levar de 5 a 7 dias úteis.',
+    'Verify Institutional Email': 'Verifique o E-mail Institucional',
+    'Requests must originate from .edu or .gov domains.':
+      'As solicitações devem partir de domínios .edu ou .gov.',
+    'Upload Research Abstract': 'Envie o Resumo da Pesquisa',
+    'Provide a clear objective for the requested data.':
+      'Apresente um objetivo claro para os dados solicitados.',
+    'Uptime': 'Disponibilidade',
+    'Latency': 'Latência',
   },
   'field-guides.html': {
     'Field Operations Library': 'Biblioteca de Operações de Campo',
     'Field Guides': 'Guias de Campo',
     'Protocols, route maps, and best practices for identifying, documenting, and preserving field discoveries.':
       'Protocolos, mapas de rota e boas práticas para identificar, documentar e preservar descobertas em campo.',
+    'Field Methodologies': 'Metodologias de Campo',
+    'Practical Guides for Bacia do Amazonas': 'Guias Práticos para a Bacia do Amazonas',
+    'A curated repository of stratigraphic protocols and paleontological field standards developed specifically for the complex sedimentary environments of the Amazon Basin.':
+      'Um repositório curado de protocolos estratigráficos e padrões paleontológicos de campo desenvolvidos especificamente para os ambientes sedimentares complexos da Bacia Amazônica.',
+    'Location Context': 'Contexto Geográfico',
+    'Coordinates': 'Coordenadas',
+    'Era': 'Era',
+    'Primary Reference': 'Referência Principal',
+    'Integrated Stratigraphic Mapping: Solimões Formation': 'Mapeamento Estratigráfico Integrado: Formação Solimões',
+    'Comprehensive field guide covering facies analysis, sequence stratigraphy, and chronostratigraphic markers unique to the Neogene deposits of Western Amazonia. Includes high-resolution type-section logs.':
+      'Guia de campo abrangente sobre análise de fácies, estratigrafia de sequências e marcadores cronoestratigráficos exclusivos dos depósitos neógenos da Amazônia Ocidental. Inclui perfis de seção-tipo em alta resolução.',
+    'Version 4.2': 'Versão 4.2',
+    '84 Pages': '84 Páginas',
+    'Download PDF (12MB)': 'Baixar PDF (12MB)',
+    'Micropaleontology Collection Protocol': 'Protocolo de Coleta Micropaleontológica',
+    'Standardized methods for sediment sampling and on-site processing of palynomorphs and ostracods in fluvial-lacustrine settings.':
+      'Métodos padronizados para amostragem de sedimentos e processamento em campo de palinomorfos e ostracodes em ambientes flúvio-lacustres.',
+    'Access Guide': 'Acessar Guia',
+    'Logistics &amp; Safety: Remote Basin Survey': 'Logística e Segurança: Levantamento em Bacia Remota',
+    'Essential operational framework for researchers working in the deep Juruá and Javari sub-basins. Includes river navigation safety.':
+      'Estrutura operacional essencial para pesquisadores que atuam nas sub-bacias profundas do Juruá e do Javari. Inclui segurança para navegação fluvial.',
+    'Scientific Ethics &amp; Licensing': 'Ética Científica e Licenciamento',
+    'Legal requirements for fossil collection and transport under Brazilian National Mining Agency (ANM) regulations.':
+      'Exigências legais para coleta e transporte de fósseis conforme as regulamentações da Agência Nacional de Mineração (ANM).',
+    'Review Legal Terms': 'Revisar Termos Legais',
+    'Latest Update': 'Atualização Mais Recente',
+    'Devonian Biostratigraphy Update': 'Atualização da Bioestratigrafia Devoniana',
+    'Revision of the Maecuru and Ererê formations taxonomy.':
+      'Revisão da taxonomia das formações Maecuru e Ererê.',
+    'Download PDF': 'Baixar PDF',
   },
   'about-us.html': {
     'Institutional Profile': 'Perfil Institucional',
     'About Us': 'Sobre Nós',
+    'INSTITUTIONAL FOUNDATIONS': 'FUNDAMENTOS INSTITUCIONAIS',
+    'Unearthing the <br/><span class="italic text-primary">Hidden Narrative</span>': 'Revelando a <br/><span class="italic text-primary">Narrativa Oculta</span>',
+    'Strata Archive is a multidisciplinary repository dedicated to the preservation and digital dissemination of paleontological findings from the South American lithosphere.':
+      'O Strata Archive é um repositório multidisciplinar dedicado à preservação e à difusão digital de descobertas paleontológicas da litosfera sul-americana.',
+    'A Legacy in <br/>Sediment.': 'Um Legado em <br/>Sedimento.',
+    'The project began in 1994 as a collaboration between the Petrobras Paleontology Division and federal research institutions, aiming to catalog deep-well microfossils.':
+      'O projeto começou em 1994 como uma colaboração entre a Divisão de Paleontologia da Petrobras e instituições federais de pesquisa, com o objetivo de catalogar microfósseis de poços profundos.',
+    'ESTABLISHED': 'FUNDADO',
+    'May 12, 1994': '12 de Maio de 1994',
+    'The Early Surveys': 'Os Primeiros Levantamentos',
+    'Pioneering offshore exploration led to the discovery of unprecedented fossilized remains in the pre-salt layers, sparking the need for a unified digital archive.':
+      'A exploração pioneira offshore levou à descoberta de vestígios fossilizados sem precedentes nas camadas do pré-sal, despertando a necessidade de um acervo digital unificado.',
+    'RECOGNITION': 'RECONHECIMENTO',
+    'Digital Renaissance': 'Renascença Digital',
+    'In 2012, we transitioned to high-resolution 3D photogrammetry, allowing researchers worldwide to interact with physical artifacts virtually.':
+      'Em 2012, fizemos a transição para a fotogrametria 3D de alta resolução, permitindo que pesquisadores do mundo inteiro interagissem virtualmente com artefatos físicos.',
+    'Our Mission is to bridge the gap between ancient biological history and modern scientific insight.':
+      'Nossa missão é aproximar a história biológica antiga do conhecimento científico contemporâneo.',
+    'PRESERVATION': 'PRESERVAÇÃO',
+    'OPEN SCIENCE': 'CIÊNCIA ABERTA',
+    'EDUCATION': 'EDUCAÇÃO',
+    'THE CURATORS': 'A CURADORIA',
+    'Research Faculty': 'Corpo de Pesquisa',
+    'Meet the experts leading the exploration of our geological past across South America\'s diverse strata.':
+      'Conheça os especialistas que lideram a exploração do nosso passado geológico pelos diversos estratos da América do Sul.',
   },
   'partnerships.html': {
     'Collaborative Network': 'Rede Colaborativa',

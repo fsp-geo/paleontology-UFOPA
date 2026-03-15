@@ -49,6 +49,8 @@ export function PublicContentEnhancer({ containerId }: PublicContentEnhancerProp
         element.textContent = dataIcon;
       }
 
+      element.classList.add('notranslate');
+      element.setAttribute('data-no-translate', 'true');
       element.setAttribute('translate', 'no');
       element.setAttribute('aria-hidden', 'true');
     });

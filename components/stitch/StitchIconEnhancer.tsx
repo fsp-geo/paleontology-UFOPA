@@ -51,6 +51,8 @@ export function StitchIconEnhancer({ containerId }: StitchIconEnhancerProps) {
         element.textContent = normalized;
       }
 
+      element.classList.add('notranslate');
+      element.setAttribute('data-no-translate', 'true');
       element.style.fontFamily = '"Material Symbols Outlined"';
       element.style.fontWeight = '400';
       element.style.fontStyle = 'normal';
