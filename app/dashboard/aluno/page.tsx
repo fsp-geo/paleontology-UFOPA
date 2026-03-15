@@ -1,7 +1,32 @@
 import { redirect } from 'next/navigation';
 import { hasAnyAllowedRole, getCurrentUserContext } from '@/lib/current-user';
+import { getStudentDashboardData } from '@/lib/student-dashboard';
+import { StudentPortalShell } from '@/components/student-site/StudentPortalShell';
+import { MyLearningClient } from '@/components/student-site/MyLearningClient';
 
 const ALLOWED_ROLES = ['admin', 'gestor', 'professor', 'aluno'];
+
+function getDisplayName(name: string | null | undefined, email: string | undefined) {
+  if (name?.trim()) {
+    return name.trim();
+  }
+
+  return email?.split('@')[0] || 'Aluno';
+}
+
+function getAvatarInitials(displayName: string) {
+  const parts = displayName
+    .split(/\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .slice(0, 2);
+
+  if (parts.length === 0) {
+    return 'U';
+  }
+
+  return parts.map((part) => part[0]?.toUpperCase() || '').join('');
+}
 
 export default async function StudentDashboardPage() {
   const context = await getCurrentUserContext();
@@ -14,9 +39,25 @@ export default async function StudentDashboardPage() {
     redirect(context.homePath);
   }
 
+  const dashboard = await getStudentDashboardData(context.supabaseUser.id);
+  const displayName = getDisplayName(context.profile?.name, context.supabaseUser.email);
+  const avatarInitials = getAvatarInitials(displayName);
+
   return (
-    <main className="h-screen w-full overflow-hidden bg-white">
-      <object data="/stitch/dashboard-aluno.html" type="text/html" className="h-full w-full" aria-label="Dashboard do Aluno" />
-    </main>
+    <StudentPortalShell
+      activeNav="learning"
+      pageTitle="My Learning"
+      displayName={displayName}
+      profileLabel={dashboard.profile.levelTitle}
+      avatarInitials={avatarInitials}
+    >
+      <MyLearningClient
+        profile={dashboard.profile}
+        topicProgress={dashboard.topicProgress}
+        recentAccesses={dashboard.recentAccesses}
+        leaderboard={dashboard.leaderboard}
+        recommendation={dashboard.recommendation}
+      />
+    </StudentPortalShell>
   );
 }

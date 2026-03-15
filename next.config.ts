@@ -62,8 +62,6 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       { source: '/prestacao-de-contas', destination: '/stitch/prestacao-de-contas.html' },
-      { source: '/acervo-digital-de-fosseis', destination: '/stitch/acervo-digital-de-fosseis.html' },
-      { source: '/wiki-de-estudos-paleontologicos', destination: '/stitch/wiki-de-estudos-paleontologicos.html' },
     ];
   },
 };

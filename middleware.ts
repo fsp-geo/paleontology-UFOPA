@@ -125,13 +125,6 @@ export async function middleware(request: NextRequest) {
           fallbackUrl.search = ''
           return NextResponse.redirect(fallbackUrl)
         }
-
-        if (pathname === '/dashboard/aluno') {
-          const rewriteUrl = request.nextUrl.clone()
-          rewriteUrl.pathname = '/stitch/dashboard-aluno.html'
-          rewriteUrl.search = ''
-          return NextResponse.rewrite(rewriteUrl)
-        }
       }
     } catch {}
   }
