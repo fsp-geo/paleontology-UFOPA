@@ -1,4 +1,5 @@
 import { demoUser, isDatabaseConfigured, isLocalDemoMode } from './demo-mode';
+import { prisma } from './prisma';
 import { createClient } from './supabase-server';
 import { syncUser } from './user-sync';
 import { getHomePathForRoles, getPrimaryRoleFromCodes, getRoleCodesFromProfile } from './access-control';
@@ -30,7 +31,21 @@ export async function getCurrentUserContext() {
     return null;
   }
 
-  const profile = await syncUser(user);
+  let profile = await prisma.user.findUnique({
+    where: { id: user.id },
+    include: {
+      userRoles: {
+        include: {
+          role: true,
+        },
+      },
+    },
+  });
+
+  if (!profile || profile.userRoles.length === 0) {
+    profile = await syncUser(user);
+  }
+
   const roleCodes = getRoleCodesFromProfile(profile);
 
   return {
