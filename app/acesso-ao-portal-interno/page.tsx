@@ -450,15 +450,24 @@ export default function AccessPortalPage() {
           </div>
         </div>
         <div className="flex gap-6">
-          <a className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary" href="#">
+          <Link
+            className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary"
+            href="/privacy-policy"
+          >
             Privacy Policy
-          </a>
-          <a className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary" href="#">
+          </Link>
+          <Link
+            className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary"
+            href="/terms-of-use"
+          >
             Terms of Use
-          </a>
-          <a className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary" href="#">
+          </Link>
+          <Link
+            className="text-xs text-on-surface-variant underline decoration-outline-variant/30 underline-offset-4 transition-colors hover:text-primary"
+            href="/legal-notices"
+          >
             Accessibility
-          </a>
+          </Link>
         </div>
       </footer>
     </div>
