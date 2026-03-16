@@ -317,6 +317,44 @@ const ptByFile: Record<string, TranslationMap> = {
   'region.html': {
     'Territorial Context': 'Contexto Territorial',
     'Region': 'Região',
+    'Regional Exploration': 'Exploração Regional',
+    'Santarém &amp; The Monte Alegre Dome': 'Santarém e o Domo de Monte Alegre',
+    'Unveiling the structural complexities of the Middle Amazon Basin, where Devonian and Carboniferous strata converge in a unique geological uplift.':
+      'Revelando as complexidades estruturais da Bacia Amazônica Central, onde estratos devonianos e carboníferos convergem em um soerguimento geológico singular.',
+    'Mapping Coordination': 'Coordenação Cartográfica',
+    'The Central Amazon Uplift Axis': 'O Eixo de Soerguimento da Amazônia Central',
+    'Lithic Architecture': 'Arquitetura Lítica',
+    'Phanerozoic Eon': 'Éon Fanerozoico',
+    'The Carboniferous Formation': 'A Formação Carbonífera',
+    'The Monte Alegre region is defined by the Tapajós Group. This sequence represents a significant marine transgression event, depositing limestone, dolomite, and evaporites that now serve as critical stratigraphic markers for the Late Paleozoic.':
+      'A região de Monte Alegre é definida pelo Grupo Tapajós. Essa sequência representa um importante evento de transgressão marinha, responsável pelo depósito de calcário, dolomito e evaporitos que hoje servem como marcadores estratigráficos críticos do Paleozóico Superior.',
+    'Chronostratigraphic Depth': 'Profundidade Cronoestratigráfica',
+    'Structural Feature': 'Feição Estrutural',
+    'Domes': 'Domos',
+    'Itaituba Formation': 'Formação Itaituba',
+    'Renowned for its fossiliferous richness, containing diverse brachiopod and fusulinid assemblages.':
+      'Reconhecida por sua riqueza fossilífera, com assembléias diversas de braquiópodes e fusulinídeos.',
+    'Crinoid Fragments': 'Fragmentos de Crinoides',
+    'Bryozoan Colonies': 'Colônias de Briozoários',
+    'Chonetes Faunules': 'Faúnulas de Chonetes',
+    'Catalog Highlights': 'Destaques do Catálogo',
+    'The Monte Alegre Biota': 'A Biota de Monte Alegre',
+    '"A remarkably preserved Orthotetes specimen found in the basal silts of the dome\'s northern flank."':
+      '"Um espécime de Orthotetes notavelmente preservado, encontrado nos siltes basais do flanco norte do domo."',
+    'These highlights represent the transition from the Devonian Curuá Group to the Carboniferous sequence. The fossils act as biological clocks, pinning the exact moment the Amazonian interior shifted from open sea to restricted saline basins.':
+      'Esses destaques representam a transição do Grupo Curuá, do Devoniano, para a sequência carbonífera. Os fósseis funcionam como relógios biológicos, marcando o momento exato em que o interior amazônico passou de mar aberto para bacias salinas restritas.',
+    'View Full Collection': 'Ver Coleção Completa',
+    'Structural Evolution': 'Evolução Estrutural',
+    'The Santarém region is not merely a collection of fossils, but a testament to the tectonic forces that shaped the South American continent.':
+      'A região de Santarém não é apenas uma coleção de fósseis, mas um testemunho das forças tectônicas que moldaram o continente sul-americano.',
+    'The Tectonic Uplift': 'O Soerguimento Tectônico',
+    'The Monte Alegre Dome is a classic example of a salt-assisted structural uplift. Neopaleozoic evaporites from the Nova Olinda Formation migrated vertically, piercing the overlying strata and creating the characteristic circular geometry observed today.':
+      'O Domo de Monte Alegre é um exemplo clássico de soerguimento estrutural assistido por sal. Evaporitos neopaleozóicos da Formação Nova Olinda migraram verticalmente, perfurando os estratos sobrejacentes e criando a geometria circular característica observada hoje.',
+    'Stratigraphic Piercing Mechanism': 'Mecanismo de Perfuração Estratigráfica',
+    'Erosional Windows': 'Janelas Erosivas',
+    'Continuous erosion of the dome\'s crest has provided geologists with an "erosional window," exposing deep-seated Devonian shales that would otherwise remain thousands of meters beneath the Amazonian floodplain.':
+      'A erosão contínua da crista do domo proporcionou aos geólogos uma "janela erosiva", expondo folhelhos devonianos profundos que de outra forma permaneceriam a milhares de metros sob a planície de inundação amazônica.',
+    'Natural Vertical Sectioning': 'Seccionamento Vertical Natural',
   },
   'about.html': {
     'Our Institutional Purpose': 'Nosso Propósito Institucional',
