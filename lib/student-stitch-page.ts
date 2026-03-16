@@ -23,7 +23,7 @@ function extractMainContent(source: string) {
 }
 
 function stripFirstHeader(content: string) {
-  return content.replace(/^\s*<header[\s\S]*?<\/header>\s*/i, '').trim();
+  return content.replace(/^\s*(?:<!--[\s\S]*?-->\s*)*<header[\s\S]*?<\/header>\s*/i, '').trim();
 }
 
 function normalizeStyles(styles: string[]) {

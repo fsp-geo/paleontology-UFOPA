@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AuthenticatedSessionTracker } from '@/components/AuthenticatedSessionTracker';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import type { SiteLocale } from '@/lib/site-locale';
 import { isPortuguese } from '@/lib/site-locale';
 
@@ -139,9 +138,6 @@ export function StudentPortalShell({
             </div>
 
             <div className="mt-6 space-y-1">
-              <div className="px-4 py-2">
-                <LocaleSwitcher locale={locale} />
-              </div>
               <button
                 className="flex w-full cursor-not-allowed items-center gap-4 px-4 py-2.5 text-left text-sm text-on-surface-variant/60"
                 disabled
