@@ -106,6 +106,7 @@ export function StudentPortalShell({
               return (
                 <Link
                   key={item.href}
+                  prefetch={false}
                   className={
                     isActive
                       ? 'flex items-center gap-3 rounded px-5 py-3.5 font-medium text-primary bg-surface-container-high transition-all'
@@ -150,6 +151,7 @@ export function StudentPortalShell({
               <span className="font-body">{pt ? 'Configuracoes' : 'Settings'}</span>
             </button>
             <Link
+              prefetch={false}
               className="flex items-center gap-4 px-4 py-2.5 text-sm text-on-surface-variant transition-colors hover:text-error"
               href="/sair"
             >
@@ -176,7 +178,7 @@ export function StudentPortalShell({
               <p className="text-[11px] font-label uppercase tracking-widest text-on-surface-variant">Strata Archive</p>
               <h2 className="font-headline text-2xl text-on-surface">{pageTitle}</h2>
             </div>
-            <Link className="text-sm font-semibold text-primary" href="/sair">
+            <Link className="text-sm font-semibold text-primary" href="/sair" prefetch={false}>
               {pt ? 'Sair' : 'Logout'}
             </Link>
           </div>

@@ -219,6 +219,7 @@ export function MyLearningClient({
               <Link
                 className="flex flex-col justify-between bg-surface-container p-6 transition-colors hover:bg-surface-container-high"
                 href="/acervo-digital-de-fosseis"
+                prefetch={false}
               >
                 <span className="material-symbols-outlined text-primary">database</span>
                 <span className="font-headline text-lg">{pt ? 'Acervo Digital de Fosseis' : 'Digital Fossil Archive'}</span>
@@ -303,6 +304,7 @@ export function MyLearningClient({
             <Link
               className="rounded-sm bg-primary px-8 py-3 text-sm font-label uppercase tracking-widest text-on-primary transition-all hover:brightness-110"
               href={recommendation?.href ?? '/wiki-de-estudos-paleontologicos'}
+              prefetch={false}
             >
               {pt ? 'Retomar Estudo' : 'Resume Session'}
             </Link>

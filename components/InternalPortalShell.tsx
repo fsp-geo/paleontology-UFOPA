@@ -131,6 +131,7 @@ export function InternalPortalShell({
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={false}
                   className={`flex items-center gap-3 rounded-[20px] px-4 py-3 text-sm font-semibold transition ${
                     isActive
                       ? 'bg-stone-900 text-stone-50 shadow-[0_18px_38px_-22px_rgba(46,31,11,0.6)]'
@@ -165,6 +166,7 @@ export function InternalPortalShell({
             </button>
             <Link
               href="/sair"
+              prefetch={false}
               className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-500 hover:text-stone-950"
             >
               <LogOut className="h-4 w-4" />
